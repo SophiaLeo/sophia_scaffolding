@@ -27,6 +27,9 @@
     --sophia_zuul 统一网关 集成oauth2
   
   
+启动redis
+
+  
   项目启动
   
   1.eureka
