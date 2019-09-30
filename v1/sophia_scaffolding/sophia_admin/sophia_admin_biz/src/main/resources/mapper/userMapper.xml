@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scaffolding.sophia.admin.biz.dao.user.UserDao">
+    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.user.User">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
+        <result column="NICKNAME" jdbcType="VARCHAR" property="nickname"/>
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+        <result column="SEX" jdbcType="INTEGER" property="sex"/>
+        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="LAST_LOGIN_IP" jdbcType="VARCHAR" property="lastLoginIp"/>
+        <result column="LAST_LOGIN_TIME" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="IS_DELETED" jdbcType="INTEGER" property="isDeleted"/>
+        <result column="STATUS" jdbcType="INTEGER" property="status"/>
+        <result column="HEAD_IMAGE" jdbcType="VARCHAR" property="headImage"/>
+        <result column="DEPT_ID" jdbcType="BIGINT" property="deptId"/>
+        <result column="COMP_ID" jdbcType="BIGINT" property="compId"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMapVO" type="com.scaffolding.sophia.admin.api.vo.UserVo">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
+        <result column="NICKNAME" jdbcType="VARCHAR" property="nickname"/>
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+        <result column="SEX" jdbcType="INTEGER" property="sex"/>
+        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="STATUS" jdbcType="INTEGER" property="status"/>
+        <result column="HEAD_IMAGE" jdbcType="VARCHAR" property="headImage"/>
+        <result column="DEPT_ID" jdbcType="BIGINT" property="deptId"/>
+        <result column="COMP_ID" jdbcType="BIGINT" property="compId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, USERNAME, NICKNAME, PASSWORD, SEX, PHONE, EMAIL, CREATE_TIME, UPDATE_TIME, LAST_LOGIN_IP, LAST_LOGIN_TIME, IS_DELETED, STATUS, HEAD_IMAGE, DEPT_ID, COMP_ID
+    </sql>
+
+    <select id="findByUserName" parameterType="string" resultMap="BaseResultMap">
+        select  ID, USERNAME, NICKNAME, PASSWORD, STATUS
+        from sys_user
+        WHERE 1 = 1
+        <if test="username != null and username != '' ">
+            AND username = #{username}
+        </if>
+    </select>
+
+    <select id="findByUserId" parameterType="long" resultMap="BaseResultMap">
+        select  ID, USERNAME, NICKNAME, HEAD_IMAGE, PHONE, EMAIL, DEPT_ID, STATUS
+        from sys_user
+        WHERE id = #{userId}
+    </select>
+
+    <select id="findUserVoList" parameterType="com.scaffolding.sophia.admin.api.vo.UserVo"
+            resultMap="BaseResultMapVO">
+        select ID, USERNAME, NICKNAME, HEAD_IMAGE, PHONE, EMAIL, CREATE_TIME, DEPT_ID, STATUS, CREATE_TIME
+        from sys_user
+        <where>
+            <if test="username != null and username != ''">
+                AND username = #{username}
+            </if>
+        </where>
+    </select>
+
+</mapper>
