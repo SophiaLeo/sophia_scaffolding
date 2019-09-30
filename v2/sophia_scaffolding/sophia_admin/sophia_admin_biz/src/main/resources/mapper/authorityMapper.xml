@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scaffolding.sophia.admin.biz.dao.authority.AuthorityDao">
+    <resultMap id="BaseResultMap" type="Authority">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <result column="AUTH_NAME" jdbcType="VARCHAR" property="authName"/>
+        <result column="AUTH_CODE" jdbcType="VARCHAR" property="authCode"/>
+        <result column="AUTH_URL" jdbcType="VARCHAR" property="authUrl"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, AUTH_NAME, AUTH_CODE, AUTH_URL
+    </sql>
+
+    <select id="findAuthorityByUserId" parameterType="long" resultMap="BaseResultMap">
+        select sa.ID,AUTH_NAME,AUTH_CODE,AUTH_URL
+        from sys_auth sa
+        INNER JOIN sys_role_auth sra ON  sa.id = sra.auth_id
+        INNER JOIN sys_user_role sur ON sur.role_id = sra.role_id
+        WHERE sur.user_id = #{userId}
+    </select>
+
+</mapper>

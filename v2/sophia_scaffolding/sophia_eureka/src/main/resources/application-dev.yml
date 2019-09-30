@@ -1,0 +1,27 @@
+server:
+  port: 8761
+spring:
+  security:
+    user:
+      name: sophia
+      password: sophia
+  application:
+    name: sophia-eureka
+eureka:
+  instance:
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+  server:
+    enable-self-preservation: false
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+#      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@peer2:8762/eureka/,http://${spring.security.user.name}:${spring.security.user.password}@peer3:8763/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,132 @@
+server:
+  port: 9000
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: sophia-auth
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:  jdbc:mysql://localhost:3306/sophia?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    name: sophia
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 5
+    min-idle: 5
+    max-active: 20
+    max-wait: 30000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: select '1' from dual
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    pool-prepared-statements: true
+    max-open-prepared-statements: 20
+    max-pool-prepared-statement-per-connection-size: 20
+  #    filters: stat,wall,log4j
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 10000
+    database: 0
+    password:
+    lettuce:
+      pool:
+        max-active: 300
+        max-idle: 100
+        max-wait: -1
+        min-idle: 20
+      shutdown-timeout: 10000
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.scaffolding.sophia.admin.api.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    default-executor-type: reuse
+    defaultStatementTimeout: 1000
+    jdbc-type-for-null: null
+    call-setters-on-nulls: true
+  global-config:
+    db-config:
+      logic-not-delete-value: 1
+      logic-delete-value: 0
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://${eurekaUserName}:${eurekaPassWord}@localhost:8761/eureka/
+  instance:
+    prefer‐ip‐address: true
+    status-page-url-path: /actuator/info
+    health-check-url-path: /actuator/health
+eurekaUserName: sophia
+eurekaPassWord: sophia
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    bus-refresh:
+      enabled: true
+  security:
+    enabled: false
+sophia:
+  security:
+    oauth2:
+      clients[0]:
+        client_id: sophia-admin
+        client_secret: sophia-admin-secret
+        accessTokenValidatySeconds: 21600
+        refreshTokenValiditySeconds: 28800
+      clients[1]:
+        client_id: amor-admin
+        client_secret: amor-admin-secret
+        accessTokenValidatySeconds: 21600
+        refreshTokenValiditySeconds: 28800
+    web:
+      loginPage: /index.html
+      unInterceptUris: /index.html,/static/**,/authentication/form,/authentication/require,/oauth/**,/actuator/**,/druid/*
+
+# 直接放行URL
+ignore:
+  urls:
+    - /index.html
+    - /static/**
+    - /authentication/form
+    - /authentication/require
+    - /oauth/**
+    - /actuator/**
+    - /druid/*
+
+ribbon:
+  ReadTimeout: 10000 #请求处理的超时时间
+  ConnectTimeout: 5000 #请求连接的超时时间
+  MaxAutoRetries: 1 #对当前实例的重试次数
+  MaxAutoRetriesNextServer: 2 #切换实例的重试次数
+  eureka:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+#熔断器开启
+feign:
+  hystrix:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false

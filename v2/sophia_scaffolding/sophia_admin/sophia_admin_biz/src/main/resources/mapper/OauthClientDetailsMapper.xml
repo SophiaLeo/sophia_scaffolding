@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scaffolding.sophia.admin.biz.dao.authority.OauthClientDetailsDao">
+    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.authority.OauthClientDetails">
+        <id column="client_id" jdbcType="VARCHAR" property="clientId"/>
+        <result column="resource_ids" jdbcType="VARCHAR" property="resourceIds"/>
+        <result column="client_secret" jdbcType="VARCHAR" property="clientSecret"/>
+        <result column="scope" jdbcType="VARCHAR" property="scope"/>
+        <result column="authorized_grant_types" jdbcType="VARCHAR" property="authorizedGrantTypes"/>
+        <result column="web_server_redirect_uri" jdbcType="VARCHAR" property="webServerRedirectUri"/>
+        <result column="authorities" jdbcType="VARCHAR" property="authorities"/>
+        <result column="access_token_validity" jdbcType="INTEGER" property="accessTokenValidity"/>
+        <result column="refresh_token_validity" jdbcType="INTEGER" property="refreshTokenValidity"/>
+        <result column="additional_information" jdbcType="LONGVARCHAR" property="additionalInformation"/>
+        <result column="autoapprove" jdbcType="VARCHAR" property="autoapprove"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, 
+    authorities, access_token_validity, refresh_token_validity,additional_information, autoapprove
+  </sql>
+
+
+    <select id="getOauthClientDetailsByClientId" resultType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_oauth_client_details
+        where client_id = #{clientId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getResourceIdsByClientId" parameterType="string" resultType="string">
+        SELECT resource_ids FROM `sys_oauth_client_details` WHERE `client_id` =  #{clientId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>
