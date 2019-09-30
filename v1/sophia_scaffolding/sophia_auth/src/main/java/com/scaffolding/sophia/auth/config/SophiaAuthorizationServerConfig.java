@@ -28,7 +28,6 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-
 import java.util.Arrays;
 
 /**
@@ -69,7 +68,7 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
                         //设置token的有效期，不设置默认12小时
                         .accessTokenValiditySeconds(client.getAccessTokenValidatySeconds())
                         //设置刷新token的有效期，不设置默认30天
-                        .refreshTokenValiditySeconds(60 * 60 * 8)
+                        .refreshTokenValiditySeconds(client.getRefreshTokenValiditySeconds())
                         .redirectUris("http://www.baidu.com")
                         .authorizedGrantTypes("authorization_code","client_credentials", "refresh_token", "password")
                         .scopes("all", "read", "write")
