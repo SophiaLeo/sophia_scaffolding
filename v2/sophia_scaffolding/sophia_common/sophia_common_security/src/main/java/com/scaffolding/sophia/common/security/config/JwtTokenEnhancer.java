@@ -7,6 +7,8 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,7 @@ import java.util.Map;
 @Component
 public class JwtTokenEnhancer implements TokenEnhancer {
 
-    // private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
@@ -39,7 +41,7 @@ public class JwtTokenEnhancer implements TokenEnhancer {
         String roles = stringBuilder.toString();
         additionalInfo.put("roles", roles.substring(0, roles.length() - 1));
         additionalInfo.put("author", "sophia");
-        // additionalInfo.put("createTime", df.format(LocalDateTime.now()));
+        additionalInfo.put("createTime", df.format(LocalDateTime.now()));
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
         return accessToken;
     }

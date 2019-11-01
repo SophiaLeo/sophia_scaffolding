@@ -17,6 +17,10 @@ spring:
           filters:
 #            - SwaggerHeaderFilter
             - StripPrefix=1
+            - name: Hystrix
+              args:
+                name: oauth-hystrix
+                fallbackUri: forward:/common/fallback #设置熔断器
         - id: sophia-admin
           uri: lb://sophia-admin
           predicates:
@@ -24,6 +28,10 @@ spring:
           filters:
 #            - SwaggerHeaderFilter
             - StripPrefix=1
+            - name: Hystrix
+              args:
+                name: admin-hystrix
+                fallbackUri: forward:/common/fallback #设置熔断器
 eureka:
   client:
     register-with-eureka: true
@@ -36,6 +44,14 @@ eureka:
     health-check-url-path: /actuator/health
 eurekaUserName: sophia
 eurekaPassWord: sophia
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
 
 management:
   metrics:

@@ -44,7 +44,7 @@ public class JsonExceptionHandler extends DefaultErrorWebExceptionHandler {
     protected RouterFunction<ServerResponse> getRoutingFunction(ErrorAttributes errorAttributes) {
         return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse);
     }
-    //
+
     ///**
     // * 根据code获取对应的HttpStatus
     // * @param errorAttributes
