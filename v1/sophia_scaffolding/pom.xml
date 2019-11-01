@@ -21,6 +21,7 @@
         <module>sophia_zuul</module>
         <module>sophia_admin</module>
         <module>sophia_auth</module>
+        <module>sophia_gateway</module>
     </modules>
 
     <properties>
@@ -52,11 +53,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
             <version>${commons-pool2.version}</version>
-        </dependency>
-        <!--web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--Lombok-->
         <dependency>

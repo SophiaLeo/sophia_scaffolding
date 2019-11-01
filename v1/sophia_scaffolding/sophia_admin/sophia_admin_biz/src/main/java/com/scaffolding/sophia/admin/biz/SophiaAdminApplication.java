@@ -1,5 +1,6 @@
 package com.scaffolding.sophia.admin.biz;
 
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @MapperScan({"com.scaffolding.sophia.admin.biz.dao"})
 @EnableFeignClients(basePackages = "com.scaffolding.sophia.admin.api.feign.client")
 @ComponentScan(basePackages = {"com.scaffolding.sophia"})
+@EnableSwagger2Doc
 public class SophiaAdminApplication {
 
     public static void main(String[] args) {

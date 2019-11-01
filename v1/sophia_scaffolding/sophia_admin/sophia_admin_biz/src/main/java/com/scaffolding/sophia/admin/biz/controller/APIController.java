@@ -11,11 +11,14 @@ import com.scaffolding.sophia.admin.biz.service.user.UserService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
 import com.scaffolding.sophia.common.security.model.LoginUser;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -65,6 +68,16 @@ public class APIController extends BaseController {
         userDto.setRoles(roleCodeList);
         userDto.setMenus(menuCodeList);
         return success(userDto);
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @ApiOperation(value = "登录接口")
+    public ApiResponse webLogin(@RequestParam String userName, @RequestParam String password){
+        UserVo result = userService.loginByPassword(userName, password);
+        if(null != result){
+            return success(result);
+        }
+        return fail("登陆失败");
     }
 
 }

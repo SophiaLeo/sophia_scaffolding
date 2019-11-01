@@ -79,4 +79,6 @@ public class UserVo implements Serializable {
      * 公司id
      */
     private Long compId;
+
+    private String accessToken;
 }

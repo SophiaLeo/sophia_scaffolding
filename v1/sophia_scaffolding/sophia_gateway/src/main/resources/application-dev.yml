@@ -1,0 +1,51 @@
+server:
+  port: 9010
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: sophia-gateway
+  cloud:
+    gateway:
+      locator:
+        enabled: true
+      routes:
+        - id: sophia-auth
+          uri: lb://sophia-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+#            - SwaggerHeaderFilter
+            - StripPrefix=1
+        - id: sophia-admin
+          uri: lb://sophia-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+#            - SwaggerHeaderFilter
+            - StripPrefix=1
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://${eurekaUserName}:${eurekaPassWord}@localhost:8761/eureka/
+  instance:
+    prefer‐ip‐address: true
+    status-page-url-path: /actuator/info
+    health-check-url-path: /actuator/health
+eurekaUserName: sophia
+eurekaPassWord: sophia
+
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    bus-refresh:
+      enabled: true
