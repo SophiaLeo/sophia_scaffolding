@@ -14,6 +14,18 @@
     <description>admin 用户鉴权服务</description>
 
     <dependencies>
+        <!-- for swagger -->
+        <dependency>
+            <groupId>com.spring4all</groupId>
+            <artifactId>swagger-spring-boot-starter</artifactId>
+            <version>${swagger-spring-boot-starter.version}</version>
+        </dependency>
+        <!--公共 工具包 -->
+        <dependency>
+            <groupId>com.scaffolding.sophia</groupId>
+            <artifactId>sophia_common_util</artifactId>
+            <version>${sophia-common.version}</version>
+        </dependency>
         <!--公共配置包 包含base包-->
         <dependency>
             <groupId>com.scaffolding.sophia</groupId>
@@ -36,11 +48,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-<!--        &lt;!&ndash;oauth2&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-oauth2</artifactId>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>

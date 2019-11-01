@@ -67,7 +67,12 @@ eureka:
     health-check-url-path: /actuator/health
 eurekaUserName: sophia
 eurekaPassWord: sophia
+
 management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
   endpoints:
     web:
       exposure:
@@ -77,6 +82,16 @@ management:
       enabled: true
   security:
     enabled: false
+
+swagger:
+  base-package: com.scaffolding.sophia.admin.biz
+  enabled: true
+  description: sophia用户服务
+  version: V2.0
+  license: Apache License, Version 2.0
+  license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  authorization:
+    key-name: Authorization
 
 security:
   oauth2:
@@ -118,3 +133,11 @@ ignore:
     - /actuator/**
     - /user/api/**
     - /authority/api/**
+    - /v2/api-docs
+    - /swagger-ui.html
+    - /swagger-resources/**
+    - /webjars/**
+    - /api/login
+
+gateway:
+  url: http://localhost:9010

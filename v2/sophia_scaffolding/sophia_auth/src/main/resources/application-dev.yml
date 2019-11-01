@@ -69,6 +69,10 @@ eurekaUserName: sophia
 eurekaPassWord: sophia
 
 management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
   endpoints:
     web:
       exposure:
@@ -78,33 +82,44 @@ management:
       enabled: true
   security:
     enabled: false
+
+swagger:
+  base-package: com.scaffolding.sophia.auth
+  enabled: true
+  description: sophia认证服务
+  version: V2.0
+  license: Apache License, Version 2.0
+  license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  authorization:
+    key-name: Authorization
+
 sophia:
   security:
-    oauth2:
-      clients[0]:
-        client_id: sophia-admin
-        client_secret: sophia-admin-secret
-        accessTokenValidatySeconds: 21600
-        refreshTokenValiditySeconds: 28800
-      clients[1]:
-        client_id: amor-admin
-        client_secret: amor-admin-secret
-        accessTokenValidatySeconds: 21600
-        refreshTokenValiditySeconds: 28800
+#    oauth2:
+#      clients[0]:
+#        client_id: sophia-admin
+#        client_secret: sophia-admin-secret
+#        accessTokenValidatySeconds: 21600
+#        refreshTokenValiditySeconds: 28800
+#      clients[1]:
+#        client_id: amor-admin
+#        client_secret: amor-admin-secret
+#        accessTokenValidatySeconds: 21600
+#        refreshTokenValiditySeconds: 28800
     web:
-      loginPage: /index.html
-      unInterceptUris: /index.html,/static/**,/authentication/form,/authentication/require,/oauth/**,/actuator/**,/druid/*
+#      loginPage: /index.html
+      unInterceptUris: /v2/api-docs,/swagger-ui.html,/swagger-resources/**,/webjars/**,/oauth/**,/actuator/**,/druid/*
 
 # 直接放行URL
 ignore:
   urls:
-    - /index.html
-    - /static/**
-    - /authentication/form
-    - /authentication/require
     - /oauth/**
     - /actuator/**
     - /druid/*
+    - /v2/api-docs
+    - /swagger-ui.html
+    - /swagger-resources/**
+    - /webjars/**
 
 ribbon:
   ReadTimeout: 10000 #请求处理的超时时间

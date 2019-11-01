@@ -18,9 +18,8 @@
         <dependency>
             <groupId>com.spring4all</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
-            <version>1.7.0.RELEASE</version>
+            <version>${swagger-spring-boot-starter.version}</version>
         </dependency>
-
         <!--公共配置包 包含base包-->
         <dependency>
             <groupId>com.scaffolding.sophia</groupId>
@@ -33,6 +32,7 @@
             <artifactId>sophia_common_security</artifactId>
             <version>${sophia-common.version}</version>
         </dependency>
+        <!--公共 工具包-->
         <dependency>
             <groupId>com.scaffolding.sophia</groupId>
             <artifactId>sophia_common_util</artifactId>

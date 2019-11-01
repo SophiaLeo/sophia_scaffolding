@@ -30,8 +30,9 @@ public class SophiaWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SophiaUserDetailService sophiaUserDetailService;
+
     @Autowired
-   private SophiaSecurityProperties securityProperties;
+    private SophiaSecurityProperties securityProperties;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -46,26 +47,6 @@ public class SophiaWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http
-        //         .formLogin().loginPage(GlobalsConstants.OAUTH_AUTH_REQUIRE_URI)
-        //         .loginProcessingUrl(GlobalsConstants.OAUTH_AUTH_FORM_URI)
-        //         .and()
-        //         .authorizeRequests().antMatchers(securityProperties.getWeb().getUnInterceptUris()).permitAll()
-        //         .anyRequest()
-        //         .authenticated()
-        //         .and().csrf().disable();
-
-        // http
-        //         .requestMatchers()
-        //         .antMatchers("/oauth/**")
-        //         .and()
-        //         .authorizeRequests()
-        //         .antMatchers("/oauth/**")
-        //         .authenticated()
-        //         .and()
-        //         .csrf()
-        //         .disable();
-
         http.requestMatchers()
                 .anyRequest()
                 .and()

@@ -14,18 +14,16 @@
     <description>zuul网关</description>
 
     <dependencies>
+        <!--web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!--公共基礎包-->
         <dependency>
             <groupId>com.scaffolding.sophia</groupId>
             <artifactId>sophia_common_base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <!--            <version>${sophia-common.version}</version>-->
-            <!--            <exclusions>-->
-            <!--                <exclusion>-->
-            <!--                    <groupId>org.springframework.boot</groupId>-->
-            <!--                    <artifactId>spring-boot-starter-data-redis</artifactId>-->
-            <!--                </exclusion>-->
-            <!--            </exclusions>-->
         </dependency>
         <!--eureka client-->
         <dependency>
