@@ -4,6 +4,8 @@ import com.scaffolding.sophia.admin.biz.service.authority.AuthorityService;
 import com.scaffolding.sophia.admin.biz.service.authority.OauthClientDetailsService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/authority")
+@Api(tags = "权限管理")
 public class AuthorityController extends BaseController {
 
     @Autowired
@@ -31,11 +34,13 @@ public class AuthorityController extends BaseController {
     private OauthClientDetailsService oauthClientDetailsService;
 
     @GetMapping("/api/{id}")
+    @ApiOperation(value = "根据用户id获取用户权限信息")
     public ApiResponse getAuthorityByUserId(@PathVariable Long id) {
         return success(authorityService.findAuthorityByUserId(id));
     }
 
     @GetMapping("/api/info")
+    @ApiOperation(value = "根据clientId获取认证客户端详情信息")
     public ApiResponse getOauthClientDetailsByClientId(@RequestParam String clientId) {
         return success(oauthClientDetailsService.findOauthClientDetailsByClientId(clientId));
     }
