@@ -22,20 +22,20 @@ zuul:
   sensitive-headers:  Cookie,Set-Cookie
   routes:
     auth:
-      path: /auth/**
+      path: /api/auth/**
       service-id: sophia-auth
     admin:
-      path: /admin/**
+      path: /api/admin/**
       service-id: sophia-admin
 security:
   oauth2:
     client:
-      access-token-uri: http://localhost:${server.port}/auth/oauth/token
-      user-authorization-uri: http://localhost:${server.port}/auth/oauth/authorize
+      access-token-uri: http://localhost:${server.port}/api/auth/oauth/token
+      user-authorization-uri: http://localhost:${server.port}/api/auth/oauth/authorize
       client-id: sophia-admin
       client-secret: sophia-admin-secret
     resource:
-      user-info-uri: http://localhost:${server.port}/auth/home/principal
+      user-info-uri: http://localhost:${server.port}/api/auth/home/principal
       prefer-token-info: false
       jwt:
         key-value: sophia_oauth_key

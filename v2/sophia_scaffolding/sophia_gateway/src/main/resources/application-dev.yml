@@ -1,5 +1,5 @@
 server:
-  port: 9010
+  port: 8002
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -13,10 +13,10 @@ spring:
         - id: sophia-auth
           uri: lb://sophia-auth
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
           filters:
 #            - SwaggerHeaderFilter
-            - StripPrefix=1
+            - StripPrefix=2
             - name: Hystrix
               args:
                 name: oauth-hystrix
@@ -24,10 +24,10 @@ spring:
         - id: sophia-admin
           uri: lb://sophia-admin
           predicates:
-            - Path=/admin/**
+            - Path=/api/admin/**
           filters:
 #            - SwaggerHeaderFilter
-            - StripPrefix=1
+            - StripPrefix=2
             - name: Hystrix
               args:
                 name: admin-hystrix

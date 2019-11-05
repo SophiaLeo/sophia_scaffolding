@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 8001
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -140,4 +140,4 @@ ignore:
     - /api/login
 
 gateway:
-  url: http://localhost:9010
+  url: http://localhost:8002
