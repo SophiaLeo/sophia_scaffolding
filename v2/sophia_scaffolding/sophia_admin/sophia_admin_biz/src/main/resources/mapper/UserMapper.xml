@@ -18,6 +18,10 @@
         <result column="HEAD_IMAGE" jdbcType="VARCHAR" property="headImage"/>
         <result column="DEPT_ID" jdbcType="BIGINT" property="deptId"/>
         <result column="COMP_ID" jdbcType="BIGINT" property="compId"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
     </resultMap>
 
     <resultMap id="BaseResultMapVO" type="com.scaffolding.sophia.admin.api.vo.UserVo">

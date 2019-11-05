@@ -18,6 +18,7 @@ public interface RoleDao extends BaseMapper<Role> {
 
     /**
      * 根据用户id查询用户的角色
+     *
      * @param userId 用户id
      * @return Role
      */

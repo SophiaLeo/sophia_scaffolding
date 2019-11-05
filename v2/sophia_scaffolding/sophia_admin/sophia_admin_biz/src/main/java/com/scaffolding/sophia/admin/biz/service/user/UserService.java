@@ -1,25 +1,9 @@
 package com.scaffolding.sophia.admin.biz.service.user;
 
-import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scaffolding.sophia.admin.api.entity.user.User;
 import com.scaffolding.sophia.admin.api.vo.UserVo;
-import com.scaffolding.sophia.admin.biz.dao.user.UserDao;
-import com.scaffolding.sophia.common.base.constants.GlobalsConstants;
-import com.scaffolding.sophia.common.base.exception.CommonException;
-import com.scaffolding.sophia.common.security.properties.SecurityOAuth2ClientProperties;
-import com.scaffolding.sophia.common.util.HttpCallOtherInterfaceUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: LHL
@@ -29,62 +13,37 @@ import java.util.Map;
  * @Description:
  * @Version: 1.0
  */
-@Service
-public class UserService extends ServiceImpl<UserDao, User> {
+public interface UserService {
 
-    @Autowired
-    private UserDao userDao;
+    /**
+     * 根据用户名称查询用户
+     *
+     * @param username 用户名
+     * @return User
+     */
+    User loadUserByUserName(String username);
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    /**
+     * 根据用户id查询用户
+     *
+     * @param userId 用户id
+     * @return User
+     */
+    User loadUserByUserId(Long userId);
 
-
-    @Value("${gateway.url}")
-    private String url;
-
-    @Autowired
-    private SecurityOAuth2ClientProperties securityOAuth2ClientProperties;
-
-    public User loadUserByUserName(String username){
-        return userDao.findByUserName(username);
-    }
-
-    @Cacheable(value= GlobalsConstants.REDIS_USER_CACHE,unless = "#result == null", key="T(com.scaffolding.sophia.common.base.constants.GlobalsConstants).USER_KEY_PREFIX.concat(T(String).valueOf(#userId))")
-    public User loadUserByUserId(Long userId){
-        return userDao.findByUserId(userId);
-    }
-
-
-    public List<UserVo> findUserVoList(UserVo userVo) {
-        return userDao.findUserVoList(userVo);
-    }
-
-
-    public UserVo loginByPassword(String userName, String password) {
-        User user = baseMapper.selectOne(new QueryWrapper<User>().eq("username",userName));
-        if (null == user) {
-            return null;
-        }
-        String s;
-        //数据库密码是加密了的
-        if (passwordEncoder.matches(password, user.getPassword())) {
-            s = "?client_id=" + securityOAuth2ClientProperties.getClientId() + "&client_secret=" + securityOAuth2ClientProperties.getClientSecret() + "&grant_type=password&scope=all&username=" + userName + "&password=" + password;
-            String sr = HttpCallOtherInterfaceUtils.callOtherInterface(url, "/auth/oauth/token" + s);
-            Map srmap = JSON.parseObject(sr);
-            if (null == srmap ) {
-                throw new CommonException("认证失败");
-            }
-            String access_token;
-            if(StringUtils.isEmpty((String) srmap.get("access_token"))){
-                access_token = (String) srmap.get("value");
-            }else {
-                access_token = (String) srmap.get("access_token");
-            }
-            UserVo vo = new UserVo();
-            BeanUtils.copyProperties(user,vo);
-            vo.setAccessToken(access_token);
-            return vo;
-        }
-        return null;
-    }
+    /**
+     * 根据用户名称查询所有相同用户名的用户
+     *
+     * @param username 用户名
+     * @return List<UserVo>
+     */
+    List<UserVo> findUserVoList(String username);
+    /**
+     * 用户 用户名和密码登录
+     *
+     * @param userName 用户名
+     * @param password 密码
+     * @return UserVo
+     * */
+    UserVo loginByPassword(String userName, String password);
 }

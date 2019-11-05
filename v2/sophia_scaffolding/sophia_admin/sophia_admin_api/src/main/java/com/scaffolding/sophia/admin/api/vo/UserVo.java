@@ -80,5 +80,6 @@ public class UserVo implements Serializable {
      */
     private Long compId;
 
+
     private String accessToken;
 }

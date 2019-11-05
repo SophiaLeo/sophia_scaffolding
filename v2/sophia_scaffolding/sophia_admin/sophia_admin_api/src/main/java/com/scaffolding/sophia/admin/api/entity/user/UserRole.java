@@ -3,6 +3,7 @@ package com.scaffolding.sophia.admin.api.entity.user;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @TableName("sys_user_role")
+@ApiModel(value = "UserRole",description = "用户角色设置")
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -11,6 +11,7 @@ import com.scaffolding.sophia.admin.biz.service.user.UserService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
 import com.scaffolding.sophia.common.security.model.LoginUser;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
+@Api(tags = "用户登录")
 public class APIController extends BaseController {
 
     @Autowired
@@ -47,6 +49,7 @@ public class APIController extends BaseController {
 
 
     @GetMapping("/principal")
+    @ApiOperation(value = "获取用户信息")
     public ApiResponse getUserInfo() {
         UserDto userDto = new UserDto();
         LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

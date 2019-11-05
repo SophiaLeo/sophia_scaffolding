@@ -1,10 +1,6 @@
 package com.scaffolding.sophia.admin.biz.service.authority;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scaffolding.sophia.admin.biz.dao.authority.AuthorityDao;
 import com.scaffolding.sophia.admin.api.entity.authority.Authority;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,13 +12,13 @@ import java.util.List;
  * @Description:
  * @Version: 1.0
  */
-@Service
-public class AuthorityService extends ServiceImpl<AuthorityDao, Authority> {
+public interface AuthorityService {
 
-    @Autowired
-    private AuthorityDao authorityDao;
-
-    public List<Authority> findAuthorityByUserId(Long id) {
-        return authorityDao.findAuthorityByUserId(id);
-    }
+    /**
+     * 根据用户id查询用户的权限
+     *
+     * @param id 用户id
+     * @return List<Authority>
+     */
+    List<Authority> findAuthorityByUserId(Long id);
 }

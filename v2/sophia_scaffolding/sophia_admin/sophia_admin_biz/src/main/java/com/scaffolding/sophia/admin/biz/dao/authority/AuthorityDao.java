@@ -19,6 +19,7 @@ public interface AuthorityDao extends BaseMapper<Authority> {
 
     /**
      * 根据用户id查询用户的权限
+     *
      * @param userId 用户id
      * @return List<Authority>
      */

@@ -8,6 +8,10 @@
         <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
         <result column="DEPT_ID" jdbcType="BIGINT" property="deptId"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
     </resultMap>
 
     <sql id="Base_Column_List">

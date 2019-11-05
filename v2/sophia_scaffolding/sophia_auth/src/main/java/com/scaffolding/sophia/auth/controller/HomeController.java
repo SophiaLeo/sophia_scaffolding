@@ -4,6 +4,8 @@ import com.scaffolding.sophia.admin.api.feign.client.ApiClient;
 import com.scaffolding.sophia.admin.api.feign.client.UserClient;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -29,10 +31,12 @@ import java.security.Principal;
  */
 @RestController
 @RequestMapping("/home")
+@Api(tags = "auth")
 public class HomeController extends BaseController {
 
     @Autowired
     private UserClient userClient;
+
     @Autowired
     private ApiClient apiClient;
 
@@ -42,6 +46,7 @@ public class HomeController extends BaseController {
 
 
     @GetMapping("/principal")
+    @ApiOperation(value = "获取当前用户信息Principal")
     public Principal user(Principal member) {
         //获取当前用户信息
         return member;
@@ -63,6 +68,7 @@ public class HomeController extends BaseController {
      * 清除token（注销登录）
      */
     @DeleteMapping("/logout")
+    @ApiOperation(value = "登出")
     public ApiResponse logout(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {
         if (StringUtils.isBlank(authHeader)) {
             return fail("退出失败，token 为空");

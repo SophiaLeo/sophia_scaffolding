@@ -13,16 +13,17 @@ import java.io.Serializable;
 /**
  * @author: LHL
  * @ProjectName: sophia_scaffolding
- * @Package: com.scaffolding.sophia.admin.api.entity.authority.entity
- * @ClassName: Authority
+ * @Package: com.scaffolding.sophia.admin.api.entity.authority
+ * @ClassName: Menu
+ * @Date: 2019/11/5 09:58
  * @Description:
  * @Version: 1.0
  */
 @Data
 @NoArgsConstructor
-@TableName("sys_auth")
-@ApiModel(value = "Authority",description = "权限设置")
-public class Authority extends BaseBo implements Serializable {
+@TableName("sys_menu")
+@ApiModel(value = "Menu",description = "菜单设置")
+public class Menu extends BaseBo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,17 +32,25 @@ public class Authority extends BaseBo implements Serializable {
      * */
     @TableId(type = IdType.AUTO)
     private Long id;
+
     /**
-     * 权限名称
-     * */
-    private String authName;
+     * 父级菜单主键
+     */
+    private Long pid;
+
     /**
-     * 权限代码
-     * */
-    private String authCode;
+     * 菜单名称
+     */
+    private String menuName;
+
     /**
-     * 权限url
-     * */
-    private String authUrl;
+     * 菜单路径
+     */
+    private String menuPath;
+
+    /**
+     * 菜单编号
+     */
+    private String menuCode;
 
 }

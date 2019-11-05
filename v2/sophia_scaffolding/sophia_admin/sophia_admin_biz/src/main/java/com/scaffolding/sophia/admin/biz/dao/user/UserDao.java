@@ -36,8 +36,8 @@ public interface UserDao extends BaseMapper<User> {
     /**
      * 根据用户名称查询所有相同用户名的用户
      *
-     * @param userVo 用户
+     * @param username 用户名
      * @return List<UserVo>
      */
-    List<UserVo> findUserVoList(UserVo userVo);
+    List<UserVo> findUserVoList(String username);
 }

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.scaffolding.sophia.common.base.bo.BaseBo;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,7 +23,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @TableName("sys_user")
-public class User implements Serializable {
+@ApiModel(value = "User",description = "用户设置")
+public class User extends BaseBo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -63,16 +66,6 @@ public class User implements Serializable {
     private String email;
 
     /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 修改时间
-     */
-    private LocalDateTime updateTime;
-
-    /**
      * 最后登录IP
      */
     private String lastLoginIp;
@@ -83,12 +76,12 @@ public class User implements Serializable {
     private LocalDateTime lastLoginTime;
 
     /**
-     * 是否删除
+     * 是否删除 (0 是  1否)
      */
     private Integer isDeleted;
 
     /**
-     * 状态
+     * 状态 0无效 1有效
      */
     private Integer status;
 

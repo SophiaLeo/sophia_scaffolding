@@ -15,9 +15,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OauthClientDetailsDao extends BaseMapper<OauthClientDetails> {
 
-
     /**
      * 根据clientId查询OauthClientDetails
+     *
      * @param clientId clientId
      * @return OauthClientDetails
      */
@@ -25,6 +25,7 @@ public interface OauthClientDetailsDao extends BaseMapper<OauthClientDetails> {
 
     /**
      * 根据clientId查询resourceIds
+     *
      * @param clientId clientId
      * @return String
      */
