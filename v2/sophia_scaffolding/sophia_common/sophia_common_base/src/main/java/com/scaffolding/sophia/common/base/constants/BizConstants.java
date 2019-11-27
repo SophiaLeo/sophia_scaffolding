@@ -14,9 +14,9 @@ public class BizConstants {
     public static final Integer NO = 0;
     /** 用户状态 */
     //用户状态：正常
-    public static final Integer USER_STATUS_NORMAL = 0;
+    public static final Integer USER_STATUS_NORMAL = 1;
     //用户状态：禁用
-    public static final Integer USER_STATUS_UNUSED = 1;
+    public static final Integer USER_STATUS_UNUSED = 0;
     //用户状态：锁定
     public static final Integer USER_STATUS_LOCKED = 2;
     //用户状态：过期
