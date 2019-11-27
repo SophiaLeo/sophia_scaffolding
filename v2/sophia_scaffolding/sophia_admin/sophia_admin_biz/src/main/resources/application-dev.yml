@@ -7,7 +7,7 @@ spring:
     name: sophia-admin
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url:  jdbc:mysql://localhost:3306/sophia?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    url:  jdbc:mysql://localhost:3306/sophia?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: root
     name: sophia
@@ -137,7 +137,7 @@ ignore:
     - /swagger-ui.html
     - /swagger-resources/**
     - /webjars/**
-    - /api/login
+    - /api/**
 
 gateway:
   url: http://localhost:8002
