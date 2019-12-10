@@ -94,7 +94,8 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
                 .accessTokenConverter(accessTokenConverter())
                 // 自定义jwt生成token方式
                 .tokenEnhancer(tokenEnhancerChain)
-                // 配置TokenServices参数
+                // 配置TokenServices参数 如果需要jw的token而不是默认生成的uuid 那把他注释
+                //.tokenServices(defaultTokenServices())
                 .tokenServices(defaultTokenServices())
                 .reuseRefreshTokens(false)
         // ;  //自定义异常处理
