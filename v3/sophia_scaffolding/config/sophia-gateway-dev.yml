@@ -1,0 +1,52 @@
+server:
+  port: 8002
+spring:
+  cloud:
+    gateway:
+      locator:
+        enabled: true
+      routes:
+        - id: sophia-auth
+          uri: lb://sophia-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            # 验证码处理
+#            - ValidateCodeGatewayFilter
+#            - SwaggerHeaderFilter
+            - StripPrefix=2
+            - name: Hystrix
+              args:
+                name: oauth-hystrix
+                fallbackUri: forward:/common/fallback #设置熔断器
+        - id: sophia-admin
+          uri: lb://sophia-admin
+          predicates:
+            - Path=/api/admin/**
+          filters:
+#            - SwaggerHeaderFilter
+            - StripPrefix=2
+            - name: Hystrix
+              args:
+                name: admin-hystrix
+                fallbackUri: forward:/common/fallback #设置熔断器
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    bus-refresh:
+      enabled: true

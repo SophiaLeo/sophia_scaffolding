@@ -1,0 +1,19 @@
+server:
+  port: 8002
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: sophia-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.0.97:8848,192.168.0.97:8849,192.168.0.97:8840
+        file-extension: yml
+#        namespace: c4c81555-91e1-4ef5-8b57-77c5407b3481
+        group: DEFAULT_GROUP
+      discovery:
+        server-addr: 192.168.0.97:8848,192.168.0.97:8849,192.168.0.97:8840
+#        namespace: c4c81555-91e1-4ef5-8b57-77c5407b3481
+  profiles:
+    active: dev

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scaffolding.sophia.admin.biz.dao.authority.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.authority.Permission">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="URL_PATH" jdbcType="VARCHAR" property="urlPath" />
+    <result column="PID" jdbcType="VARCHAR" property="pid" />
+    <result column="TYPE" jdbcType="INTEGER" property="type" />
+    <result column="ICON_PATH" jdbcType="VARCHAR" property="iconPath" />
+    <result column="SORT" jdbcType="INTEGER" property="sort" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, CODE, URL_PATH, PID, TYPE, ICON_PATH, SORT, STATUS, CREATE_TIME, CREATE_USER, 
+    UPDATE_TIME, UPDATE_USER
+  </sql>
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_permission
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findAuthorityByUserId" parameterType="long" resultMap="BaseResultMap">
+        select sp.ID , NAME, CODE, URL_PATH, PID, TYPE, ICON_PATH, SORT
+        from sys_permission sp
+        INNER JOIN sys_role_auth sra ON  sp.id = sra.auth_id
+        INNER JOIN sys_user_role sur ON sur.role_id = sra.role_id
+        WHERE sur.user_id = #{userId}
+    </select>
+
+  <select id="findAuthorityByRoleId" parameterType="long" resultMap="BaseResultMap">
+        SELECT
+         sp.ID , NAME, CODE, URL_PATH, PID, TYPE, ICON_PATH, SORT
+        from sys_permission sp
+        LEFT JOIN sys_role_auth ra ON sp.id = ra.auth_id
+        WHERE ra.role_id = #{id}
+    </select>
+</mapper>
