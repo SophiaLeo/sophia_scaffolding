@@ -69,8 +69,6 @@ INSERT INTO `sys_dept` VALUES (2, 1, 1, '[1],[2]', '技术部', '技术部', NUL
 INSERT INTO `sys_dept` VALUES (3, 1, 2, '[1],[2],[3]', '研发一部', '研发一部', NULL, NULL, 1, 1, '2019-11-22 16:22:33', 1, NULL, NULL);
 INSERT INTO `sys_dept` VALUES (4, 2, 2, '[1],[2],[4]', '研发二部', '研发二部', NULL, NULL, 1, 1, '2019-11-22 16:22:33', 1, NULL, NULL);
 INSERT INTO `sys_dept` VALUES (5, 2, NULL, '[5]', 'TenXun', '腾讯', NULL, NULL, 0, NULL, '2019-11-22 16:22:33', 1, NULL, NULL);
-INSERT INTO `sys_dept` VALUES (6, 3, NULL, '[6]', '武汉软艺', '武汉软艺科技有限公司', '互联网', '湖北省武汉市洪山区关南村', 0, NULL, '2019-11-27 17:30:25', 1, NULL, NULL);
-INSERT INTO `sys_dept` VALUES (7, 4, NULL, '[7]', '信运通', '武汉信运通信息产业有限公司', '物流,互联网', '湖北省武汉市江夏区藏龙岛', 0, NULL, '2019-11-27 17:36:40', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict
