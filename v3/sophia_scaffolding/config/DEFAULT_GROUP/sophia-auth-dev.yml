@@ -21,7 +21,6 @@ spring:
     pool-prepared-statements: true
     max-open-prepared-statements: 20
     max-pool-prepared-statement-per-connection-size: 20
-  #    filters: stat,wall,log4j
   redis:
     host: localhost
     port: 6379
@@ -70,7 +69,7 @@ management:
 swagger:
   base-package: com.scaffolding.sophia.auth
   enabled: true
-  description: sophia认证服务
+  description: sophia-auth
   version: V2.0
   license: Apache License, Version 2.0
   license-url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -86,7 +85,6 @@ sophia:
     web:
       unInterceptUris: /v2/api-docs,/swagger-ui.html,/swagger-resources/**,/webjars/**,/oauth/**,/actuator/**,/druid/*
 
-# 直接放行URL
 ignore:
   urls:
     - /oauth/**
@@ -98,10 +96,10 @@ ignore:
     - /webjars/**
 
 ribbon:
-  ReadTimeout: 10000 #请求处理的超时时间
-  ConnectTimeout: 5000 #请求连接的超时时间
-  MaxAutoRetries: 1 #对当前实例的重试次数
-  MaxAutoRetriesNextServer: 2 #切换实例的重试次数
+  ReadTimeout: 10000
+  ConnectTimeout: 5000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
   eureka:
     enabled: true
 
@@ -113,7 +111,6 @@ hystrix:
           thread:
             timeoutInMilliseconds: 60000
 
-#熔断器开启
 feign:
   hystrix:
     enabled: true
@@ -124,7 +121,7 @@ feign:
 
 gateway:
   url: http://localhost:8002
-
+  
 security:
   oauth2:
     client:
