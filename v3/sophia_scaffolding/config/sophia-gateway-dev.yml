@@ -13,7 +13,6 @@ spring:
           filters:
             # 验证码处理
 #            - ValidateCodeGatewayFilter
-#            - SwaggerHeaderFilter
             - StripPrefix=2
             - name: Hystrix
               args:
@@ -24,7 +23,6 @@ spring:
           predicates:
             - Path=/api/admin/**
           filters:
-#            - SwaggerHeaderFilter
             - StripPrefix=2
             - name: Hystrix
               args:
