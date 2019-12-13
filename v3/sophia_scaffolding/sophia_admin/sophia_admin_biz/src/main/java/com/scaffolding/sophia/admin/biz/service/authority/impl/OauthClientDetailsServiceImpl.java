@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.admin.biz.service.authority.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scaffolding.sophia.admin.api.entity.authority.OauthClientDetails;
+import com.scaffolding.sophia.admin.api.entity.bo.OauthClientDetails;
 import com.scaffolding.sophia.admin.biz.dao.authority.OauthClientDetailsMapper;
 import com.scaffolding.sophia.admin.biz.service.authority.OauthClientDetailsService;
 import com.scaffolding.sophia.common.base.constants.GlobalsConstants;

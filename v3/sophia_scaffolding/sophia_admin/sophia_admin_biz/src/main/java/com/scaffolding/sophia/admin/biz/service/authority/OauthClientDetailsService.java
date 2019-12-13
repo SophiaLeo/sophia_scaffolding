@@ -1,6 +1,6 @@
 package com.scaffolding.sophia.admin.biz.service.authority;
 
-import com.scaffolding.sophia.admin.api.entity.authority.OauthClientDetails;
+import com.scaffolding.sophia.admin.api.entity.bo.OauthClientDetails;
 
 /**
  * @author: LHL

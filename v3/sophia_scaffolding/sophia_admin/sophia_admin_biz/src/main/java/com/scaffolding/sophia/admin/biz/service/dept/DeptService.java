@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.admin.biz.service.dept;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.scaffolding.sophia.admin.api.entity.dept.Dept;
+import com.scaffolding.sophia.admin.api.entity.bo.Dept;
 
 import java.util.List;
 import java.util.Map;

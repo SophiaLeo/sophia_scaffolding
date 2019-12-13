@@ -2,8 +2,8 @@ package com.scaffolding.sophia.admin.biz.dao.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.scaffolding.sophia.admin.api.entity.user.User;
-import com.scaffolding.sophia.admin.api.vo.UserVo;
+import com.scaffolding.sophia.admin.api.entity.bo.User;
+import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

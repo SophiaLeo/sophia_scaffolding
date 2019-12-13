@@ -1,10 +1,10 @@
 package com.scaffolding.sophia.admin.biz.controller;
 
-import com.scaffolding.sophia.admin.api.dto.UserDto;
-import com.scaffolding.sophia.admin.api.entity.authority.Permission;
-import com.scaffolding.sophia.admin.api.entity.role.Role;
-import com.scaffolding.sophia.admin.api.entity.user.User;
-import com.scaffolding.sophia.admin.api.vo.UserVo;
+import com.scaffolding.sophia.admin.api.entity.dto.UserDto;
+import com.scaffolding.sophia.admin.api.entity.bo.Permission;
+import com.scaffolding.sophia.admin.api.entity.bo.Role;
+import com.scaffolding.sophia.admin.api.entity.bo.User;
+import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 import com.scaffolding.sophia.admin.biz.service.authority.PermissionService;
 import com.scaffolding.sophia.admin.biz.service.role.RoleService;
 import com.scaffolding.sophia.admin.biz.service.user.UserService;

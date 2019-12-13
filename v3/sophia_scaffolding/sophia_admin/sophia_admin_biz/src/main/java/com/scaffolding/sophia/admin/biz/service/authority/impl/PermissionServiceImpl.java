@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.admin.biz.service.authority.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scaffolding.sophia.admin.api.entity.authority.Permission;
+import com.scaffolding.sophia.admin.api.entity.bo.Permission;
 import com.scaffolding.sophia.admin.biz.dao.authority.PermissionMapper;
 import com.scaffolding.sophia.admin.biz.service.authority.PermissionService;
 import org.springframework.stereotype.Service;

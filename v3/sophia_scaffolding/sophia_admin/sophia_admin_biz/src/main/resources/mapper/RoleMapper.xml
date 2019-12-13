@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scaffolding.sophia.admin.biz.dao.role.RoleMapper">
-    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.role.Role">
+    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.bo.Role">
         <id column="ID" jdbcType="BIGINT" property="id"/>
         <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
         <result column="ROLE_CODE" jdbcType="VARCHAR" property="roleCode"/>

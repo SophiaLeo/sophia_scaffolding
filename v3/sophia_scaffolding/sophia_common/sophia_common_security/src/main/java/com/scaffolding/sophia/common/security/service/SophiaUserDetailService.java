@@ -1,8 +1,8 @@
 package com.scaffolding.sophia.common.security.service;
 
 import com.alibaba.fastjson.JSON;
-import com.scaffolding.sophia.admin.api.entity.authority.Permission;
-import com.scaffolding.sophia.admin.api.entity.user.User;
+import com.scaffolding.sophia.admin.api.entity.bo.Permission;
+import com.scaffolding.sophia.admin.api.entity.bo.User;
 import com.scaffolding.sophia.admin.api.feign.client.AuthorityClient;
 import com.scaffolding.sophia.admin.api.feign.client.UserClient;
 import com.scaffolding.sophia.common.base.constants.BizConstants;

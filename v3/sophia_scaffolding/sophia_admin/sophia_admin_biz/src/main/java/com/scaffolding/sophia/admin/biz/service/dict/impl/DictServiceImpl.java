@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.admin.biz.service.dict.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scaffolding.sophia.admin.api.entity.dict.Dict;
+import com.scaffolding.sophia.admin.api.entity.bo.Dict;
 import com.scaffolding.sophia.admin.biz.dao.dict.DictMapper;
 import com.scaffolding.sophia.admin.biz.service.dict.DictService;
 import org.springframework.stereotype.Service;

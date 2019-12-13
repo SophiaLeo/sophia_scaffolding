@@ -1,6 +1,6 @@
 package com.scaffolding.sophia.admin.biz.controller;
 
-import com.scaffolding.sophia.admin.api.entity.dept.Dept;
+import com.scaffolding.sophia.admin.api.entity.bo.Dept;
 import com.scaffolding.sophia.admin.biz.service.dept.DeptService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;

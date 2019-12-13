@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scaffolding.sophia.admin.biz.dao.authority.OauthClientDetailsMapper">
-    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.authority.OauthClientDetails">
+    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.bo.OauthClientDetails">
         <id column="client_id" jdbcType="VARCHAR" property="clientId"/>
         <result column="resource_ids" jdbcType="VARCHAR" property="resourceIds"/>
         <result column="client_secret" jdbcType="VARCHAR" property="clientSecret"/>

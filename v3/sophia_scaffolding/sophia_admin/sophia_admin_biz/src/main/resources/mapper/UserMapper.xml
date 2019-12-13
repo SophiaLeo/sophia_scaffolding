@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scaffolding.sophia.admin.biz.dao.user.UserMapper">
-    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.user.User">
+    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.bo.User">
         <id column="ID" jdbcType="BIGINT" property="id"/>
         <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
         <result column="NICKNAME" jdbcType="VARCHAR" property="nickname"/>
@@ -28,7 +28,7 @@
         <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser"/>
     </resultMap>
 
-    <resultMap id="BaseResultMapVO" type="com.scaffolding.sophia.admin.api.vo.UserVo">
+    <resultMap id="BaseResultMapVO" type="com.scaffolding.sophia.admin.api.entity.vo.UserVo">
         <id column="ID" jdbcType="BIGINT" property="id"/>
         <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
         <result column="NICKNAME" jdbcType="VARCHAR" property="nickname"/>
@@ -109,7 +109,7 @@
         WHERE id = #{userId}
     </select>
 
-    <select id="findUserVoList" parameterType="com.scaffolding.sophia.admin.api.vo.UserVo"
+    <select id="findUserVoList" parameterType="com.scaffolding.sophia.admin.api.entity.vo.UserVo"
             resultMap="BaseResultMapVO">
         select
         ID, USERNAME, NICKNAME, PASSWORD, AGE, SEX, BIRTHDAY, PHONE, PROVINCE, CITY, AREA, ADDRESS, EMAIL,

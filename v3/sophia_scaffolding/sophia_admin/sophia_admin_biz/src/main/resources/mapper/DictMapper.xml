@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scaffolding.sophia.admin.biz.dao.dict.DictMapper">
-  <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.dict.Dict">
+  <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.bo.Dict">
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="VALUE" jdbcType="INTEGER" property="value" />
     <result column="PID" jdbcType="BIGINT" property="pid" />
@@ -30,7 +30,7 @@
     where ID = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insertSelective" parameterType="com.scaffolding.sophia.admin.api.entity.dict.Dict">
+  <insert id="insertSelective" parameterType="com.scaffolding.sophia.admin.api.entity.bo.Dict">
     insert into sys_dict
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -98,7 +98,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.scaffolding.sophia.admin.api.entity.dict.Dict">
+  <update id="updateByPrimaryKeySelective" parameterType="com.scaffolding.sophia.admin.api.entity.bo.Dict">
     update sys_dict
     <set>
       <if test="value != null">

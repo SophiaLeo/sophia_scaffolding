@@ -1,4 +1,4 @@
-package com.scaffolding.sophia.admin.api.entity.dict;
+package com.scaffolding.sophia.admin.api.entity.bo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.scaffolding.sophia.common.base.bo.BaseBo;

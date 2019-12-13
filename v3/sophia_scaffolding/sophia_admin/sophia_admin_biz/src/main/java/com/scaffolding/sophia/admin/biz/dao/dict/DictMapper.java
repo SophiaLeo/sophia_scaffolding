@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.admin.biz.dao.dict;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.scaffolding.sophia.admin.api.entity.dict.Dict;
+import com.scaffolding.sophia.admin.api.entity.bo.Dict;
 import org.springframework.stereotype.Repository;
 
 /**

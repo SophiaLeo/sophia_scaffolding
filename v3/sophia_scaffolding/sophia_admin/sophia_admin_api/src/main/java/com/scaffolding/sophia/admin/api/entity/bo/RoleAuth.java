@@ -1,4 +1,4 @@
-package com.scaffolding.sophia.admin.api.entity.user;
+package com.scaffolding.sophia.admin.api.entity.bo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -12,16 +12,16 @@ import java.io.Serializable;
 /**
  * @author: LHL
  * @ProjectName: sophia_scaffolding
- * @Package: com.scaffolding.sophia.admin.api.entity.user.entity
- * @ClassName: UserRole
+ * @Package: com.scaffolding.sophia.admin.api.entity.role.entity
+ * @ClassName: RoleAuth
  * @Description:
  * @Version: 1.0
  */
 @Data
 @NoArgsConstructor
-@TableName("sys_user_role")
-@ApiModel(value = "UserRole",description = "用户角色设置")
-public class UserRole implements Serializable {
+@TableName("sys_role_auth")
+@ApiModel(value = "RoleAuth",description = "角色权限设置")
+public class  RoleAuth implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,7 +37,9 @@ public class UserRole implements Serializable {
     private Long roleId;
 
     /**
-     * 用户id
+     * 权限id
      */
-    private Long userId;
+    private Long authId;
+
+
 }

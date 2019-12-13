@@ -1,8 +1,8 @@
 package com.scaffolding.sophia.admin.biz.service.user;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.scaffolding.sophia.admin.api.entity.user.User;
-import com.scaffolding.sophia.admin.api.vo.UserVo;
+import com.scaffolding.sophia.admin.api.entity.bo.User;
+import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 
 import java.util.List;
 import java.util.Map;

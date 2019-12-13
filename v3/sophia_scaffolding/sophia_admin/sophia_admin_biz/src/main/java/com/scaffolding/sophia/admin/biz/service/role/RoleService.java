@@ -1,6 +1,6 @@
 package com.scaffolding.sophia.admin.biz.service.role;
 
-import com.scaffolding.sophia.admin.api.entity.role.Role;
+import com.scaffolding.sophia.admin.api.entity.bo.Role;
 
 /**
  * @author: LHL

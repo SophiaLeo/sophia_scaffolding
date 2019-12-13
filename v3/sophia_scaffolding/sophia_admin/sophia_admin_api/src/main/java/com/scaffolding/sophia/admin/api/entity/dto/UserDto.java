@@ -1,7 +1,7 @@
-package com.scaffolding.sophia.admin.api.dto;
+package com.scaffolding.sophia.admin.api.entity.dto;
 
-import com.scaffolding.sophia.admin.api.entity.authority.Permission;
-import com.scaffolding.sophia.admin.api.vo.UserVo;
+import com.scaffolding.sophia.admin.api.entity.bo.Permission;
+import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author: LHL
  * @ProjectName: sophia_scaffolding
- * @Package: com.scaffolding.sophia.admin.api.dto
+ * @Package: com.scaffolding.sophia.admin.api.entity.dto
  * @ClassName: UserDto
  * @Description:
  * @Version: 1.0

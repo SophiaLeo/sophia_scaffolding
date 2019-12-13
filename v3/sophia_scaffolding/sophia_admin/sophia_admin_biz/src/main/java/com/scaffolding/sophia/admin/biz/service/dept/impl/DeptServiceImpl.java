@@ -3,7 +3,7 @@ package com.scaffolding.sophia.admin.biz.service.dept.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scaffolding.sophia.admin.api.entity.dept.Dept;
+import com.scaffolding.sophia.admin.api.entity.bo.Dept;
 import com.scaffolding.sophia.admin.biz.dao.dept.DeptMapper;
 import com.scaffolding.sophia.admin.biz.service.dept.DeptService;
 import com.scaffolding.sophia.common.security.util.UserUtils;

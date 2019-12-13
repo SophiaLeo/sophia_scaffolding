@@ -1,4 +1,4 @@
-package com.scaffolding.sophia.admin.api.entity.authority;
+package com.scaffolding.sophia.admin.api.entity.bo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

@@ -1,6 +1,6 @@
 package com.scaffolding.sophia.admin.biz.service.authority;
 
-import com.scaffolding.sophia.admin.api.entity.authority.Permission;
+import com.scaffolding.sophia.admin.api.entity.bo.Permission;
 
 import java.util.List;
 

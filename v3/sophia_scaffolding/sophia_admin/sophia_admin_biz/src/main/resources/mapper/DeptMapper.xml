@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scaffolding.sophia.admin.biz.dao.dept.DeptMapper">
-    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.dept.Dept">
+    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.bo.Dept">
         <id column="ID" jdbcType="BIGINT" property="id"/>
         <result column="NUM" jdbcType="INTEGER" property="num"/>
         <result column="PID" jdbcType="BIGINT" property="pid"/>
@@ -60,7 +60,7 @@
     where ID = #{id,jdbcType=BIGINT}
   </delete>
 
-    <insert id="insertSelective" parameterType="com.scaffolding.sophia.admin.api.entity.dept.Dept" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertSelective" parameterType="com.scaffolding.sophia.admin.api.entity.bo.Dept" useGeneratedKeys="true" keyProperty="id">
         insert into sys_dept
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -152,7 +152,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.scaffolding.sophia.admin.api.entity.dept.Dept">
+    <update id="updateByPrimaryKeySelective" parameterType="com.scaffolding.sophia.admin.api.entity.bo.Dept">
         update sys_dept
         <set>
             <if test="num != null">

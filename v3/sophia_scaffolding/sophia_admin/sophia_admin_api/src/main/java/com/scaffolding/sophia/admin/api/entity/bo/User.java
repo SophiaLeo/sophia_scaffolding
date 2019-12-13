@@ -1,6 +1,11 @@
-package com.scaffolding.sophia.admin.api.vo;
+package com.scaffolding.sophia.admin.api.entity.bo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.scaffolding.sophia.common.base.bo.BaseBo;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,20 +16,23 @@ import java.time.LocalDateTime;
 /**
  * @author: LHL
  * @ProjectName: sophia_scaffolding
- * @Package: com.scaffolding.sophia.admin.api.vo
- * @ClassName: UserVo
+ * @Package: com.scaffolding.sophia.admin.api.entity.user.entity
+ * @ClassName: User
  * @Description:
  * @Version: 1.0
  */
 @Data
 @NoArgsConstructor
-public class UserVo implements Serializable {
+@TableName("sys_user")
+@ApiModel(value = "User",description = "用户设置")
+public class User extends BaseBo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * id
-     * */
+     */
+    @TableId(type = IdType.AUTO)
     @ApiModelProperty(value = "主键id")
     private Long id;
 
@@ -98,7 +106,26 @@ public class UserVo implements Serializable {
     private String address;
 
     /**
-     * 状态
+     * 最后登录IP
+     */
+    @ApiModelProperty(value = "最后登录IP")
+    private String lastLoginIp;
+
+    /**
+     * 最后登陆时间
+     */
+    @ApiModelProperty(value = "最后登陆时间")
+    private LocalDateTime lastLoginTime;
+
+
+    /**
+     * 是否删除 (0 是  1否)
+     */
+    @ApiModelProperty(value = "是否删除 (0 是  1否)")
+    private Integer isDeleted;
+
+    /**
+     * 状态 0无效 1有效
      */
     @ApiModelProperty(value = "状态 0无效 1有效")
     private Integer status;
@@ -121,12 +148,4 @@ public class UserVo implements Serializable {
     @ApiModelProperty(value = "公司id")
     private Long compId;
 
-    @ApiModelProperty(value = "token")
-    private String accessToken;
-
-    @ApiModelProperty(value = "角色名称")
-    private String roleName;
-
-    @ApiModelProperty(value = "部门名称")
-    private String deptName;
 }

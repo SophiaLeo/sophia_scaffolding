@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scaffolding.sophia.admin.biz.dao.authority.PermissionMapper">
-  <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.authority.Permission">
+  <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.bo.Permission">
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="CODE" jdbcType="VARCHAR" property="code" />

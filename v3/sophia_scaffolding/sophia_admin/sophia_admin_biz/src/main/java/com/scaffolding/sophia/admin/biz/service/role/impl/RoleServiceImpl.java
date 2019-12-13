@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.admin.biz.service.role.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scaffolding.sophia.admin.api.entity.role.Role;
+import com.scaffolding.sophia.admin.api.entity.bo.Role;
 import com.scaffolding.sophia.admin.biz.dao.role.RoleMapper;
 import com.scaffolding.sophia.admin.biz.service.role.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;

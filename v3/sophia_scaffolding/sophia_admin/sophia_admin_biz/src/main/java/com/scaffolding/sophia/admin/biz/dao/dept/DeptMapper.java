@@ -2,7 +2,7 @@ package com.scaffolding.sophia.admin.biz.dao.dept;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.scaffolding.sophia.admin.api.entity.dept.Dept;
+import com.scaffolding.sophia.admin.api.entity.bo.Dept;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

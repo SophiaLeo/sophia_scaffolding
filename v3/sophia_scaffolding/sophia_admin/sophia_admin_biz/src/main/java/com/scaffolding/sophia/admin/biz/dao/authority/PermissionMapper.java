@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.admin.biz.dao.authority;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.scaffolding.sophia.admin.api.entity.authority.Permission;
+import com.scaffolding.sophia.admin.api.entity.bo.Permission;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

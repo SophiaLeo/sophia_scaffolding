@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.admin.biz.dao.role;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.scaffolding.sophia.admin.api.entity.role.Role;
+import com.scaffolding.sophia.admin.api.entity.bo.Role;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
