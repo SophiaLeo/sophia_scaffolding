@@ -70,7 +70,9 @@ public class SophiaResourceServerConfig extends ResourceServerConfigurerAdapter 
     @Bean
     public TokenStore tokenStore() {
 //        return new InMemoryTokenStore();
-        return new RedisTokenStore(redisConnectionFactory);
+        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+        redisTokenStore.setPrefix(GlobalsConstants.PROJECT_PREFIX+GlobalsConstants.OAUTH_PREFIX);
+        return redisTokenStore;
 //        return new JwtTokenStore(jwtAccessTokenConverter());
 //        return new JdbcTokenStore(dataSource);
     }
