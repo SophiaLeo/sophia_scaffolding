@@ -54,30 +54,6 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
     private SophiaClientDetailsService sophiaClientDetailsService;
 
 
-    // /**
-    //  * 配置客户端详情信息，客户端详情信息在这里进行初始化，通过数据库来存储调取详情信息
-    //  */
-    // @Override
-    // public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    //     InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
-    //     if (ArrayUtils.isNotEmpty(securityProperties.getOauth2().getClients())) {
-    //         for (OAuth2ClientProperties client : securityProperties.getOauth2().getClients()) {
-    //             builder
-    //                     .withClient(client.getClientId())
-    //                     .secret(new BCryptPasswordEncoder().encode(client.getClientSecret()))
-    //                     // .resourceIds("admin","auth")
-    //                     //设置token的有效期，不设置默认12小时
-    //                     .accessTokenValiditySeconds(client.getAccessTokenValidatySeconds())
-    //                     //设置刷新token的有效期，不设置默认30天
-    //                     .refreshTokenValiditySeconds(client.getRefreshTokenValiditySeconds())
-    //                     .redirectUris("http://www.baidu.com")
-    //                     .authorizedGrantTypes("authorization_code","client_credentials", "refresh_token", "password")
-    //                     .scopes("all", "read", "write")
-    //                     .autoApprove(true);
-    //         }
-    //     }
-    // }
-
     /**
      *  配置客户端详情信息，客户端详情信息在这里进行初始化，通过数据库来存储调取详情信息
      * */
@@ -103,10 +79,10 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
                 .accessTokenConverter(accessTokenConverter())
                 // 自定义jwt生成token方式
                 .tokenEnhancer(tokenEnhancerChain)
-                // 配置TokenServices参数
-                .tokenServices(defaultTokenServices())
+                // 配置TokenServices参数 如果需要默认的uuid就不用注释了
+                // .tokenServices(defaultTokenServices())
                 .reuseRefreshTokens(false)
-        // ;  //自定义异常处理
+                //自定义异常处理
                 .exceptionTranslator(new SophiaWebResponseExceptionTranslator());
     }
 
@@ -133,9 +109,9 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
         // 设置上次RefreshToken是否还可以使用 默认为true
         tokenServices.setReuseRefreshToken(false);
         // token有效期自定义设置，默认12小时
-        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 6);
+        tokenServices.setAccessTokenValiditySeconds(securityProperties.getOauth2().getClients()[0].getAccessTokenValidatySeconds());
         // refresh_token默认30天
-        tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 8);
+        tokenServices.setRefreshTokenValiditySeconds(securityProperties.getOauth2().getClients()[0].getRefreshTokenValiditySeconds());
         tokenServices.setTokenEnhancer(tokenEnhancer());
         return tokenServices;
     }

@@ -79,6 +79,10 @@ swagger:
 
 sophia:
   security:
+    oauth2:
+      clients[0]:
+        accessTokenValidatySeconds: 21600
+        refreshTokenValiditySeconds: 2592000
     web:
       unInterceptUris: /v2/api-docs,/swagger-ui.html,/swagger-resources/**,/webjars/**,/oauth/**,/actuator/**,/druid/*
 
