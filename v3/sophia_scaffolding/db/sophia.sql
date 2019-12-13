@@ -239,9 +239,9 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', '超级管理员', '$2a$10$ts07XkBaX7OwC5xA449gh.MO1Sa3KfyJlcx./lZKkMEgP8XDSoR9e', 18, 1, '1997-04-04 16:00:01', '15271808834', 'aomrlee412@gmail.com', '湖北省', '武汉市', '洪山区', '湖北省武汉市洪山区光谷', '2019-10-29 07:17:27', NULL, '2019-12-06 15:02:13', 1, '0:0:0:0:0:0:0:1', '2019-12-06 15:02:13', 1, 1, '1/2/ts_Penguins.jpg', NULL, NULL);
-INSERT INTO `sys_user` VALUES (2, 'gs', '公司管理员', '$2a$10$ts07XkBaX7OwC5xA449gh.MO1Sa3KfyJlcx./lZKkMEgP8XDSoR9e', 18, 1, '1997-05-18 00:00:01', '18986091954', '1054868512@qq.com', '湖北省', '武汉市', '洪山区', '湖北省武汉市洪山区光谷', '2019-11-05 15:20:14', 1, '2019-11-05 15:20:14', 1, NULL, '2019-11-22 19:54:49', 1, 1, NULL, NULL, 5);
-INSERT INTO `sys_user` VALUES (3, 'bm', '部门管理员', '$2a$10$ts07XkBaX7OwC5xA449gh.MO1Sa3KfyJlcx./lZKkMEgP8XDSoR9e', 18, 0, '1997-05-18 00:00:01', '18923689269', '2359878269@qq.com', '湖北省', '武汉市', '洪山区', '湖北省武汉市洪山区光谷', '2019-11-05 15:20:10', 1, '2019-11-05 15:20:10', 1, NULL, '2019-11-22 16:33:33', 1, 1, NULL, 2, NULL);
+INSERT INTO `sys_user` VALUES (1, 'admin', '超级管理员', '$2a$10$ts07XkBaX7OwC5xA449gh.MO1Sa3KfyJlcx./lZKkMEgP8XDSoR9e', 18, 1, '1997-04-04 16:00:01', '15271802334', 'aomrlee@gmail.com', '湖北省', '武汉市', '洪山区', '湖北省武汉市洪山区光谷', '2019-10-29 07:17:27', NULL, '2019-12-06 15:02:13', 1, '0:0:0:0:0:0:0:1', '2019-12-06 15:02:13', 1, 1, '1/2/ts_Penguins.jpg', NULL, NULL);
+INSERT INTO `sys_user` VALUES (2, 'gs', '公司管理员', '$2a$10$ts07XkBaX7OwC5xA449gh.MO1Sa3KfyJlcx./lZKkMEgP8XDSoR9e', 18, 1, '1997-05-18 00:00:01', '18986091864', '2369548632@qq.com', '湖北省', '武汉市', '洪山区', '湖北省武汉市洪山区光谷', '2019-11-05 15:20:14', 1, '2019-11-05 15:20:14', 1, NULL, '2019-11-22 19:54:49', 1, 1, NULL, NULL, 5);
+INSERT INTO `sys_user` VALUES (3, 'bm', '部门管理员', '$2a$10$ts07XkBaX7OwC5xA449gh.MO1Sa3KfyJlcx./lZKkMEgP8XDSoR9e', 18, 0, '1997-05-18 00:00:01', '18923688969', '2359878269@qq.com', '湖北省', '武汉市', '洪山区', '湖北省武汉市洪山区光谷', '2019-11-05 15:20:10', 1, '2019-11-05 15:20:10', 1, NULL, '2019-11-22 16:33:33', 1, 1, NULL, 2, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_role
