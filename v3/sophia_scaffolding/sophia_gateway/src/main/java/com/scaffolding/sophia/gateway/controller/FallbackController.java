@@ -22,6 +22,7 @@ public class FallbackController {
         Map map = new HashMap<>();
         map.put("code", 504);
         map.put("msg", "请求超时，请稍后再试");
+        logger.debug("msg : {}",map.get("msg"));
         return map;
     }
 }
