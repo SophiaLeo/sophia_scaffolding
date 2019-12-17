@@ -101,7 +101,7 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
     // public DefaultTokenServices defaultTokenServices() {
     //     DefaultTokenServices tokenServices = new DefaultTokenServices();
     //     tokenServices.setTokenStore(tokenStore());
-    //     tokenServices.setSupportRefreshToken(true);
+    //     tokenServices.setAuthenticationManager(authenticationManager);
     //     // 这里如果设置为false则不能更新refresh_token，如果需要刷新token的功能需要设置成true
     //     tokenServices.setSupportRefreshToken(true);
     //     // 设置上次RefreshToken是否还可以使用 默认为true
