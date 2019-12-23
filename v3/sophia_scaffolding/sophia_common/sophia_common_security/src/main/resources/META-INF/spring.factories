@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.scaffolding.sophia.common.security.service.SophiaUserDetailService

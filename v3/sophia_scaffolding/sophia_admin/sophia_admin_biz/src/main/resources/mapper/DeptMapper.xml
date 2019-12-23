@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scaffolding.sophia.admin.biz.mapper.DeptMapper">
+    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.bo.Dept">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="NUM" jdbcType="INTEGER" property="num" />
+        <result column="PID" jdbcType="VARCHAR" property="pid" />
+        <result column="PIDS" jdbcType="VARCHAR" property="pids" />
+        <result column="SIMPLE_NAME" jdbcType="VARCHAR" property="simpleName" />
+        <result column="FULL_NAME" jdbcType="VARCHAR" property="fullName" />
+        <result column="TIPS" jdbcType="VARCHAR" property="tips" />
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+        <result column="DEPT_TYPE" jdbcType="INTEGER" property="deptType" />
+        <result column="COMP_ID" jdbcType="VARCHAR" property="compId" />
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="UPDATE_USER" jdbcType="VARCHAR" property="updateUser" />
+    </resultMap>
+
+   <resultMap id="BaseResultMapVo" type="com.scaffolding.sophia.admin.api.entity.vo.DeptVo">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="NUM" jdbcType="INTEGER" property="num" />
+        <result column="PID" jdbcType="VARCHAR" property="pid" />
+        <result column="SIMPLE_NAME" jdbcType="VARCHAR" property="simpleName" />
+        <result column="FULL_NAME" jdbcType="VARCHAR" property="fullName" />
+        <result column="TIPS" jdbcType="VARCHAR" property="tips" />
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+        <result column="DEPT_TYPE" jdbcType="INTEGER" property="deptType" />
+        <result column="COMP_ID" jdbcType="VARCHAR" property="compId" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ID, NUM, PID, PIDS, SIMPLE_NAME, FULL_NAME, TIPS, ADDRESS, DEPT_TYPE, COMP_ID, CREATE_TIME,
+    CREATE_USER, UPDATE_TIME, UPDATE_USER
+  </sql>
+
+    <select id="selectByDeptId" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        ID, NUM, PID, SIMPLE_NAME, FULL_NAME, TIPS, ADDRESS, DEPT_TYPE, COMP_ID
+        from sys_dept
+        <where>
+            <if test="deptId != null">
+                PIDS like concat('%[',#{deptId},']%')
+            </if>
+        </where>
+        ORDER BY NUM
+    </select>
+
+    <select id="findCompanyList" resultMap="BaseResultMapVo">
+        select
+        ID, NUM, PID, SIMPLE_NAME, FULL_NAME, TIPS, ADDRESS, DEPT_TYPE, COMP_ID
+        from sys_dept
+        where DEPT_TYPE = 0
+        <if test="param.name != null and param.name != ''">
+            AND SIMPLE_NAME like concat('%',#{param.name},'%') OR FULL_NAME like concat('%',#{param.name},'%')
+        </if>
+        <if test="param.address != null and param.address != ''">
+            AND ADDRESS like concat('%',#{param.address},'%')
+        </if>
+        ORDER BY NUM ,CREATE_TIME DESC
+    </select>
+
+</mapper>

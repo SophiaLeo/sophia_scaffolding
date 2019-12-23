@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.scaffolding.sophia</groupId>
+        <artifactId>sophia_admin</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+    </parent>
+    <artifactId>sophia_admin_biz</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>sophia_admin_biz</name>
+    <description>admin 用户鉴权服务</description>
+
+    <dependencies>
+        <!-- for swagger -->
+        <dependency>
+            <groupId>com.spring4all</groupId>
+            <artifactId>swagger-spring-boot-starter</artifactId>
+            <version>${swagger-spring-boot-starter.version}</version>
+        </dependency>
+        <!--公共 工具包 -->
+        <dependency>
+            <groupId>com.scaffolding.sophia</groupId>
+            <artifactId>sophia_common_util</artifactId>
+            <version>${sophia-common.version}</version>
+        </dependency>
+        <!--公共配置包 包含base包-->
+        <dependency>
+            <groupId>com.scaffolding.sophia</groupId>
+            <artifactId>sophia_common_config</artifactId>
+            <version>${sophia-common.version}</version>
+        </dependency>
+        <!--公共security包 包含admin api 及 包含base-->
+        <dependency>
+            <groupId>com.scaffolding.sophia</groupId>
+            <artifactId>sophia_common_security</artifactId>
+            <version>${sophia-common.version}</version>
+        </dependency>
+        <!--actuator监管-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--eureka client-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--        </dependency>-->
+        <!-- nacos -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>${spring-cloud-alibaba.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <version>${spring-cloud-alibaba.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
