@@ -5,20 +5,19 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for sys_api_logger
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_api_logger`;
-CREATE TABLE `sys_api_logger`  (
-  `ID` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `URI` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'url',
-  `METHOD_NAME` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '方法名',
-  `CLASS_NAME` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '类名',
-  `CREATE_TIME` timestamp(0) NULL DEFAULT NULL COMMENT '访问时间',
-  `USER_ID` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '访问用户',
-  `USER_NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户昵称',
-  `PARAMS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数',
-  `IP` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '访问ip',
-  `METHOD` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求方式',
+CREATE TABLE `sys_api_logger` (
+  `ID` varchar(50) NOT NULL,
+  `URI` varchar(100) DEFAULT NULL COMMENT 'url',
+  `METHOD_NAME` varchar(40) DEFAULT NULL COMMENT '方法名',
+  `CLASS_NAME` varchar(100) DEFAULT NULL COMMENT '类名',
+  `CREATE_TIME` timestamp NULL DEFAULT NULL COMMENT '访问时间',
+  `SERVICE_ID` varchar(50) DEFAULT NULL COMMENT '服务id',
+  `USER_NAME` varchar(50) DEFAULT NULL COMMENT '用户昵称',
+  `PARAMS` varchar(2000) DEFAULT NULL COMMENT '参数',
+  `IP` varchar(50) DEFAULT NULL COMMENT '访问ip',
+  `METHOD` varchar(50) DEFAULT NULL COMMENT '请求方式',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '日志' ROW_FORMAT = Dynamic;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='日志';
 -- ----------------------------
 -- Table structure for sys_dept
 -- ----------------------------
