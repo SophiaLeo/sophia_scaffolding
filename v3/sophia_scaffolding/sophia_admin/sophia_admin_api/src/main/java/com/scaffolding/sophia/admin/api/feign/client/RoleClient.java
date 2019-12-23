@@ -19,6 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(contextId = "roleClient", name = ServiceNameConstants.SOPHIA_ADMIN, configuration = FeignRequestInterceptorConfig.class, fallback = RoleClientFallBack.class)
 public interface RoleClient {
 
-    @GetMapping("/role/info/{id}")
-    ApiResponse getRoleByUserId(@PathVariable Long id);
+    @GetMapping("/role/web/info/user/{id}")
+    ApiResponse getRoleByUserId(@PathVariable String id);
 }

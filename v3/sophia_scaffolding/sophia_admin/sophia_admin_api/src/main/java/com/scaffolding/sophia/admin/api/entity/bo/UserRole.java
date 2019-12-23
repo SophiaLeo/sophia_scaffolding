@@ -1,6 +1,5 @@
 package com.scaffolding.sophia.admin.api.entity.bo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -28,16 +27,17 @@ public class UserRole implements Serializable {
     /**
      * id
      * */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+    @TableId
+    private String id;
 
     /**
      * 角色id
      */
-    private Long roleId;
+    private String roleId;
 
     /**
      * 用户id
      */
-    private Long userId;
+    private String userId;
+
 }

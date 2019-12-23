@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.admin.biz.controller;
 
 import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
-import com.scaffolding.sophia.admin.biz.service.user.UserService;
+import com.scaffolding.sophia.admin.biz.service.UserService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
 import io.swagger.annotations.Api;

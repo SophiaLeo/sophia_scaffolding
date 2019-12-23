@@ -21,7 +21,7 @@ public class RoleClientFallBack implements RoleClient {
     private final Logger logger = LoggerFactory.getLogger(RoleClientFallBack.class);
 
     @Override
-    public ApiResponse getRoleByUserId(Long id) {
+    public ApiResponse getRoleByUserId(String id) {
         logger.error("调用sophia-admin服务getRoleByUserId方法失败!");
         return ApiResponse.hystrixError(ServiceNameConstants.SOPHIA_ADMIN, "getRoleByUserId");
     }

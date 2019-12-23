@@ -1,8 +1,8 @@
 package com.scaffolding.sophia.common.security.service;
 
 import com.alibaba.fastjson.JSON;
-import com.scaffolding.sophia.admin.api.entity.bo.Permission;
 import com.scaffolding.sophia.admin.api.entity.bo.User;
+import com.scaffolding.sophia.admin.api.entity.vo.PermissionVo;
 import com.scaffolding.sophia.admin.api.feign.client.AuthorityClient;
 import com.scaffolding.sophia.admin.api.feign.client.UserClient;
 import com.scaffolding.sophia.common.base.constants.BizConstants;
@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,10 +53,10 @@ public class SophiaUserDetailService implements UserDetailsService {
             throw new CommonException("用户已禁用");
         }
         ApiResponse response = authorityClient.getAuthorityByUserId(user.getId());
-        List<Permission> authList = JSON.parseArray(JSON.toJSONString(response.getData(), true),Permission.class);
+        List<PermissionVo> authList = JSON.parseArray(JSON.toJSONString(response.getData(), true), PermissionVo.class);
         List<GrantedAuthority> lists = new ArrayList<>();
         if(authList != null && authList.size()>0){
-            for (Permission auth : authList) {
+            for (PermissionVo auth : authList) {
                 lists.add(new SimpleGrantedAuthority(auth.getCode()));
             }
         }

@@ -6,7 +6,6 @@
         <groupId>com.scaffolding.sophia</groupId>
         <artifactId>sophia_scaffolding</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <artifactId>sophia_auth</artifactId>
     <version>0.0.1-SNAPSHOT</version>

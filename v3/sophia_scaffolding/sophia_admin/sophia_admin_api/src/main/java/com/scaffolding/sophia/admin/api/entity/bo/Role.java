@@ -1,12 +1,13 @@
 package com.scaffolding.sophia.admin.api.entity.bo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.scaffolding.sophia.admin.api.entity.dto.RoleDto;
 import com.scaffolding.sophia.common.base.bo.BaseBo;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 
@@ -29,8 +30,8 @@ public class Role extends BaseBo implements Serializable {
     /**
      * id
      * */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+    @TableId
+    private String id;
 
     /**
      * 角色名称
@@ -48,8 +49,21 @@ public class Role extends BaseBo implements Serializable {
     private String description;
 
     /**
-     * 部门id
+     * 角色类型 1:后台角色 0:前台角色
      */
-    private Long deptId;
+    private Integer roleType;
 
+    /**
+     * 是否有效(0无效，1有效)
+     */
+    private Integer status;
+
+
+    /**
+     *   dto转bo
+     */
+    public Role buildBo(RoleDto roleDto){
+        BeanUtils.copyProperties(roleDto,this);
+        return this;
+    }
 }

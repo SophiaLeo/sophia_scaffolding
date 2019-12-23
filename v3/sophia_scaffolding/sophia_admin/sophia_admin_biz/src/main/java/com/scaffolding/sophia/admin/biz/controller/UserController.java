@@ -1,13 +1,16 @@
 package com.scaffolding.sophia.admin.biz.controller;
 
-import com.scaffolding.sophia.admin.api.entity.dto.UserDto;
-import com.scaffolding.sophia.admin.api.entity.bo.Permission;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.scaffolding.sophia.admin.api.entity.bo.Role;
 import com.scaffolding.sophia.admin.api.entity.bo.User;
+import com.scaffolding.sophia.admin.api.entity.dto.UserDto;
+import com.scaffolding.sophia.admin.api.entity.vo.LoginUserVo;
+import com.scaffolding.sophia.admin.api.entity.vo.PermissionVo;
 import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
-import com.scaffolding.sophia.admin.biz.service.authority.PermissionService;
-import com.scaffolding.sophia.admin.biz.service.role.RoleService;
-import com.scaffolding.sophia.admin.biz.service.user.UserService;
+import com.scaffolding.sophia.admin.biz.service.PermissionService;
+import com.scaffolding.sophia.admin.biz.service.RoleService;
+import com.scaffolding.sophia.admin.biz.service.UserService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
 import com.scaffolding.sophia.common.security.model.LoginUser;
@@ -15,6 +18,7 @@ import com.scaffolding.sophia.common.security.util.UserUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,84 +61,168 @@ public class UserController extends BaseController {
     @GetMapping("/principal")
     @ApiOperation(value = "获取用户信息")
     public ApiResponse getUserInfo() {
-        UserDto userDto = new UserDto();
+        LoginUserVo loginUserVo = new LoginUserVo();
         LoginUser loginUser = UserUtils.getLoginUser();
-        User user = userService.loadUserByUserId(loginUser.getId());
-        UserVo userVo = new UserVo();
+        UserVo userVo = userService.loadUserByUserId(loginUser.getId());
         Role role = roleService.getRoleByUserId(loginUser.getId());
-        List<Permission> authList = permissionService.findAuthorityByUserId(loginUser.getId());
+        List<PermissionVo> authList = permissionService.findAuthorityByUserId(loginUser.getId());
         List<String> authCodeList = new ArrayList<>();
         List<String> roleCodeList = new ArrayList<>();
-        for (Permission authority : authList) {
+        for (PermissionVo authority : authList) {
             authCodeList.add(authority.getCode());
         }
         roleCodeList.add(role.getRoleCode());
-        BeanUtils.copyProperties(user, userVo);
-        userDto.setSysUser(userVo);
-        userDto.setPermissions(authCodeList);
-        userDto.setRoles(roleCodeList);
-        userDto.setMenus(authList);
-
+        loginUserVo.setSysUser(userVo);
+        loginUserVo.setPermissions(authCodeList);
+        loginUserVo.setRoles(roleCodeList);
+        loginUserVo.setMenus(authList);
         // 更新用户登录信息
-        User userInfo = userService.loadUserByUserId(user.getId());
+        User userInfo = new User();
+        BeanUtils.copyProperties(userVo,userInfo);
         userInfo.setLastLoginIp(this.getIpAddr());
         userInfo.setLastLoginTime(LocalDateTime.now());
         userInfo.setUpdateTime(LocalDateTime.now());
         userInfo.setUpdateUser(UserUtils.getLoginUser().getId());
         userService.updateUserInfo(userInfo);
-        return success(userDto);
+        return success(loginUserVo);
     }
 
-    @GetMapping("")
+    @GetMapping("/web")
     @ApiOperation(value = "用户信息分页")
     public ApiResponse getUserList() {
         Map<String, Object> param = getParams();
-        param.put("deptPid", UserUtils.getLoginUser().getDeptId());
-        param.put("userId", UserUtils.getLoginUser().getId());
         return success(userService.queryUserList(param));
     }
 
-    @PutMapping("/info")
+    @GetMapping("/web/info/{id}")
+    @ApiOperation(value = "根据用户id获取用户信息")
+    public ApiResponse getUserByUserId(@ApiParam("用户id") @PathVariable String id) {
+        return success(userService.loadUserByUserId(id));
+    }
+
+    @GetMapping(value = "/web/check")
+    @ApiOperation(value = "校验用户某属性值是否重复-后端管理用户管理", notes = "校验用户某属性值是否重复-后端管理用户管理")
+    public ApiResponse checkUserName(@ApiParam(value = "用户id", required = false) @RequestParam(required = false) String id
+            , @ApiParam(value = "用户名称或手机号或用户昵称", required = true) @RequestParam String str
+            , @ApiParam(value = "校验类型 1:用户名称 2:用户昵称 3:手机", required = true) @RequestParam Integer type) {
+        Map<String, Object> map = null;
+        boolean flag = false;
+        switch (type) {
+            case 1:
+                map = userService.checkUserName(str, id);
+                flag = (boolean) map.get("flag");
+                break;
+            case 2:
+                map = userService.checkNickname(str, id);
+                flag = (boolean) map.get("flag");
+                break;
+            case 3:
+                map = userService.checkPhone(str, id);
+                flag = (boolean) map.get("flag");
+                break;
+            default:
+                break;
+        }
+        if (flag) {
+            return success("成功");
+        } else {
+            String msg = (String) map.get("msg");
+            return success(msg);
+        }
+    }
+
+    @GetMapping("/web/judge/{id}")
+    @ApiOperation(value = "判断用户原密码是否正确-后台管理用户管理", notes = "判断用户原密码是否正确-后台管理用户管理")
+    public ApiResponse judgePassword(@RequestParam String password, @ApiParam("用户id") @PathVariable String id) {
+        if (StringUtils.isBlank(id)) {
+            return fail("id不能为空");
+        }
+        if (StringUtils.isBlank(password)) {
+            return fail("密码不能为空");
+        }
+        if (userService.judgePassword(id, password)) {
+            return success("填写成功");
+        } else {
+            return fail("填写正确的密码");
+        }
+    }
+
+    @PutMapping("/web/add")
     @ApiOperation(value = "添加用户")
-    public ApiResponse saveUser(@RequestBody User user) {
-        if (user == null) {
+    public ApiResponse saveUser(@RequestBody UserDto userDto) {
+        if (userDto == null) {
             return fail();
         }
-        User checkUser = userService.loadUserByUserName(user.getUsername());
-        if (checkUser != null) {
-            return fail("用户名已存在，请重新输入");
-        }
-        return handle(userService.saveUser(user));
+        return handle(userService.saveUser(userDto));
     }
 
-    @PutMapping("/info/{id}")
+    @PutMapping("/web/update")
     @ApiOperation(value = "修改用户")
-    public ApiResponse updateUser(@RequestBody User user, @ApiParam("用户id") @PathVariable Long id) {
-        if (user == null) {
+    public ApiResponse updateUser(@RequestBody UserDto userDto) {
+        if (userDto == null) {
             return fail();
         }
-        user.setId(id);
-        return handle(userService.updateUser(user));
+        return handle(userService.updateUser(userDto));
+    }
+
+    @PutMapping("/web/updatePassword")
+    @ApiOperation(value = "修改用户密码-后端管理用户管理", notes = "修改用户密码-后端管理用户管理")
+    public ApiResponse updateWebPassword(@RequestBody UserDto userDto) {
+        if (StringUtils.isBlank(userDto.getId())) {
+            return fail("id不能为空");
+        }
+        if (StringUtils.isBlank(userDto.getPassword())) {
+            return fail("新密码不能为空");
+        }
+        if (userService.updatePassword(userDto)) {
+            return success("修改成功");
+        } else {
+            return fail("修改失败");
+        }
     }
 
 
-    @PostMapping("/status/{id}")
+    @PutMapping("/web/role")
+    @ApiOperation(value = "分配用户角色-后端管理用户管理", notes = "分配用户角色-后端管理用户管理")
+    public ApiResponse updateWebRole(@RequestBody UserDto userDto) {
+        if (StringUtils.isBlank(userDto.getId())) {
+            return fail("id不能为空");
+        }
+        if (StringUtils.isBlank(userDto.getRoleId())) {
+            return fail("角色id不能为空");
+        }
+        if (userService.updateRole(userDto)) {
+            return success("修改成功");
+        } else {
+            return fail("修改失败");
+        }
+    }
+
+    @PostMapping("/web/status/{id}")
     @ApiOperation(value = "修改用户状态  0无效 1有效 ")
-    public ApiResponse updateStatus(@ApiParam("用户id") @PathVariable Long id, Integer status) {
+    public ApiResponse updateStatus(@ApiParam("用户id") @PathVariable String id, Integer status) {
         return handle(userService.updateStatus(id, status));
     }
 
 
-    @GetMapping("/info/{id}")
-    @ApiOperation(value = "根据用户id获取用户信息")
-    public ApiResponse getUserByUserId(@ApiParam("用户id") @PathVariable Long id) {
-        return success(userService.loadUserByUserId(id));
+    @DeleteMapping("/web/del/{id}")
+    @ApiOperation(value = "根据用户id删除用户信息")
+    public ApiResponse deleteUser(@ApiParam("用户id") @PathVariable String id) {
+        return handle(userService.deleteUser(id));
     }
 
-    @DeleteMapping("/info/{id}")
-    @ApiOperation(value = "根据用户id删除用户信息")
-    public ApiResponse deleteUser(@ApiParam("用户id") @PathVariable Long id) {
-        return handle(userService.deleteUser(id));
+    @DeleteMapping(value = "/web/delBatch")
+    @ApiOperation(value = "批量删除用户管理-后端管理用户管理", notes = "批量删除用户管理-后端管理用户管理")
+    public ApiResponse deleteBatchUser(@RequestBody String ids) {
+        if (StringUtils.isBlank(ids)) {
+            return fail("参数不能为空");
+        }
+        List<String> idList = JSON.parseArray(((JSONArray) JSON.parseObject(ids).get("ids")).toJSONString(), String.class);
+        if (userService.deleteBatchUser(idList)) {
+            return success("批量删除成功");
+        } else {
+            return fail("批量删除失败");
+        }
     }
 
     @GetMapping("/api")

@@ -1,48 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.scaffolding.sophia.admin.biz.dao.authority.PermissionMapper">
-  <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.bo.Permission">
-    <id column="ID" jdbcType="BIGINT" property="id" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="CODE" jdbcType="VARCHAR" property="code" />
-    <result column="URL_PATH" jdbcType="VARCHAR" property="urlPath" />
-    <result column="PID" jdbcType="VARCHAR" property="pid" />
-    <result column="TYPE" jdbcType="INTEGER" property="type" />
-    <result column="ICON_PATH" jdbcType="VARCHAR" property="iconPath" />
-    <result column="SORT" jdbcType="INTEGER" property="sort" />
-    <result column="STATUS" jdbcType="INTEGER" property="status" />
-    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
-    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    ID, NAME, CODE, URL_PATH, PID, TYPE, ICON_PATH, SORT, STATUS, CREATE_TIME, CREATE_USER, 
+<mapper namespace="com.scaffolding.sophia.admin.biz.mapper.PermissionMapper">
+    <resultMap id="BaseResultMap" type="com.scaffolding.sophia.admin.api.entity.bo.Permission">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="URL_PATH" jdbcType="VARCHAR" property="urlPath"/>
+        <result column="PID" jdbcType="VARCHAR" property="pid"/>
+        <result column="TYPE" jdbcType="INTEGER" property="type"/>
+        <result column="ICON_PATH" jdbcType="VARCHAR" property="iconPath"/>
+        <result column="SORT" jdbcType="INTEGER" property="sort"/>
+        <result column="STATUS" jdbcType="INTEGER" property="status"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser"/>
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="UPDATE_USER" jdbcType="VARCHAR" property="updateUser"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMapVo" type="com.scaffolding.sophia.admin.api.entity.vo.PermissionVo">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="URL_PATH" jdbcType="VARCHAR" property="urlPath"/>
+        <result column="PID" jdbcType="VARCHAR" property="pid"/>
+        <result column="TYPE" jdbcType="INTEGER" property="type"/>
+        <result column="ICON_PATH" jdbcType="VARCHAR" property="iconPath"/>
+        <result column="SORT" jdbcType="INTEGER" property="sort"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ID, NAME, CODE, URL_PATH, PID, TYPE, ICON_PATH, SORT, STATUS, CREATE_TIME, CREATE_USER,
     UPDATE_TIME, UPDATE_USER
   </sql>
 
-
-
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_permission
-    where ID = #{id,jdbcType=BIGINT}
-  </select>
-
-  <select id="findAuthorityByUserId" parameterType="long" resultMap="BaseResultMap">
+    <select id="findAuthorityByUserId" parameterType="string" resultMap="BaseResultMapVo">
         select sp.ID , NAME, CODE, URL_PATH, PID, TYPE, ICON_PATH, SORT
         from sys_permission sp
-        INNER JOIN sys_role_auth sra ON  sp.id = sra.auth_id
+        INNER JOIN sys_role_permission sra ON  sp.id = sra.PERM_ID
         INNER JOIN sys_user_role sur ON sur.role_id = sra.role_id
-        WHERE sur.user_id = #{userId}
+        WHERE sp.STATUS = 1 AND  sur.user_id = #{userId}
+         ORDER BY sp.SORT,sp.CREATE_TIME desc
     </select>
 
-  <select id="findAuthorityByRoleId" parameterType="long" resultMap="BaseResultMap">
+    <select id="getPermissionByUserId" parameterType="string" resultMap="BaseResultMapVo">
+        select sp.ID , sp.NAME, sp.CODE, sp.URL_PATH, sp.PID, sp.TYPE, sp.ICON_PATH, sp.SORT, p.`name` pidName
+        from sys_permission sp
+        INNER JOIN sys_role_permission srp ON  sp.id = srp.PERM_ID
+        INNER JOIN sys_user_role sur ON sur.role_id = srp.role_id
+        LEFT join  sys_permission p ON sp.pid = p.id
+        WHERE sp.STATUS = 1 AND sur.user_id = #{userId}
+        ORDER BY sp.SORT,sp.CREATE_TIME desc
+    </select>
+
+    <select id="findAuthorityByRoleId" parameterType="string" resultMap="BaseResultMapVo">
         SELECT
          sp.ID , NAME, CODE, URL_PATH, PID, TYPE, ICON_PATH, SORT
         from sys_permission sp
-        LEFT JOIN sys_role_auth ra ON sp.id = ra.auth_id
+        LEFT JOIN sys_role_permission ra ON sp.id = ra.PERM_ID
         WHERE ra.role_id = #{id}
     </select>
+
+    <select id="selectPermissionList" resultMap="BaseResultMapVo">
+      SELECT
+      ID, NAME, CODE, URL_PATH, PID, TYPE, ICON_PATH, SORT
+      FROM sys_permission
+      WHERE STATUS = 1
+      ORDER BY SORT,CREATE_TIME desc
+    </select>
+
+    <select id="selectByRoleId" resultMap="BaseResultMap">
+        select
+        p.ID, p.`NAME`, p.CODE, p.URL_PATH,p.ICON_PATH, p.PID, p.`TYPE`
+        from sys_role_permission rp
+        inner join  sys_permission p on rp.PERM_ID = p.ID
+        WHERE  p.STATUS = 1 and  rp.ROLE_ID =  #{id}
+        ORDER BY SORT
+    </select>
+
+    <update id="updateBatchIds" parameterType="java.util.List">
+        update sys_permission
+        set STATUS = 0
+        where ID in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

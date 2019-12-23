@@ -27,7 +27,7 @@ public class UserClientFallBack implements UserClient {
     }
 
     @Override
-    public ApiResponse getUserByUserId(Long id) {
+    public ApiResponse getUserByUserId(String id) {
         logger.error("调用sophia-admin服务getUserByUserId方法失败!");
         return ApiResponse.hystrixError(ServiceNameConstants.SOPHIA_ADMIN, "getUserByUserId");
     }

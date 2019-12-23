@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController
-@MapperScan({"com.scaffolding.sophia.admin.biz.dao"})
+@MapperScan({"com.scaffolding.sophia.admin.biz.mapper"})
 @EnableFeignClients(basePackages = "com.scaffolding.sophia.admin.api.feign.client")
 @ComponentScan(basePackages = {"com.scaffolding.sophia"})
 @EnableSwagger2Doc

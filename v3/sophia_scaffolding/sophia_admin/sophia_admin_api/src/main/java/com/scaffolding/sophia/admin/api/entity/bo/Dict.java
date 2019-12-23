@@ -1,10 +1,13 @@
 package com.scaffolding.sophia.admin.api.entity.bo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.scaffolding.sophia.admin.api.entity.dto.DictDto;
 import com.scaffolding.sophia.common.base.bo.BaseBo;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 
@@ -25,7 +28,8 @@ public class Dict extends BaseBo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    @TableId
+    private String id;
 
     /**
      * 字典值
@@ -35,7 +39,7 @@ public class Dict extends BaseBo implements Serializable {
     /**
      * 上级ID
      */
-    private Long pid;
+    private String pid;
 
     /**
      * 字典名称
@@ -48,9 +52,17 @@ public class Dict extends BaseBo implements Serializable {
     private String type;
 
     /**
-     * 是否删除 (0 是  1否)
+     * 0无效 1有效
      */
-    private Integer isDeleted;
+    private Integer status;
 
+
+    /**
+     *   dto转bo
+     */
+    public Dict buildBo(DictDto dictDto){
+        BeanUtils.copyProperties(dictDto,this);
+        return this;
+    }
 
 }

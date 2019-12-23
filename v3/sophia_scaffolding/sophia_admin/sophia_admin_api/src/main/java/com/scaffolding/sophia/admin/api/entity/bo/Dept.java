@@ -1,13 +1,13 @@
 package com.scaffolding.sophia.admin.api.entity.bo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.scaffolding.sophia.admin.api.entity.dto.DeptDto;
 import com.scaffolding.sophia.common.base.bo.BaseBo;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 
@@ -31,8 +31,8 @@ public class Dept extends BaseBo implements Serializable {
     /**
      * id
      * */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+    @TableId
+    private String id;
 
     /**
      * 排序
@@ -42,7 +42,7 @@ public class Dept extends BaseBo implements Serializable {
     /**
      * 父部门id
      */
-    private Long pid;
+    private String pid;
 
     /**
      * 父级ids
@@ -70,13 +70,21 @@ public class Dept extends BaseBo implements Serializable {
     private String address;
 
     /**
-     * 部门类型(0 公司 1 部门)
+     * 部门类型(0 公司1部门)
      */
     private Integer deptType;
 
     /**
-     *  部门所在的公司id
+     * 部门所在的公司id
      */
-    @ApiModelProperty(value = "公司id")
-    private Long compId;
+    private String compId;
+
+
+    /**
+     *   dto转bo
+     */
+    public Dept buildBo(DeptDto deptDto){
+        BeanUtils.copyProperties(deptDto,this);
+        return this;
+    }
 }

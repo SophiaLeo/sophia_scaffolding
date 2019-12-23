@@ -1,40 +1,107 @@
 package com.scaffolding.sophia.admin.api.entity.dto;
 
-import com.scaffolding.sophia.admin.api.entity.bo.Permission;
-import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.util.List;
+import java.time.LocalDateTime;
 
 /**
- * @author: LHL
- * @ProjectName: sophia_scaffolding
- * @Package: com.scaffolding.sophia.admin.api.entity.dto
- * @ClassName: UserDto
- * @Description:
- * @Version: 1.0
+ * @author LHL
  */
 @Data
-@NoArgsConstructor
 public class UserDto implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+
     /**
-     * 用户
-     * */
-    private UserVo sysUser;
+     * 当前登录用户id
+     */
+    private String userId;
+
     /**
-     * 权限
-     * */
-    private List<String> permissions;
+     * 角色id
+     */
+    private String roleId;
+
     /**
-     * 角色
-     * */
-    private List<String> roles;
+     * 用户id
+     */
+    private String id;
+
     /**
-     * 菜单
-     * */
-    private List<Permission> menus;
+     * 用户名
+     */
+    private String username;
+
+    /**
+     * 用户昵称
+     */
+    private String nickname;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
+     * 年龄
+     */
+    private Integer age;
+
+    /**
+     * 性别 1:男 2:女
+     */
+    private Integer sex;
+
+    /**
+     * 生日
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime birthday;
+
+    /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 省
+     */
+    private String province;
+
+    /**
+     * 市
+     */
+    private String city;
+
+    /**
+     * 区
+     */
+    private String area;
+
+    /**
+     * 住址
+     */
+    private String address;
+
+    /**
+     * 后台用户头像
+     */
+    private String headImage;
+
+    /**
+     * 部门id 一个用户只有 一个部门
+     */
+    private String deptId;
+
+    /**
+     * 公司id
+     */
+    private String compId;
+
 }

@@ -2,6 +2,7 @@ package com.scaffolding.sophia.common.base.bo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
  * @Version: 1.0
  */
 @Data
-public class BaseBo {
+public class BaseBo implements Serializable {
 
     /**
      * 创建时间
@@ -24,7 +25,7 @@ public class BaseBo {
     /**
      * 创建人
      */
-    private Long createUser;
+    private String createUser;
 
     /**
      * 修改时间
@@ -34,5 +35,5 @@ public class BaseBo {
     /**
      * 修改人
      */
-    private Long updateUser;
+    private String updateUser;
 }

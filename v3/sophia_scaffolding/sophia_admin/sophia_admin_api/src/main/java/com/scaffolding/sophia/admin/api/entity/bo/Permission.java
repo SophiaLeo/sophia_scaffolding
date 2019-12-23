@@ -1,12 +1,13 @@
 package com.scaffolding.sophia.admin.api.entity.bo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.scaffolding.sophia.admin.api.entity.dto.PermissionDto;
 import com.scaffolding.sophia.common.base.bo.BaseBo;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 
@@ -24,8 +25,8 @@ public class Permission extends BaseBo implements Serializable {
     /**
      * id
      * */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+    @TableId
+    private String id;
 
     /**
      * 权限名称
@@ -66,5 +67,13 @@ public class Permission extends BaseBo implements Serializable {
      * 是否有效(0无效，1有效)
      */
     private Integer status;
+
+    /**
+     *   dto转bo
+     */
+    public Permission buildBo(PermissionDto permissionDto){
+        BeanUtils.copyProperties(permissionDto,this);
+        return this;
+    }
 
 }

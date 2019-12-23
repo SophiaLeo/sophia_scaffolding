@@ -60,7 +60,7 @@ public class HomeController extends BaseController {
 
 
     @GetMapping("/test/{userId}")
-    public ApiResponse getUserByUserId(@PathVariable Long userId) {
+    public ApiResponse getUserByUserId(@PathVariable String userId) {
         return userClient.getUserByUserId(userId);
     }
 

@@ -24,5 +24,5 @@ public interface UserClient {
     ApiResponse getUserByUserName(@RequestParam String username);
 
     @GetMapping("/user/info/{id}")
-    ApiResponse getUserByUserId(@PathVariable Long id);
+    ApiResponse getUserByUserId(@PathVariable String id);
 }
