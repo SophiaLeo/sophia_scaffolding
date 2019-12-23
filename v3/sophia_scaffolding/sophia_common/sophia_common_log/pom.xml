@@ -14,6 +14,22 @@
     <description>日志处理</description>
 
     <dependencies>
-
+        <!--admin  api 包含oauth-->
+        <dependency>
+            <groupId>com.scaffolding.sophia</groupId>
+            <artifactId>sophia_admin_api</artifactId>
+            <version>${sophia-admin.version}</version>
+        </dependency>
+        <!--util-->
+        <dependency>
+            <groupId>com.scaffolding.sophia</groupId>
+            <artifactId>sophia_common_util</artifactId>
+            <version>${sophia-admin.version}</version>
+        </dependency>
+        <!--aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
     </dependencies>
 </project>

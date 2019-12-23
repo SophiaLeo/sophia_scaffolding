@@ -20,10 +20,10 @@
             <artifactId>swagger-spring-boot-starter</artifactId>
             <version>${swagger-spring-boot-starter.version}</version>
         </dependency>
-        <!--公共 工具包 -->
+        <!--公共 log 包含工具包 -->
         <dependency>
             <groupId>com.scaffolding.sophia</groupId>
-            <artifactId>sophia_common_util</artifactId>
+            <artifactId>sophia_common_log</artifactId>
             <version>${sophia-common.version}</version>
         </dependency>
         <!--公共配置包 包含base包-->

@@ -118,4 +118,13 @@ public interface GlobalsConstants {
      */
     String FROM = "from";
 
+    String LOCAL_HOST_127 = "127.0.0.1";
+
+    String LOCAL_HOST_1 = "0:0:0:0:0:0:0:1";
+
+    String GET = "GET";
+
+    String LOGIN = "/login";
+
+    String SAVE_LOG = "/log/api/add";
 }

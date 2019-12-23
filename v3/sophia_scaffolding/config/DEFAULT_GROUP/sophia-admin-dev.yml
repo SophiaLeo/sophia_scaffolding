@@ -113,6 +113,7 @@ ignore:
   urls:
     - /actuator/**
     - /user/api/**
+    - /log/api/**
     - /authority/api/**
     - /v2/api-docs
     - /swagger-ui.html
