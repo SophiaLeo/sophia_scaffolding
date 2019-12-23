@@ -53,6 +53,8 @@ https://blog.csdn.net/Amor_Leo/article/details/103496056
 
   --sophia_common_util 公共工具类
 
+  --sophia_common_log 公共日志配置
+ 
 --sophia_eureka eureka server注册中心
 
 --sophia_zuul 统一网关 
@@ -68,4 +70,4 @@ https://blog.csdn.net/Amor_Leo/article/details/103496056
 3.  如果使用v3 请搭建nacos
 
 #### 接口
-![输入图片说明](https://img-blog.csdnimg.cn/20191223110923880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Ftb3JfTGVv,size_16,color_FFFFFF,t_70 "在这里输入图片标题")
+![输入图片说明](https://img-blog.csdnimg.cn/20191223161738114.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Ftb3JfTGVv,size_16,color_FFFFFF,t_70"在这里输入图片标题")
