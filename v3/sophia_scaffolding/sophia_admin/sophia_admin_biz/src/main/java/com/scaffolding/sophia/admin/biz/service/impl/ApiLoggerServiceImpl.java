@@ -40,8 +40,8 @@ public class ApiLoggerServiceImpl extends ServiceImpl<ApiLoggerMapper, ApiLogger
         queryWrapper.like(StringUtils.isNotBlank((String)param.get("userName")), "USER_NAME", (String)param.get("userName"));
         queryWrapper.like(StringUtils.isNotBlank((String)param.get("method")), "METHOD", (String)param.get("method"));
         queryWrapper.like(StringUtils.isNotBlank((String)param.get("methodName")), "METHOD_NAME", (String)param.get("methodName"));
-        queryWrapper.ge(null != (LocalDateTime)param.get("startTime"), "CREATE_TIME", (String)param.get("startTime"));
-        queryWrapper.le(null != (LocalDateTime)param.get("endTime"), "CREATE_TIME", (String)param.get("endTime"));
+        queryWrapper.ge(null != (LocalDateTime)param.get("startTime"), "CREATE_TIME", (LocalDateTime)param.get("startTime"));
+        queryWrapper.le(null != (LocalDateTime)param.get("endTime"), "CREATE_TIME", (LocalDateTime)param.get("endTime"));
         queryWrapper.orderByDesc("CREATE_TIME");
         IPage<ApiLogger> iPage = baseMapper.selectPage(page, queryWrapper);
         BeanUtils.copyProperties(iPage, result);
