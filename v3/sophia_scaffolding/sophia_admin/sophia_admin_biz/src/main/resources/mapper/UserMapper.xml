@@ -48,6 +48,7 @@
         <result column="BIRTHDAY" jdbcType="TIMESTAMP" property="birthday"/>
         <result column="LAST_LOGIN_IP" jdbcType="VARCHAR" property="lastLoginIp" />
         <result column="LAST_LOGIN_TIME" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="bl_status" property="blStatus" />
     </resultMap>
 
 
@@ -61,7 +62,7 @@
         SELECT
         su.ID, su.USERNAME, su.NICKNAME, su.AGE, su.SEX, su.BIRTHDAY, su.PHONE, su.PROVINCE, su.CITY,
         su.AREA, su.ADDRESS, su.EMAIL, su.LAST_LOGIN_IP, su.LAST_LOGIN_TIME, su.HEAD_IMAGE,
-        su.DEPT_ID, su.COMP_ID
+        su.DEPT_ID, su.COMP_ID, if(su.STATUS = 1,'true','false') bl_status
         ,sr.role_name as roleName,dt.FULL_NAME deptName,dt1.FULL_NAME compName
         FROM
         sys_user su
@@ -73,6 +74,9 @@
             su.is_deleted = 1  and  su.STATUS = 1  AND sr.role_code != #{param.roleCode} AND sr.role_code != 'SUPER_ADMIN'
             <if test="param.username != null and param.username != ''">
                 AND su.username like concat('%', #{param.username},'%')
+            </if>
+            <if test="param.nickname != null and param.nickname != ''">
+                AND su.nickname like concat('%', #{param.nickname},'%')
             </if>
              <if test="param.roleId != null and param.roleId != ''">
                 AND sr.id = #{param.roleId}

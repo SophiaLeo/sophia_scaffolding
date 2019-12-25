@@ -107,6 +107,11 @@ public class UserVo implements Serializable {
      * 0无效 1有效
      */
     private Integer status;
+
+    /**
+     * 0无效 1有效
+     */
+    private boolean blStatus;
     /**
      * 最后登录IP
      */
