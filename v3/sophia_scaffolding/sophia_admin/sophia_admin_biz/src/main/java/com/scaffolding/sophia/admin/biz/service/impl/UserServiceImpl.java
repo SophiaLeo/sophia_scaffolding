@@ -171,7 +171,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public IPage<UserVo> queryUserList(Map param) {
-        param.put("deptPid", UserUtils.getLoginUser().getDeptId());
+        String deptId = UserUtils.getLoginUser().getDeptId();
+        if(StringUtils.isBlank(deptId)){
+            deptId =  UserUtils.getLoginUser().getCompId();
+        }
+        param.put("deptPid",deptId);
         param.put("userId", UserUtils.getLoginUser().getId());
         Role role = roleMapper.getRoleByUserId(UserUtils.getLoginUser().getId());
         if (null != role) {

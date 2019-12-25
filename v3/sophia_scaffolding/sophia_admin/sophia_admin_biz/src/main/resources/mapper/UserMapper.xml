@@ -62,7 +62,7 @@
         su.ID, su.USERNAME, su.NICKNAME, su.AGE, su.SEX, su.BIRTHDAY, su.PHONE, su.PROVINCE, su.CITY,
         su.AREA, su.ADDRESS, su.EMAIL, su.LAST_LOGIN_IP, su.LAST_LOGIN_TIME, su.HEAD_IMAGE,
         su.DEPT_ID, su.COMP_ID
-        ,sr.role_name as "roleName",dt.FULL_NAME deptName,dt1.FULL_NAME compName
+        ,sr.role_name as roleName,dt.FULL_NAME deptName,dt1.FULL_NAME compName
         FROM
         sys_user su
         INNER JOIN sys_user_role ur ON su.id = ur.user_id
@@ -74,17 +74,14 @@
             <if test="param.username != null and param.username != ''">
                 AND su.username like concat('%', #{param.username},'%')
             </if>
+             <if test="param.roleId != null and param.roleId != ''">
+                AND sr.id = #{param.roleId}
+            </if>
             <if test="param.startTime != null">
                 AND su.BIRTHDAY &gt;= #{param.startTime}
             </if>
             <if test="param.endTime != null">
                 AND su.BIRTHDAY &lt;= #{param.endTime}
-            </if>
-            <if test="param.deptId != null">
-                AND su.dept_id = #{param.deptId}
-            </if>
-            <if test="param.compId != null">
-                AND su.comp_id = #{param.compId}
             </if>
             <if test="param.deptPid != null">
                 AND dt.pids like concat('%[',#{param.deptPid},']%')

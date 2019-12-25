@@ -58,7 +58,7 @@ public class ApiLogAspect {
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         HttpServletRequest request = sra.getRequest();
         String operation = request.getMethod();
-        if (!GlobalsConstants.GET.equals(operation) && ! (request.getRequestURI().contains(GlobalsConstants.SAVE_LOG))) {
+        if (!GlobalsConstants.GET.equals(operation) && ! (request.getRequestURI().contains(GlobalsConstants.SAVE_LOG)) && ! (request.getRequestURI().contains(GlobalsConstants.GET_TOKEN))) {
             try {
                 ApiLogger apiLogger = new ApiLogger();
                 apiLogger.setId(UuidUtils.getUuid());

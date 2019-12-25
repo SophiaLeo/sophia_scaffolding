@@ -127,4 +127,6 @@ public interface GlobalsConstants {
     String LOGIN = "/login";
 
     String SAVE_LOG = "/log/api/add";
+
+    String GET_TOKEN = "/api/token";
 }
