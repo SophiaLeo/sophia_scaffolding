@@ -19,6 +19,8 @@ Nacos搭建
 
 https://blog.csdn.net/Amor_Leo/article/details/103496056
 
+前端只写了登录
+借用了 elementUI-admin
 
 #### 使用框架软件
 + IDEA
