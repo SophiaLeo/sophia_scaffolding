@@ -163,7 +163,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', '系统管理员', '$2a$10$ts07XkBaX7OwC5xA449gh.MO1Sa3KfyJlcx./lZKkMEgP8XDSoR9e', 1, '13269630365', '1234@qq.com', '2019-09-27 15:04:26', '2019-09-27 15:04:26', '0:0:0:0:0:0:0:1', '2019-09-27 15:04:26', 0, 0, '1/2/ts_Penguins.jpg', 20009, NULL);
+INSERT INTO `sys_user` VALUES (1, 'admin', '系统管理员', '$2a$10$ts07XkBaX7OwC5xA449gh.MO1Sa3KfyJlcx./lZKkMEgP8XDSoR9e', 1, '13269630365', '1234@qq.com', '2019-09-27 15:04:26', '2019-09-27 15:04:26', '0:0:0:0:0:0:0:1', '2019-09-27 15:04:26', 0, 1, '1/2/ts_Penguins.jpg', 20009, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_role
