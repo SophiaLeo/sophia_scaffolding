@@ -6,7 +6,7 @@
       <el-select v-model="listQuery.roleId" placeholder="请选择角色" clearable style="width: 200px" class="filter-item">
         <el-option v-for="(item, index) in roleList" :key="index" :label="item.roleName" :value="item.id" />
       </el-select>
-      <el-date-picker v-model="listQuery.queryTime" type="daterange" range-separator="至" start-placeholder="访问开始日期" end-placeholder="访问结束日期" class="filter-item" style="width: 400px"/>
+      <el-date-picker v-model="listQuery.queryTime" type="daterange" range-separator="至" start-placeholder="访问开始日期" end-placeholder="访问结束日期" class="filter-item" style="width: 400px" />
       <div class="button-group">
         <el-button type="warning" icon="el-icon-plus" @click="addUser">添加</el-button>
         <el-button type="primary" icon="el-icon-search" @click="getList">查询</el-button>
@@ -15,8 +15,8 @@
     </div>
 
     <el-table
-      v-loading="listLoading"
       ref="multipleTable"
+      v-loading="listLoading"
       :data="list"
       border
       fit
@@ -24,8 +24,8 @@
       style="width: 100%;"
       @selection-change="handleSelectionChange"
     >
-    <el-table-column type="selection" align="center" width="55"/>
-    <el-table-column width="55" label="序号" align="center">
+      <el-table-column type="selection" align="center" width="55" />
+      <el-table-column width="55" label="序号" align="center">
         <template slot-scope="scope">
           <span>{{ scope.$index + 1 }}</span>
         </template>
@@ -40,9 +40,14 @@
           <span>{{ row.nickname }}</span>
         </template>
       </el-table-column>
+      <el-table-column :show-overflow-tooltip="true" label="用户角色" prop="roleName" width="150px" align="center">
+        <template slot-scope="{row}">
+          <span>{{ row.roleName }}</span>
+        </template>
+      </el-table-column>
       <el-table-column :show-overflow-tooltip="true" label="头像" prop="headImage" width="150px" align="center">
         <template slot-scope="{row}">
-          <img :src="row.headImage" class="imgShow" >
+          <img :src="row.headImage" class="imgShow">
         </template>
       </el-table-column>
       <el-table-column :show-overflow-tooltip="true" label="公司" prop="compName" width="150px" align="center">
@@ -59,7 +64,7 @@
         <template slot-scope="{row}">
           <span>{{ row.age }}</span>
         </template>
-      </el-table-column>      
+      </el-table-column>
       <el-table-column :show-overflow-tooltip="true" label="生日" prop="birthday" width="150px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.birthday }}</span>
@@ -101,7 +106,7 @@
         <template slot-scope="{row}">
           <span>{{ row.address }}</span>
         </template>
-      </el-table-column> 
+      </el-table-column>
       <el-table-column :show-overflow-tooltip="true" label="最后登录时间" prop="lastLoginTime" width="150px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.lastLoginTime }}</span>
@@ -111,10 +116,10 @@
         <template slot-scope="{row}">
           <span>{{ row.lastLoginIp }}</span>
         </template>
-      </el-table-column>      
+      </el-table-column>
       <el-table-column fixed="right" prop="blStatus" label="用户启用" width="150" align="center">
         <template slot-scope="{row}">
-          <el-switch v-model="row.blStatus" style="display: block" class="textbalck" active-text="启用" inactive-text="禁用" active-color="#13ce66" inactive-color="#ff4949" @change="changeStatus(row)"/>
+          <el-switch v-model="row.blStatus" style="display: block" class="textbalck" active-text="启用" inactive-text="禁用" active-color="#13ce66" inactive-color="#ff4949" @change="changeStatus(row)" />
         </template>
       </el-table-column>
       <el-table-column prop="status" label="操作" align="center" fixed="right" width="200">
@@ -125,15 +130,16 @@
       </el-table-column>
     </el-table>
 
-    <el-pagination  
-      :total="total" 
+    <el-pagination
+      :total="total"
       :page-size="pageSize"
       :current-page="currentPage"
       :page-sizes="[10, 20, 30, 40]"
       background
       layout=" prev, pager, next, sizes, total"
       @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"/>
+      @current-change="handleCurrentChange"
+    />
   </div>
 </template>
 
@@ -176,14 +182,14 @@ export default {
   },
   methods: {
     queryDictByType() {
-      let type = 'sex'
+      const type = 'sex'
       dictByType(type).then(res => {
-         this.sexList = res.data
+        this.sexList = res.data
       })
-    },    
+    },
     queryRole() {
       roleSelectList(store.getters.userId).then(res => {
-         this.roleList = res.data
+        this.roleList = res.data
       })
     },
     getList() {
@@ -198,19 +204,19 @@ export default {
       }
       this.listLoading = true
       userList(this.listQuery).then(response => {
-        if(response.code == 200){
+        if (response.code == 200) {
           this.list = response.data.records
           this.total = response.data.total
           this.pageSize = response.data.size
           this.currentPage = response.data.current
-          this.listLoading = false   
-        }else{
+          this.listLoading = false
+        } else {
           this.list = []
           this.total = 0
           this.pageSize = 10
           this.currentPage = 1
           this.listLoading = false
-        }   
+        }
       })
     },
     handleSizeChange(pageSize) {
@@ -230,10 +236,10 @@ export default {
       this.multipleSelection = val
     },
     addUser() {
-      this.$router.push({name: 'UserSave'})
+      this.$router.push({ name: 'UserSave' })
     },
     updateUser(id) {
-      this.$router.push({name:'UserUpdate',query: {id:id}})
+      this.$router.push({ name: 'UserUpdate', query: { id: id }})
     },
     changeStatus(row) {
       let status
@@ -242,7 +248,7 @@ export default {
       } else {
         status = 0
       }
-      let params = {
+      const params = {
         id: row.id,
         status: status
       }
@@ -252,40 +258,40 @@ export default {
           this.getList()
         } else {
           this.$message.error(response.message)
-        }    
+        }
       })
     },
-    deleteUser(id){
+    deleteUser(id) {
       this.$confirm('确认删除?')
         .then(_ => {
-         deleteUser(id).then(response => {
-              if (response.code == 200) {
-                this.$message.success(response.message)
-                this.getList()
-              } else {
-                this.$message.error(response.message)
-              }
+          deleteUser(id).then(response => {
+            if (response.code == 200) {
+              this.$message.success(response.message)
+              this.getList()
+            } else {
+              this.$message.error(response.message)
             }
+          }
           )
         })
         .catch(_ => { })
     },
-    batchDelete(rows){
-       rows.forEach(element => {
+    batchDelete(rows) {
+      rows.forEach(element => {
         this.ids.push(element.id)
       })
       this.$confirm('确认批量删除?')
         .then(_ => {
           deleteBatch(this.ids).then(response => {
-              if (response.code === 200) {
-                this.$message.success(response.message)
-                this.getList()
-                this.$refs.multipleTable.clearSelection()
-                this.ids = []
-              } else {
-                this.$message.error(response.message)
-              }
+            if (response.code === 200) {
+              this.$message.success(response.message)
+              this.getList()
+              this.$refs.multipleTable.clearSelection()
+              this.ids = []
+            } else {
+              this.$message.error(response.message)
             }
+          }
           )
         }).catch(_ => {
         })

@@ -12,7 +12,7 @@ spring:
             - Path=/api/auth/**
           filters:
             # 验证码处理
-#            - ValidateCodeGatewayFilter
+            - ValidateCodeGatewayFilter
             - StripPrefix=2
             - name: Hystrix
               args:
