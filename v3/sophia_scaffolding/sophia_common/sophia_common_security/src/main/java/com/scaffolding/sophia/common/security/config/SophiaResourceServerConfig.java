@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
@@ -85,6 +86,8 @@ public class SophiaResourceServerConfig extends ResourceServerConfigurerAdapter 
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>
                 .ExpressionInterceptUrlRegistry registry = httpSecurity
                 .authorizeRequests();
+
+        registry.antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
         //对配置的url放行 不进行验证
         ignorePropertiesConfig.getUrls()
                 .forEach(url -> registry.antMatchers(url).permitAll());

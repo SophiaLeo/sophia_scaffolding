@@ -51,24 +51,30 @@
       <el-form-item prop="code">
         <el-row :span="24">
           <el-col :span="16">
-            <el-input size="small"
-                      @keyup.enter.native="handleLogin"
-                      :maxlength="code.len"
-                      v-model="loginForm.code"
-                      auto-complete="off"
-                      placeholder="请输入验证码">
-              <i slot="prefix" class="icon-yanzhengma"></i>
+            <el-input
+              v-model="loginForm.code"
+              size="small"
+              :maxlength="code.len"
+              auto-complete="off"
+              placeholder="请输入验证码"
+              @keyup.enter.native="handleLogin"
+            >
+              <i slot="prefix" class="icon-yanzhengma" />
             </el-input>
           </el-col>
           <el-col :span="8">
             <div class="login-code">
-              <span class="login-code-img"
-                    @click="refreshCode"
-                    v-if="code.type == 'text'">{{code.value}}</span>
-              <img :src="code.src"
-                  class="login-code-img"
-                  @click="refreshCode"
-                  v-else/>
+              <span
+                v-if="code.type == 'text'"
+                class="login-code-img"
+                @click="refreshCode"
+              >{{ code.value }}</span>
+              <img
+                v-else
+                :src="code.src"
+                class="login-code-img"
+                @click="refreshCode"
+              >
             </div>
           </el-col>
         </el-row>
@@ -81,13 +87,12 @@
       <div style="position:relative">
         <div class="tips">
           <span>{{ $t('login.username') }} : admin</span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
+          <span>{{ $t('login.password') }} : 123456</span>
         </div>
         <div class="tips">
           <span style="margin-right:18px;">
-            {{ $t('login.username') }} : editor
+            验证码后台网关没有在yml配置,则可随便填
           </span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
         </div>
 
         <el-button class="thirdparty-button" type="primary" @click="showDialog=true">

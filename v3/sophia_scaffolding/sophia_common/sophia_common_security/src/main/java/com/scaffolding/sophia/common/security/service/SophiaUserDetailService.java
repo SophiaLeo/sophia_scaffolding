@@ -1,6 +1,7 @@
 package com.scaffolding.sophia.common.security.service;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.scaffolding.sophia.admin.api.entity.bo.User;
 import com.scaffolding.sophia.admin.api.entity.vo.PermissionVo;
 import com.scaffolding.sophia.admin.api.feign.client.AuthorityClient;
@@ -43,7 +44,9 @@ public class SophiaUserDetailService implements UserDetailsService {
             throw new CommonException("登录名不能为空");
         }
         ApiResponse apiResponse = userClient.getUserByUserName(username);
-        User user = JSON.parseObject(JSON.toJSONString( apiResponse.getData(), true),User.class);
+        // String s = JSON.toJSONString(apiResponse.getData());
+        // User user = JSON.parseObject(s,User.class);
+        User user = JSONObject.parseObject(JSONObject.toJSONString(apiResponse.getData(), true),User.class);
         if (user == null) {
             throw new CommonException("登录名不存在");
         } else if (BizConstants.USER_STATUS_EXPIRED.equals(user.getStatus())) {
