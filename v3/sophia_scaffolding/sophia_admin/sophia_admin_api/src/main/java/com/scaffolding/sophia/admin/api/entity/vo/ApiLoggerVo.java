@@ -1,6 +1,6 @@
 package com.scaffolding.sophia.admin.api.entity.vo;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.scaffolding.sophia.admin.api.entity.bo.ApiLogger;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
@@ -38,7 +38,7 @@ public class ApiLoggerVo implements Serializable {
     /**
      * 访问时间
      */
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private LocalDateTime createTime;
 
     /**
