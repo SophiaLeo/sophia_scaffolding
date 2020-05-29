@@ -26,6 +26,12 @@ public class GlobalExceptionHandler {
         return new ApiResponse(SophiaHttpStatus.COMMON_FAIL.getCode(),new CommonException().getMessage());
     }
 
+    @ExceptionHandler(value = BusinessException.class)
+    public ApiResponse defaultErrorHandler(BusinessException e) {
+        e.printStackTrace();
+        return new ApiResponse(SophiaHttpStatus.COMMON_FAIL.getCode(),new CommonException().getMessage());
+    }
+
     @ExceptionHandler(value = RuntimeException.class)
     public ApiResponse defaultErrorHandler(RuntimeException e) {
         e.printStackTrace();

@@ -48,6 +48,7 @@
         <openfeign-core.version>2.1.3.RELEASE</openfeign-core.version>
         <swagger-spring-boot-starter.version>1.9.1.RELEASE</swagger-spring-boot-starter.version>
         <kaptcha.version>0.0.9</kaptcha.version>
+        <pinyin4j.version>2.5.1</pinyin4j.version>
     </properties>
 
     <dependencies>
