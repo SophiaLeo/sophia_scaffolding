@@ -32,6 +32,15 @@ public interface DeptService {
      */
     IPage<DeptVo> queryCompanyList(Map<String, Object> params);
 
+
+
+    /**
+     * 公司下拉框查询
+     *
+     * @return List
+     * */
+    List<DeptVo> queryCompanySelectList();
+
     /**
      * 新增或修改公司
      *

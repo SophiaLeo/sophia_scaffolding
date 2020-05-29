@@ -9,6 +9,7 @@ import com.scaffolding.sophia.common.base.constants.BizConstants;
 import com.scaffolding.sophia.common.base.exception.CommonException;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.security.model.LoginUser;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class SophiaUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if(StringUtils.isEmpty(username)){
+        if(StringUtils.isBlank(username)){
             throw new CommonException("登录名不能为空");
         }
         ApiResponse apiResponse = userClient.getUserByUserName(username);
@@ -57,7 +58,9 @@ public class SophiaUserDetailService implements UserDetailsService {
         List<GrantedAuthority> lists = new ArrayList<>();
         if(authList != null && authList.size()>0){
             for (PermissionVo auth : authList) {
-                lists.add(new SimpleGrantedAuthority(auth.getCode()));
+                if (StringUtils.isNotBlank(auth.getCode())) {
+                    lists.add(new SimpleGrantedAuthority(auth.getCode()));
+                }
             }
         }
         LoginUser loginUser = new LoginUser(username,user.getPassword(),user.getNickname(),user.getStatus(), lists);

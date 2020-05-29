@@ -48,7 +48,13 @@ public class CompanyController extends BaseController {
         Map<String, Object> params = getParams();
         return success(deptService.queryCompanyList(params));
     }
-
+    
+    @GetMapping("/web/select/list")
+    @ApiOperation(value = "查询公司下拉框-后端管理公司管理", notes = "查询公司管理-后端管理公司管理")
+    public ApiResponse getCompanySelectList(){
+        return success(deptService.queryCompanySelectList());
+    }
+    
     @GetMapping(value = "/web/info/{id}")
     @ApiOperation(value = "获取公司")
     public ApiResponse getCompany(@ApiParam(value = "公司id",required = true)@PathVariable String id){

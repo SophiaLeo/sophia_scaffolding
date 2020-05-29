@@ -1,5 +1,6 @@
 package com.scaffolding.sophia.admin.biz.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -52,6 +53,12 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         Integer pageSize = param.get("pageSize") == null ? 10 : Integer.parseInt(String.valueOf(param.get("pageSize")));
         Page<DeptVo> page = new Page<>(currentPage, pageSize);
         return page.setRecords(baseMapper.findCompanyList(page, param));
+    }
+
+    @Override
+    public List<DeptVo> queryCompanySelectList() {
+        List<Dept> deptList = baseMapper.selectList(new QueryWrapper<Dept>().eq("DEPT_TYPE", BizConstants.COMP));
+        return new DeptVo().buildVoList(deptList);
     }
 
     @Override
