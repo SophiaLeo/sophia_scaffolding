@@ -24,7 +24,7 @@ public class UserUtils {
             OAuth2Authentication oAuth2Auth = (OAuth2Authentication) authentication;
             authentication = oAuth2Auth.getUserAuthentication();
             if (authentication instanceof UsernamePasswordAuthenticationToken) {
-                UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
+                // UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
                 // Map map = (Map) authenticationToken.getDetails();
                 // map = (Map) map.get("principal");
                 // return JSONObject.parseObject(JSONObject.toJSONString(map), LoginUser.class);
