@@ -51,7 +51,6 @@ mybatis-plus:
       logic-not-delete-value: 1
       logic-delete-value: 0
 
-#配置上传文件的目录
 file:
   fileActualPath: E:/
   fileVirtualPath: /upload/**
