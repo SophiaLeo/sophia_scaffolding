@@ -25,7 +25,6 @@
 
     <properties>
         <java.version>1.8</java.version>
-<!--        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>-->
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
         <spring-cloud-alibaba.version>0.2.1.RELEASE</spring-cloud-alibaba.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -34,16 +33,17 @@
         <spring-security.version>5.3.1.RELEASE</spring-security.version>
         <security-jwt.version>1.1.0.RELEASE</security-jwt.version>
         <openfeign-core.version>2.2.2.RELEASE</openfeign-core.version>
-        <fastjson.version>1.2.68</fastjson.version>
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
         <druid.version>1.1.22</druid.version>
-        <commons-lang3.version>3.10</commons-lang3.version>
-        <jjwt.version>0.9.1</jjwt.version>
-        <hutool.version>5.3.5</hutool.version>
-        <json.version>20190722</json.version>
         <commons-pool2.version>2.8.0</commons-pool2.version>
-        <kaptcha.version>0.0.9</kaptcha.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <fastjson.version>1.2.68</fastjson.version>
+        <json.version>20190722</json.version>
+        <commons-lang3.version>3.10</commons-lang3.version>
+        <hutool.version>5.3.5</hutool.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
+        <kaptcha.version>0.0.9</kaptcha.version>
+        <knife4j-spring-boot-starter.version>2.0.3</knife4j-spring-boot-starter.version>
         <swagger.version>2.9.2</swagger.version>
         <swagger-spring-boot-starter.version>1.9.1.RELEASE</swagger-spring-boot-starter.version>
         <aliyun-java-sdk-dysmsapi.version>1.1.0</aliyun-java-sdk-dysmsapi.version>

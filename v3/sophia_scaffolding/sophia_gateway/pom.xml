@@ -46,17 +46,25 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <!-- for swagger -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger2</artifactId>-->
+<!--            <version>${swagger.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger-ui</artifactId>-->
+<!--            <version>${swagger.version}</version>-->
+<!--        </dependency>-->
         <!-- for swagger -->
+
+        <!--knife4j-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>${knife4j-spring-boot-starter.version}</version>
+        </dependency>
+
         <!--验证码-->
         <dependency>
             <groupId>com.github.axet</groupId>

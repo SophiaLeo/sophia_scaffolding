@@ -15,11 +15,11 @@
 
     <dependencies>
         <!-- for swagger -->
-        <dependency>
-            <groupId>com.spring4all</groupId>
-            <artifactId>swagger-spring-boot-starter</artifactId>
-            <version>${swagger-spring-boot-starter.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.spring4all</groupId>-->
+<!--            <artifactId>swagger-spring-boot-starter</artifactId>-->
+<!--            <version>${swagger-spring-boot-starter.version}</version>-->
+<!--        </dependency>-->
         <!--公共 log 包含工具包 -->
         <dependency>
             <groupId>com.scaffolding.sophia</groupId>

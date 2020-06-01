@@ -19,11 +19,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!-- for swagger -->
-        <dependency>
-            <groupId>com.spring4all</groupId>
-            <artifactId>swagger-spring-boot-starter</artifactId>
-            <version>${swagger-spring-boot-starter.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.spring4all</groupId>-->
+<!--            <artifactId>swagger-spring-boot-starter</artifactId>-->
+<!--            <version>${swagger-spring-boot-starter.version}</version>-->
+<!--        </dependency>-->
+
         <!--公共 log 包含util-->
         <dependency>
             <groupId>com.scaffolding.sophia</groupId>

@@ -73,12 +73,15 @@ management:
     enabled: false
 
 swagger:
-  base-package: com.scaffolding.sophia.admin.biz
   enabled: true
-  description: sophia用户服务
+  title: 用户服务
+  base-package: com.scaffolding.sophia.admin.biz
   version: V2.0
+  description: sophia用户服务
   license: Apache License, Version 2.0
   license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  terms-of-service-url: http://localhost:8002/doc.html
+  contact: amorLee412@gmail.com
   authorization:
     key-name: Authorization
 
@@ -125,6 +128,7 @@ ignore:
     - /v2/api-docs
     - /swagger-ui.html
     - /swagger-resources/**
+    - /favicon.ico
     - /webjars/**
     - /api/**
 

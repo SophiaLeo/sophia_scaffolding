@@ -1,6 +1,5 @@
 package com.scaffolding.sophia.auth;
 
-import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @EnableFeignClients(basePackages = "com.scaffolding.sophia.admin.api.feign.client")
 @ComponentScan(basePackages = {"com.scaffolding.sophia"})
-@EnableSwagger2Doc
+// @EnableSwagger2Doc
 public class SophiaAuthApplication {
 
     public static void main(String[] args) {
