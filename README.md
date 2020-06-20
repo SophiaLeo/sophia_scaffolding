@@ -15,6 +15,9 @@ gateway和swagger 整合
 
 https://blog.csdn.net/Amor_Leo/article/details/102853186
 
+Knife4j  和 Gateway 整合
+https://blog.csdn.net/Amor_Leo/article/details/106470845
+
 Nacos搭建
 
 https://blog.csdn.net/Amor_Leo/article/details/103496056
