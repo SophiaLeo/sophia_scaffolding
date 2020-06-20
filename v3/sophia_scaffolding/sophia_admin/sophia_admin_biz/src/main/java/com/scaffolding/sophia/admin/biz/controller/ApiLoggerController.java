@@ -7,6 +7,7 @@ import com.scaffolding.sophia.admin.api.entity.dto.ApiLoggerSearchDto;
 import com.scaffolding.sophia.admin.biz.service.ApiLoggerService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -42,6 +43,7 @@ public class ApiLoggerController extends BaseController {
         return success(apiLoggerService.queryApiLoggerList(params));
     }
 
+    @SysLog("删除日志")
     @DeleteMapping(value = "/web/del/{id}")
     @ApiOperation(value = "删除日志管理-后端管理日志管理", notes = "删除日志管理-后端管理日志管理")
     public ApiResponse deleteApiLogger(@ApiParam(value = "日志id", required = true) @PathVariable String id) {
@@ -76,7 +78,7 @@ public class ApiLoggerController extends BaseController {
      * @param apiLogger 日志实体
      * @return ApiResponse
      */
-    @PostMapping("/api/add")
+    @PostMapping("/info/add")
     public ApiResponse saveLog(@Validated @RequestBody ApiLogger apiLogger) {
         return handle(apiLoggerService.saveLog(apiLogger));
     }

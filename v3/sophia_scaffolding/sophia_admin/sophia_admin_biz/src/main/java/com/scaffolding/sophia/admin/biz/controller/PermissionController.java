@@ -9,6 +9,7 @@ import com.scaffolding.sophia.admin.biz.service.PermissionService;
 import com.scaffolding.sophia.common.base.dto.PageDto;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: LHL
@@ -97,6 +97,7 @@ public class PermissionController extends BaseController {
     }
 
 
+    @SysLog("新增权限")
     @PostMapping(value = "/web/save")
     @ApiOperation(value = "新增权限管理-后端管理权限管理", notes = "新增权限管理-后端管理权限管理")
     public ApiResponse savePermission(@RequestBody PermissionDto permissionDto){
@@ -107,6 +108,7 @@ public class PermissionController extends BaseController {
         }
     }
 
+    @SysLog("修改权限")
     @PutMapping(value = "/web/update")
     @ApiOperation(value = "修改权限管理-后端管理权限管理", notes = "修改权限管理-后端管理权限管理")
     public ApiResponse updatePermission(@RequestBody PermissionDto permissionDto){
@@ -117,6 +119,7 @@ public class PermissionController extends BaseController {
         }
     }
 
+    @SysLog("删除权限")
     @DeleteMapping(value = "/web/del/{id}")
     @ApiOperation(value = "删除权限管理-后端管理权限管理", notes = "删除权限管理-后端管理权限管理")
     public ApiResponse deletePermission(@ApiParam(value = "权限id",required = true)@PathVariable String id){
@@ -131,6 +134,7 @@ public class PermissionController extends BaseController {
     }
 
 
+    @SysLog("批量删除权限")
     @DeleteMapping(value = "/web/delBatch")
     @ApiOperation(value = "批量删除权限管理-后端管理权限管理", notes = "批量删除权限管理-后端管理权限管理")
     public ApiResponse deleteBatchPermission(@RequestBody String ids){

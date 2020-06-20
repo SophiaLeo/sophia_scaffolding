@@ -4,6 +4,7 @@ import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 import com.scaffolding.sophia.admin.biz.service.UserService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +30,7 @@ public class APIController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @SysLog("获取token")
     @PostMapping(value = "/token")
     @ApiOperation(value = "获取token接口")
     public ApiResponse getToken(@RequestParam String username, @RequestParam String password,@RequestParam String code, @RequestParam String randomStr){
@@ -39,6 +41,7 @@ public class APIController extends BaseController {
         return fail("获取token失败");
     }
 
+    @SysLog("密码登录")
     @PostMapping(value = "/login")
     @ApiOperation(value = "登录接口")
     public ApiResponse webLogin(@RequestParam String username, @RequestParam String password, @RequestParam(required = false) String code, @RequestParam(required = false) String randomStr){

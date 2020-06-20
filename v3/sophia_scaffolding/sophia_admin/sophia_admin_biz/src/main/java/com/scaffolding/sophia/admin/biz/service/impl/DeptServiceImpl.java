@@ -12,7 +12,7 @@ import com.scaffolding.sophia.admin.biz.mapper.DeptMapper;
 import com.scaffolding.sophia.admin.biz.service.DeptService;
 import com.scaffolding.sophia.common.base.constants.BizConstants;
 import com.scaffolding.sophia.common.security.util.UserUtils;
-import com.scaffolding.sophia.common.util.UuidUtils;
+import com.scaffolding.sophia.common.util.UuidUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -73,7 +73,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         Dept dept = new Dept();
         dept.buildBo(deptDto);
         if (StringUtils.isBlank(dept.getId())) {
-            String uuid = UuidUtils.getUuid();
+            String uuid = UuidUtil.getUuid();
             dept.setId(uuid);
             dept.setDeptType(BizConstants.DEPT);
             dept.setCompId(deptDto.getCompId());
@@ -101,7 +101,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         Dept dept = new Dept();
         dept.buildBo(deptDto);
         if (StringUtils.isBlank(deptDto.getId())) {
-            String uuid = UuidUtils.getUuid();
+            String uuid = UuidUtil.getUuid();
             dept.setId(uuid);
             dept.setPid(BizConstants.NONE_NODE);
             dept.setDeptType(BizConstants.COMP);

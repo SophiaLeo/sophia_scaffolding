@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * @author LHL
  */
-public class ComUtils {
+public class ComUtil {
 
     public static boolean isEmpty(Object aObj) {
         if (aObj instanceof String) {

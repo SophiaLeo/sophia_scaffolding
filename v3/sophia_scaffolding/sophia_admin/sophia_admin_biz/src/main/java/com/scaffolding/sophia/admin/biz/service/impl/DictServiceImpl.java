@@ -12,7 +12,7 @@ import com.scaffolding.sophia.admin.biz.service.DictService;
 import com.scaffolding.sophia.common.base.constants.BizConstants;
 import com.scaffolding.sophia.common.base.exception.CommonException;
 import com.scaffolding.sophia.common.security.util.UserUtils;
-import com.scaffolding.sophia.common.util.UuidUtils;
+import com.scaffolding.sophia.common.util.UuidUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,7 +73,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         Dict dict = new Dict();
         dict.buildBo(dictDto);
         if (StringUtils.isBlank(dictDto.getId())) {
-            String uuid = UuidUtils.getUuid();
+            String uuid = UuidUtil.getUuid();
             dict.setId(uuid);
             dict.setPid(BizConstants.NONE_NODE);
             dict.setStatus(BizConstants.YES);
@@ -83,7 +83,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
             if (dictDto.getChildren().size() > 0) {
                 dictList = dictDto.getChildren().stream().parallel().map(x -> {
                     Dict d = new Dict();
-                    d.setId(UuidUtils.getUuid());
+                    d.setId(UuidUtil.getUuid());
                     d.setName(x.getName());
                     d.setValue(x.getValue());
                     d.setPid(uuid);

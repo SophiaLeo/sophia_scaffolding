@@ -8,6 +8,7 @@ import com.scaffolding.sophia.admin.api.entity.vo.DictVo;
 import com.scaffolding.sophia.admin.biz.service.DictService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -74,6 +75,7 @@ public class DictController extends BaseController {
         }
     }
 
+    @SysLog("新增字典")
     @PostMapping(value = "/web/save")
     @ApiOperation(value = "新增数据字典管理-后端管理数据字典管理", notes = "新增数据字典管理-后端管理数据字典管理")
     public ApiResponse saveDict(@RequestBody DictDto dictDto){
@@ -84,6 +86,7 @@ public class DictController extends BaseController {
         }
     }
 
+    @SysLog("修改数据字典")
     @PutMapping(value = "/web/update")
     @ApiOperation(value = "修改数据字典管理-后端管理数据字典管理", notes = "修改数据字典管理-后端管理数据字典管理")
     public ApiResponse updateDict(@RequestBody DictDto dictDto){
@@ -94,6 +97,7 @@ public class DictController extends BaseController {
         }
     }
 
+    @SysLog("删除字典")
     @DeleteMapping(value = "/web/del/{id}")
     @ApiOperation(value = "删除数据字典管理-后端管理数据字典管理", notes = "删除数据字典管理-后端管理数据字典管理")
     public ApiResponse deleteDict(@ApiParam(value = "字典id",required = true)@PathVariable String id){
@@ -108,6 +112,7 @@ public class DictController extends BaseController {
     }
 
 
+    @SysLog("批量删除字典")
     @DeleteMapping(value = "/web/delBatch")
     @ApiOperation(value = "批量删除数据字典管理-后端管理数据字典管理", notes = "批量删除数据字典管理-后端管理数据字典管理")
     public ApiResponse deleteBatchDict(@RequestBody String ids){

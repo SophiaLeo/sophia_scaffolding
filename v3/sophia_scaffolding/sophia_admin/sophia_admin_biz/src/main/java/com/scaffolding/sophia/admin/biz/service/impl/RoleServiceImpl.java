@@ -17,7 +17,7 @@ import com.scaffolding.sophia.admin.biz.service.RoleService;
 import com.scaffolding.sophia.common.base.constants.BizConstants;
 import com.scaffolding.sophia.common.base.exception.CommonException;
 import com.scaffolding.sophia.common.security.util.UserUtils;
-import com.scaffolding.sophia.common.util.UuidUtils;
+import com.scaffolding.sophia.common.util.UuidUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,7 +80,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
                 map.put("flag", false);
                 return map;
             }
-            role.setId(UuidUtils.getUuid());
+            role.setId(UuidUtil.getUuid());
             role.setCreateTime(LocalDateTime.now());
             role.setCreateUser(roleDto.getUserId());
             role.setStatus(BizConstants.YES);

@@ -14,6 +14,7 @@ import com.scaffolding.sophia.admin.biz.service.RoleService;
 import com.scaffolding.sophia.admin.biz.service.UserService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import com.scaffolding.sophia.common.security.model.LoginUser;
 import com.scaffolding.sophia.common.security.util.UserUtils;
 import io.swagger.annotations.Api;
@@ -148,6 +149,7 @@ public class UserController extends BaseController {
         }
     }
 
+    @SysLog("添加用户")
     @PutMapping("/web/add")
     @ApiOperation(value = "添加用户")
     public ApiResponse saveUser(@RequestBody UserDto userDto) {
@@ -157,6 +159,7 @@ public class UserController extends BaseController {
         return handle(userService.saveUser(userDto));
     }
 
+    @SysLog("修改用户")
     @PutMapping("/web/update")
     @ApiOperation(value = "修改用户")
     public ApiResponse updateUser(@RequestBody UserDto userDto) {
@@ -166,6 +169,7 @@ public class UserController extends BaseController {
         return handle(userService.updateUser(userDto));
     }
 
+    @SysLog("修改密码")
     @PutMapping("/web/updatePassword")
     @ApiOperation(value = "修改用户密码-后端管理用户管理", notes = "修改用户密码-后端管理用户管理")
     public ApiResponse updateWebPassword(@RequestBody UserDto userDto) {
@@ -183,6 +187,7 @@ public class UserController extends BaseController {
     }
 
 
+    @SysLog("分配用户角色")
     @PutMapping("/web/role")
     @ApiOperation(value = "分配用户角色-后端管理用户管理", notes = "分配用户角色-后端管理用户管理")
     public ApiResponse updateWebRole(@RequestBody UserDto userDto) {
@@ -199,6 +204,7 @@ public class UserController extends BaseController {
         }
     }
 
+    @SysLog("修改用户状态")
     @PutMapping("/web/status/{id}")
     @ApiOperation(value = "修改用户状态  0无效 1有效 ")
     public ApiResponse updateStatus(@ApiParam("用户id") @PathVariable String id,@ApiParam("状态 0无效 1有效") Integer status) {
@@ -206,12 +212,14 @@ public class UserController extends BaseController {
     }
 
 
+    @SysLog("删除用户")
     @DeleteMapping("/web/del/{id}")
     @ApiOperation(value = "根据用户id删除用户信息")
     public ApiResponse deleteUser(@ApiParam("用户id") @PathVariable String id) {
         return handle(userService.deleteUser(id));
     }
 
+    @SysLog("批量删除用户")
     @DeleteMapping(value = "/web/delBatch")
     @ApiOperation(value = "批量删除用户管理-后端管理用户管理", notes = "批量删除用户管理-后端管理用户管理")
     public ApiResponse deleteBatchUser(@RequestBody String ids) {

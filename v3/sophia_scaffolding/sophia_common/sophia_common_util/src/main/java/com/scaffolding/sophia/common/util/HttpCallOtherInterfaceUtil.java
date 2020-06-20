@@ -13,7 +13,7 @@ import org.apache.http.util.EntityUtils;
 /**
  * @author LHL
  */
-public class HttpCallOtherInterfaceUtils {
+public class HttpCallOtherInterfaceUtil {
 
     public static String callOtherPostInterface(JSONObject jsonParam, String gatewayUrl, String postUrl) {
         HttpClient client = HttpClients.createDefault();

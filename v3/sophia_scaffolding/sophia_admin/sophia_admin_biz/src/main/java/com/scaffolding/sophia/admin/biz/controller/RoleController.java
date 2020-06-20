@@ -9,6 +9,7 @@ import com.scaffolding.sophia.admin.biz.service.PermissionService;
 import com.scaffolding.sophia.admin.biz.service.RoleService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -80,6 +81,7 @@ public class RoleController extends BaseController {
         }
     }
 
+    @SysLog("详情角色")
     @PostMapping(value = "/web/save")
     @ApiOperation(value = "新增角色管理-后端管理角色管理", notes = "新增角色管理-后端管理角色管理")
     public ApiResponse saveRole(@RequestBody RoleDto roleDto){
@@ -93,6 +95,7 @@ public class RoleController extends BaseController {
         }
     }
 
+    @SysLog("修改角色")
     @PutMapping(value = "/web/update")
     @ApiOperation(value = "修改角色管理-后端管理角色管理", notes = "修改角色管理-后端管理角色管理")
     public ApiResponse updateRole(@RequestBody RoleDto roleDto){
@@ -106,6 +109,7 @@ public class RoleController extends BaseController {
         }
     }
 
+    @SysLog("删除角色")
     @DeleteMapping(value = "/web/del/{id}")
     @ApiOperation(value = "删除角色管理-后端管理角色管理", notes = "删除角色管理-后端管理角色管理")
     public ApiResponse deleteRole(@ApiParam(value = "角色id",required = true)@PathVariable String id){
@@ -123,6 +127,7 @@ public class RoleController extends BaseController {
     }
 
 
+    @SysLog("批量删除角色")
     @DeleteMapping(value = "/web/delBatch")
     @ApiOperation(value = "批量删除角色管理-后端管理角色管理", notes = "批量删除角色管理-后端管理角色管理")
     public ApiResponse deleteBatchRole(@RequestBody String ids){
@@ -150,6 +155,7 @@ public class RoleController extends BaseController {
     }
 
 
+    @SysLog("分配角色权限")
     @PostMapping("/web/permission/save/{id}")
     @ApiOperation("分配该角色选择的权限-后端管理角色管理")
     public ApiResponse savePermissionAndRole(@ApiParam("角色id") @PathVariable String id, @RequestBody String ids){

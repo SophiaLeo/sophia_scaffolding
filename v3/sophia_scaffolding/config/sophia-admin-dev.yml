@@ -123,14 +123,14 @@ feign:
 ignore:
   urls:
     - /actuator/**
-    - /user/api/**
-    - /authority/api/**
     - /v2/api-docs
     - /swagger-ui.html
     - /swagger-resources/**
-    - /favicon.ico
     - /webjars/**
+    - /favicon.ico
     - /api/**
+    - /user/api/**
+    - /authority/api/**
 
 gateway:
   url: http://localhost:8002

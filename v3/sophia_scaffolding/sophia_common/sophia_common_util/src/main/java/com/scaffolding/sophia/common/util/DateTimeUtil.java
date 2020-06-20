@@ -12,7 +12,7 @@ import java.util.Locale;
 /**
  * @author LHL
  */
-public class DateTimeUtils {
+public class DateTimeUtil {
     /**
      *  G    Era    标志符            Text    公元
      y    年                    Year    1996; 96
@@ -213,7 +213,7 @@ public class DateTimeUtils {
     /**
      * 私有化构造器，使得不能产生该类对象，类中所有的方法均为静态方法
      */
-    private DateTimeUtils() {
+    private DateTimeUtil() {
     }
 
     /**
@@ -1428,8 +1428,8 @@ public class DateTimeUtils {
      * @return 月份差
      */
     public static int getMonthCount(Date sDate, Date eDate) {
-        String sDateStr = DateTimeUtils.formatDateTimetoString(sDate, "MM");
-        String eDateStr = DateTimeUtils.formatDateTimetoString(eDate, "MM");
+        String sDateStr = DateTimeUtil.formatDateTimetoString(sDate, "MM");
+        String eDateStr = DateTimeUtil.formatDateTimetoString(eDate, "MM");
         int monthCount = Integer.parseInt(eDateStr) - Integer.parseInt(sDateStr) + 1;
         return monthCount;
     }
@@ -1444,8 +1444,8 @@ public class DateTimeUtils {
      * @return 年份差
      */
     public static int getYearCount(Date sDate, Date eDate) {
-        String sDateStr = DateTimeUtils.formatDateTimetoString(sDate, "yyyy");
-        String eDateStr = DateTimeUtils.formatDateTimetoString(eDate, "yyyy");
+        String sDateStr = DateTimeUtil.formatDateTimetoString(sDate, "yyyy");
+        String eDateStr = DateTimeUtil.formatDateTimetoString(eDate, "yyyy");
         return Integer.parseInt(eDateStr) - Integer.parseInt(sDateStr);
     }
 
@@ -1457,9 +1457,9 @@ public class DateTimeUtils {
      * @return 新日期对象
      */
     public static Date getDayNextMonth(Date date) {
-        String yearStr = DateTimeUtils.formatDateTimetoString(date, "yyyy");
-        String monthStr = DateTimeUtils.formatDateTimetoString(date, "MM");
-        String dayStr = DateTimeUtils.formatDateTimetoString(date, "dd");
+        String yearStr = DateTimeUtil.formatDateTimetoString(date, "yyyy");
+        String monthStr = DateTimeUtil.formatDateTimetoString(date, "MM");
+        String dayStr = DateTimeUtil.formatDateTimetoString(date, "dd");
         int year = Integer.parseInt(yearStr);
         int month = Integer.parseInt(monthStr);
         if (month == 12) {
@@ -1471,7 +1471,7 @@ public class DateTimeUtils {
 
         String dateStr = yearStr + "-" + monthStr + "-" + dayStr;
         try {
-            date = DateTimeUtils.parseToDate(dateStr);
+            date = DateTimeUtil.parseToDate(dateStr);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1691,20 +1691,20 @@ public class DateTimeUtils {
         Date currDate = getSystemDate();
         // 今天以前
         if (date.before(getZeroDate(currDate))) {
-            timeStr = DateTimeUtils.formatDatetoString(date);
+            timeStr = DateTimeUtil.formatDatetoString(date);
         } else {
             // 时
-            double hours = DateTimeUtils.getHoursOfTwoDate(currDate, date);
+            double hours = DateTimeUtil.getHoursOfTwoDate(currDate, date);
             if (hours < 24 && hours >= 1) {
                 timeStr = String.valueOf((int) hours) + "小时前";
             } else {
                 // 分
-                double minutes = DateTimeUtils.getMinutesOfTwoDate(currDate, date);
+                double minutes = DateTimeUtil.getMinutesOfTwoDate(currDate, date);
                 if (minutes < 60 && minutes >= 1) {
                     timeStr = String.valueOf((int) minutes) + "分钟前";
                 } else {
                     // 秒
-                    double seconds = DateTimeUtils.getSecondsOfTwoDate(currDate, date);
+                    double seconds = DateTimeUtil.getSecondsOfTwoDate(currDate, date);
                     if (seconds < 60 && seconds >= 1) {
                         // timeStr = String.valueOf(seconds)+"秒前";
                         timeStr = "刚刚";

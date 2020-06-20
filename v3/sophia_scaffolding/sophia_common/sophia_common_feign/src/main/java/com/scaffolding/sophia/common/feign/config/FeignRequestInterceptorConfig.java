@@ -2,10 +2,11 @@ package com.scaffolding.sophia.common.feign.config;
 
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
-import com.scaffolding.sophia.common.util.HttpCallOtherInterfaceUtils;
+import com.scaffolding.sophia.common.util.HttpCallOtherInterfaceUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -64,13 +65,16 @@ public class FeignRequestInterceptorConfig implements RequestInterceptor {
         if (CollUtil.isNotEmpty(fromHeader) && fromHeader.contains(FROM_IN)) {
             log.info("内部调用feign");
             String s = "?client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=client_credentials&scope=all";
-            String sr = HttpCallOtherInterfaceUtils.callOtherInterface(url, "/api/auth/oauth/token" + s);
+            String sr = HttpCallOtherInterfaceUtil.callOtherInterface(url, "/api/auth/oauth/token" + s);
             Map srmap = JSON.parseObject(sr);
             if (null == srmap) {
                 log.info("内部调用feign传递失败");
                 return;
             }
             String access_token = (String) srmap.get("access_token");
+            if (StringUtils.isBlank(access_token)){
+                access_token = (String) srmap.get("value");
+            }
             log.info(access_token);
             template.header(AUTHORIZATION_HEADER, "Bearer " + access_token);
             return;

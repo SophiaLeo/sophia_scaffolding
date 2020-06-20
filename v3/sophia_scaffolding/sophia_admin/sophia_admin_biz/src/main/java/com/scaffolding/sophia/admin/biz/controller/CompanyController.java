@@ -8,6 +8,7 @@ import com.scaffolding.sophia.admin.api.entity.vo.DeptVo;
 import com.scaffolding.sophia.admin.biz.service.DeptService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -71,6 +72,7 @@ public class CompanyController extends BaseController {
     }
 
 
+    @SysLog("新增公司")
     @PostMapping("/web/add")
     @ApiOperation("新增公司")
     public ApiResponse addCompany(@RequestBody DeptDto deptDto){
@@ -81,6 +83,7 @@ public class CompanyController extends BaseController {
         }
     }
 
+    @SysLog("修改公司")
     @PutMapping("/web/update")
     @ApiOperation("修改公司")
     public ApiResponse updateCompany(@RequestBody DeptDto deptDto){
@@ -91,6 +94,7 @@ public class CompanyController extends BaseController {
         }
     }
 
+    @SysLog("删除公司")
     @DeleteMapping("/web/del/{id}")
     @ApiOperation("删除公司")
     public ApiResponse deleteCompany(@PathVariable String id){
@@ -102,6 +106,7 @@ public class CompanyController extends BaseController {
     }
 
 
+    @SysLog("批量删除公司")
     @DeleteMapping("/web/batchDel")
     @ApiOperation("批量删除公司")
     public ApiResponse deleteBatchCompany(@RequestBody String ids){

@@ -20,8 +20,8 @@ import com.scaffolding.sophia.common.base.constants.GlobalsConstants;
 import com.scaffolding.sophia.common.base.exception.CommonException;
 import com.scaffolding.sophia.common.security.properties.SecurityOAuth2ClientProperties;
 import com.scaffolding.sophia.common.security.util.UserUtils;
-import com.scaffolding.sophia.common.util.HttpCallOtherInterfaceUtils;
-import com.scaffolding.sophia.common.util.UuidUtils;
+import com.scaffolding.sophia.common.util.HttpCallOtherInterfaceUtil;
+import com.scaffolding.sophia.common.util.UuidUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,7 +101,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //数据库密码是加密了的
         if (passwordEncoder.matches(password, user.getPassword())) {
             s = "?client_id=" + securityOAuth2ClientProperties.getClientId() + "&client_secret=" + securityOAuth2ClientProperties.getClientSecret() + "&grant_type=password&scope=all&username=" + username + "&password=" + password + "&code=" + code + "&randomStr=" + randomStr;
-            String sr = HttpCallOtherInterfaceUtils.callOtherInterface(url, "/api/auth/oauth/token" + s);
+            String sr = HttpCallOtherInterfaceUtil.callOtherInterface(url, "/api/auth/oauth/token" + s);
             Map srmap = JSON.parseObject(sr);
             if (null == srmap) {
                 throw new CommonException("认证失败");
@@ -210,7 +210,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         User user = new User();
         user.buildBo(userDto);
-        user.setId(UuidUtils.getUuid());
+        user.setId(UuidUtil.getUuid());
         //TODO 保存头像
         user.setCreateTime(LocalDateTime.now());
         user.setCreateUser(userDto.getUserId());
@@ -262,7 +262,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //数据库密码是加密了的
         if (passwordEncoder.matches(password, user.getPassword())) {
             s = "?client_id=" + securityOAuth2ClientProperties.getClientId() + "&client_secret=" + securityOAuth2ClientProperties.getClientSecret() + "&grant_type=password&scope=all&username=" + username + "&password=" + password + "&code=" + code + "&randomStr=" + randomStr;
-            String sr = HttpCallOtherInterfaceUtils.callOtherInterface(url, "/api/auth/oauth/token" + s);
+            String sr = HttpCallOtherInterfaceUtil.callOtherInterface(url, "/api/auth/oauth/token" + s);
             Map srmap = JSON.parseObject(sr);
             if (null == srmap) {
                 throw new CommonException("认证失败");
@@ -349,7 +349,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UserRole userRole = userRoleMapper.selectOne(new QueryWrapper<UserRole>().eq("USER_ID", userDto.getId()));
         if (null == userRole) {
             UserRole userRole1 = new UserRole();
-            userRole1.setId(UuidUtils.getUuid());
+            userRole1.setId(UuidUtil.getUuid());
             userRole1.setUserId(userDto.getId());
             userRole1.setRoleId(userDto.getRoleId());
             return userRoleMapper.insert(userRole1) > 0;

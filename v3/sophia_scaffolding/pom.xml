@@ -36,6 +36,7 @@
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
         <druid.version>1.1.22</druid.version>
         <commons-pool2.version>2.8.0</commons-pool2.version>
+        <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jjwt.version>0.9.1</jjwt.version>
         <fastjson.version>1.2.68</fastjson.version>
         <json.version>20190722</json.version>

@@ -38,7 +38,7 @@ public class StringUtil {
      * @return boolean
      */
     public static boolean checkEmail(String email) {
-        if (ComUtils.isEmpty(email)) {
+        if (ComUtil.isEmpty(email)) {
             return false;
         }
         boolean flag = false;

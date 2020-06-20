@@ -7,6 +7,7 @@ import com.scaffolding.sophia.admin.api.entity.vo.DeptVo;
 import com.scaffolding.sophia.admin.biz.service.DeptService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -62,6 +63,7 @@ public class DeptController extends BaseController {
     }
 
 
+    @SysLog("新增部门")
     @PostMapping("/web/add")
     @ApiOperation("新增部门")
     public ApiResponse addDept(@RequestBody DeptDto deptDto){
@@ -72,6 +74,7 @@ public class DeptController extends BaseController {
         }
     }
 
+    @SysLog("修改部门")
     @PutMapping("/web/update")
     @ApiOperation("修改部门")
     public ApiResponse updateDept(@RequestBody DeptDto deptDto){
@@ -82,6 +85,7 @@ public class DeptController extends BaseController {
         }
     }
 
+    @SysLog("删除部门")
     @DeleteMapping("/web/del/{id}")
     @ApiOperation("删除部门")
     public ApiResponse deleteDept(@PathVariable String id){
@@ -93,6 +97,7 @@ public class DeptController extends BaseController {
     }
 
 
+    @SysLog("批量删除部门")
     @DeleteMapping("/web/batchDel")
     @ApiOperation("批量删除部门")
     public ApiResponse deleteBatchDept(@RequestBody String ids){

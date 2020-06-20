@@ -15,7 +15,7 @@ import com.scaffolding.sophia.common.base.constants.BizConstants;
 import com.scaffolding.sophia.common.base.dto.PageDto;
 import com.scaffolding.sophia.common.base.exception.CommonException;
 import com.scaffolding.sophia.common.security.util.UserUtils;
-import com.scaffolding.sophia.common.util.UuidUtils;
+import com.scaffolding.sophia.common.util.UuidUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,7 +90,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         Permission permission = new Permission();
         permission.buildBo(permissionDto);
         if (StringUtils.isBlank(permissionDto.getId())) {
-            permission.setId(UuidUtils.getUuid());
+            permission.setId(UuidUtil.getUuid());
             permission.setCreateTime(LocalDateTime.now());
             permission.setCreateUser(permissionDto.getUserId());
             permission.setStatus(BizConstants.YES);
@@ -170,7 +170,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         }
         List<RolePermission> collect = ids.stream().parallel().map(x -> {
             RolePermission rolePermission = new RolePermission();
-            rolePermission.setId(UuidUtils.getUuid());
+            rolePermission.setId(UuidUtil.getUuid());
             rolePermission.setRoleId(id);
             rolePermission.setPermId(x);
             return rolePermission;
