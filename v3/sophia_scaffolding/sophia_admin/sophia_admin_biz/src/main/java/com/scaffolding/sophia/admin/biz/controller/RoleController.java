@@ -3,6 +3,7 @@ package com.scaffolding.sophia.admin.biz.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.scaffolding.sophia.admin.api.entity.dto.RoleDto;
+import com.scaffolding.sophia.admin.api.entity.dto.RoleSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.RoleVo;
 import com.scaffolding.sophia.admin.biz.service.PermissionService;
 import com.scaffolding.sophia.admin.biz.service.RoleService;
@@ -15,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -53,8 +55,8 @@ public class RoleController extends BaseController {
 
     @GetMapping("/web/list")
     @ApiOperation(value = "查询角色管理列表分页-后端管理角色管理", notes = "查询角色管理列表分页-后端管理角色管理")
-    public ApiResponse getRolePage(){
-        Map<String, Object> params = getParams();
+    public ApiResponse getRolePage(@ModelAttribute RoleSearchDto params){
+        // Map<String, Object> params = getParams();
         return success(roleService.queryRoleList(params));
     }
 

@@ -39,7 +39,6 @@ public class APIController extends BaseController {
         return fail("获取token失败");
     }
 
-
     @PostMapping(value = "/login")
     @ApiOperation(value = "登录接口")
     public ApiResponse webLogin(@RequestParam String username, @RequestParam String password, @RequestParam(required = false) String code, @RequestParam(required = false) String randomStr){

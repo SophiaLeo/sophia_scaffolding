@@ -1,6 +1,7 @@
 package com.scaffolding.sophia.admin.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.scaffolding.sophia.admin.api.entity.dto.CompanySearchDto;
 import com.scaffolding.sophia.admin.api.entity.dto.DeptDto;
 import com.scaffolding.sophia.admin.api.entity.vo.DeptVo;
 
@@ -30,7 +31,7 @@ public interface DeptService {
      * @param params 条件
      * @return IPage<DeptVo>
      */
-    IPage<DeptVo> queryCompanyList(Map<String, Object> params);
+    IPage<DeptVo> queryCompanyList(CompanySearchDto params);
 
 
 

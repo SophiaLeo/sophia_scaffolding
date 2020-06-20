@@ -3,6 +3,7 @@ package com.scaffolding.sophia.admin.biz.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.scaffolding.sophia.admin.api.entity.bo.ApiLogger;
+import com.scaffolding.sophia.admin.api.entity.dto.ApiLoggerSearchDto;
 import com.scaffolding.sophia.admin.biz.service.ApiLoggerService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
@@ -11,17 +12,17 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author LHL
@@ -36,8 +37,8 @@ public class ApiLoggerController extends BaseController {
 
     @GetMapping("/web/list")
     @ApiOperation(value = "查询日志管理列表分页-后端管理日志管理", notes = "查询日志管理列表分页-后端管理日志管理")
-    public ApiResponse getApiLoggerPage(){
-        Map<String, Object> params = getParams();
+    public ApiResponse getApiLoggerPage(@ModelAttribute ApiLoggerSearchDto params){
+        // Map<String, Object> params = getParams();
         return success(apiLoggerService.queryApiLoggerList(params));
     }
 
@@ -76,7 +77,7 @@ public class ApiLoggerController extends BaseController {
      * @return ApiResponse
      */
     @PostMapping("/api/add")
-    public ApiResponse saveLog(@Valid @RequestBody ApiLogger apiLogger) {
+    public ApiResponse saveLog(@Validated @RequestBody ApiLogger apiLogger) {
         return handle(apiLoggerService.saveLog(apiLogger));
     }
 

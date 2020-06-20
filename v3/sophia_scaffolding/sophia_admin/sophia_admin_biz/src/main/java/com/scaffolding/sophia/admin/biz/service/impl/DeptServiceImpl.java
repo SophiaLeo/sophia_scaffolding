@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scaffolding.sophia.admin.api.entity.bo.Dept;
+import com.scaffolding.sophia.admin.api.entity.dto.CompanySearchDto;
 import com.scaffolding.sophia.admin.api.entity.dto.DeptDto;
 import com.scaffolding.sophia.admin.api.entity.vo.DeptVo;
 import com.scaffolding.sophia.admin.biz.mapper.DeptMapper;
@@ -48,9 +49,9 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
     }
 
     @Override
-    public IPage<DeptVo> queryCompanyList(Map<String, Object> param) {
-        Integer currentPage = param.get("currentPage") == null ? 1 : Integer.parseInt(String.valueOf(param.get("currentPage")));
-        Integer pageSize = param.get("pageSize") == null ? 10 : Integer.parseInt(String.valueOf(param.get("pageSize")));
+    public IPage<DeptVo> queryCompanyList(CompanySearchDto param) {
+        Integer currentPage = param.getCurrentPage()== null ? 1 : param.getCurrentPage();
+        Integer pageSize = param.getPageSize() == null ? 10 : param.getPageSize();
         Page<DeptVo> page = new Page<>(currentPage, pageSize);
         return page.setRecords(baseMapper.findCompanyList(page, param));
     }

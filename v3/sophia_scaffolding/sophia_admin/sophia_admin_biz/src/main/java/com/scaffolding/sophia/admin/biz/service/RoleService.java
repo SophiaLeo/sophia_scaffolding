@@ -3,6 +3,7 @@ package com.scaffolding.sophia.admin.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.scaffolding.sophia.admin.api.entity.bo.Role;
 import com.scaffolding.sophia.admin.api.entity.dto.RoleDto;
+import com.scaffolding.sophia.admin.api.entity.dto.RoleSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.RoleVo;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public interface RoleService {
      * @param param 分页
      * @return IPage<RoleVo>
      */
-    IPage<RoleVo> queryRoleList(Map<String,Object> param);
+    IPage<RoleVo> queryRoleList(RoleSearchDto param);
 
     /**
      * 获取角色信息

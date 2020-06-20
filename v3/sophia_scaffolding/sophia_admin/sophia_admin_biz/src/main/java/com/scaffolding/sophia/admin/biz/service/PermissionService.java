@@ -3,6 +3,7 @@ package com.scaffolding.sophia.admin.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.scaffolding.sophia.admin.api.entity.dto.PermissionDto;
 import com.scaffolding.sophia.admin.api.entity.vo.PermissionVo;
+import com.scaffolding.sophia.common.base.dto.PageDto;
 
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public interface PermissionService {
      * @param param 分页
      * @return IPage<PermissionVo>
      */
-    IPage<PermissionVo> queryPermissionList(Map<String,Object> param);
+    IPage<PermissionVo> queryPermissionList(PageDto param);
 
     /**
      * 获取权限树形结构

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.scaffolding.sophia.admin.api.entity.bo.Role;
 import com.scaffolding.sophia.admin.api.entity.bo.User;
 import com.scaffolding.sophia.admin.api.entity.dto.UserDto;
+import com.scaffolding.sophia.admin.api.entity.dto.UserSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.LoginUserVo;
 import com.scaffolding.sophia.admin.api.entity.vo.PermissionVo;
 import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
@@ -23,6 +24,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -88,9 +90,9 @@ public class UserController extends BaseController {
 
     @GetMapping("/web")
     @ApiOperation(value = "用户信息分页")
-    public ApiResponse getUserList() {
-        Map<String, Object> param = getParams();
-        return success(userService.queryUserList(param));
+    public ApiResponse getUserList(@ModelAttribute UserSearchDto userSearchDto) {
+        // Map<String, Object> param = getParams();
+        return success(userService.queryUserList(userSearchDto));
     }
 
     @GetMapping("/web/info/{id}")
@@ -199,7 +201,7 @@ public class UserController extends BaseController {
 
     @PutMapping("/web/status/{id}")
     @ApiOperation(value = "修改用户状态  0无效 1有效 ")
-    public ApiResponse updateStatus(@ApiParam("用户id") @PathVariable String id, Integer status) {
+    public ApiResponse updateStatus(@ApiParam("用户id") @PathVariable String id,@ApiParam("状态 0无效 1有效") Integer status) {
         return handle(userService.updateStatus(id, status));
     }
 
@@ -224,9 +226,15 @@ public class UserController extends BaseController {
         }
     }
 
-    @GetMapping("/api")
+    @GetMapping("/info/{id}")
+    @ApiOperation(value = "根据用户id获取用户信息")
+    public ApiResponse loadUserByUserId(@ApiParam("用户id") @PathVariable String id) {
+        return success(userService.loadUserByUserId(id));
+    }
+
+    @GetMapping("/api/{username}")
     @ApiOperation(value = "根据用户名(手机号或者邮箱)获取用户信息")
-    public ApiResponse getUserByUserName(@ApiParam("用户名(手机号或者邮箱)") @RequestParam String username) {
+    public ApiResponse getUserByUserName(@PathVariable String username) {
         return success(userService.loadUserByUserName(username));
     }
 

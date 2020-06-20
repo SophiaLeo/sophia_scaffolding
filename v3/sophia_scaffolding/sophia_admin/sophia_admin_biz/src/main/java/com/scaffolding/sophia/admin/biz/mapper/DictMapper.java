@@ -3,12 +3,12 @@ package com.scaffolding.sophia.admin.biz.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scaffolding.sophia.admin.api.entity.bo.Dict;
+import com.scaffolding.sophia.admin.api.entity.dto.DictSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.DictVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: LHL
@@ -44,7 +44,7 @@ public interface DictMapper extends BaseMapper<Dict> {
      * @param param 分页条件
      * @return List<DictVo>
      */
-    List<DictVo> selectDictList(@Param("page") Page<DictVo> page, @Param("param") Map<String,Object> param);
+    List<DictVo> selectDictList(@Param("page") Page<DictVo> page, @Param("param") DictSearchDto param);
 
     /**
      * 逻辑删除

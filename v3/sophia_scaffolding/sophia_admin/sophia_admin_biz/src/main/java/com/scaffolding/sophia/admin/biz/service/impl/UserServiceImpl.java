@@ -9,6 +9,7 @@ import com.scaffolding.sophia.admin.api.entity.bo.Role;
 import com.scaffolding.sophia.admin.api.entity.bo.User;
 import com.scaffolding.sophia.admin.api.entity.bo.UserRole;
 import com.scaffolding.sophia.admin.api.entity.dto.UserDto;
+import com.scaffolding.sophia.admin.api.entity.dto.UserSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 import com.scaffolding.sophia.admin.biz.mapper.RoleMapper;
 import com.scaffolding.sophia.admin.biz.mapper.UserMapper;
@@ -170,21 +171,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
 
     @Override
-    public IPage<UserVo> queryUserList(Map param) {
+    public IPage<UserVo> queryUserList(UserSearchDto userSearchDto) {
         String deptId = UserUtils.getLoginUser().getDeptId();
         if(StringUtils.isBlank(deptId)){
             deptId =  UserUtils.getLoginUser().getCompId();
         }
-        param.put("deptPid",deptId);
-        param.put("userId", UserUtils.getLoginUser().getId());
+        userSearchDto.setDeptPid(deptId);
+        if (StringUtils.isBlank(userSearchDto.getUserId())) {
+            userSearchDto.setUserId(UserUtils.getLoginUser().getId());
+        }
         Role role = roleMapper.getRoleByUserId(UserUtils.getLoginUser().getId());
         if (null != role) {
-            param.put("roleCode", role.getRoleCode());
+            userSearchDto.setRoleCode(role.getRoleCode());
         }
-        Integer currentPage = param.get("currentPage") == null ? 1 : Integer.parseInt(String.valueOf(param.get("currentPage")));
-        Integer pageSize = param.get("pageSize") == null ? 10 : Integer.parseInt(String.valueOf(param.get("pageSize")));
+        Integer currentPage = userSearchDto.getCurrentPage() == null ? 1 : userSearchDto.getCurrentPage();
+        Integer pageSize = userSearchDto.getPageSize() == null ? 10 : userSearchDto.getPageSize();
         Page<UserVo> page = new Page<>(currentPage, pageSize);
-        return page.setRecords(baseMapper.findUserList(page, param));
+        return page.setRecords(baseMapper.findUserList(page, userSearchDto));
     }
 
     @Override

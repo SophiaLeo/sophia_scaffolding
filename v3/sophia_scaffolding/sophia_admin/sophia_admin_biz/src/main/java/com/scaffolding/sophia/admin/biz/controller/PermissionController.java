@@ -6,6 +6,7 @@ import com.scaffolding.sophia.admin.api.entity.dto.PermissionDto;
 import com.scaffolding.sophia.admin.api.entity.vo.PermissionVo;
 import com.scaffolding.sophia.admin.biz.service.OauthClientDetailsService;
 import com.scaffolding.sophia.admin.biz.service.PermissionService;
+import com.scaffolding.sophia.common.base.dto.PageDto;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
 import io.swagger.annotations.Api;
@@ -15,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,8 +62,8 @@ public class PermissionController extends BaseController {
 
     @GetMapping("/web/list")
     @ApiOperation(value = "查询权限管理列表分页-后端管理权限管理", notes = "查询权限管理列表分页-后端管理权限管理")
-    public ApiResponse getPermissionPage(){
-        Map<String, Object> params = getParams();
+    public ApiResponse getPermissionPage(@ModelAttribute PageDto params){
+        // Map<String, Object> params = getParams();
         return success(permissionService.queryPermissionList(params));
     }
 

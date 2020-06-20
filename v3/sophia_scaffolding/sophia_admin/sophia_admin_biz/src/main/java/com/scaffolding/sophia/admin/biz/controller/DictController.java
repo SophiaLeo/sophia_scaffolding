@@ -3,6 +3,7 @@ package com.scaffolding.sophia.admin.biz.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.scaffolding.sophia.admin.api.entity.dto.DictDto;
+import com.scaffolding.sophia.admin.api.entity.dto.DictSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.DictVo;
 import com.scaffolding.sophia.admin.biz.service.DictService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
@@ -14,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: LHL
@@ -46,8 +47,8 @@ public class DictController extends BaseController {
 
     @GetMapping("/web/list")
     @ApiOperation(value = "查询数据字典管理列表分页-后端管理数据字典管理", notes = "查询数据字典管理列表分页-后端管理数据字典管理")
-    public ApiResponse getDictPage(){
-        Map<String, Object> param = getParams();
+    public ApiResponse getDictPage(@ModelAttribute DictSearchDto param){
+        // Map<String, Object> param = getParams();
         return success(dictService.queryDictList(param));
     }
 

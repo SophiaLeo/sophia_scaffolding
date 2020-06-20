@@ -12,6 +12,7 @@ import com.scaffolding.sophia.admin.biz.mapper.PermissionMapper;
 import com.scaffolding.sophia.admin.biz.mapper.RolePermissionMapper;
 import com.scaffolding.sophia.admin.biz.service.PermissionService;
 import com.scaffolding.sophia.common.base.constants.BizConstants;
+import com.scaffolding.sophia.common.base.dto.PageDto;
 import com.scaffolding.sophia.common.base.exception.CommonException;
 import com.scaffolding.sophia.common.security.util.UserUtils;
 import com.scaffolding.sophia.common.util.UuidUtils;
@@ -60,9 +61,9 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     }
 
     @Override
-    public IPage<PermissionVo> queryPermissionList(Map<String,Object> param) {
-        Integer currentPage = param.get("currentPage") == null ? 1 : Integer.parseInt(String.valueOf(param.get("currentPage")));
-        Integer pageSize = param.get("pageSize") == null ? 10 : Integer.parseInt(String.valueOf(param.get("pageSize")));
+    public IPage<PermissionVo> queryPermissionList(PageDto param) {
+        Integer currentPage = param.getCurrentPage() == null ? 1 : param.getCurrentPage();
+        Integer pageSize = param.getPageSize() == null ? 10 : param.getPageSize();
         Page<PermissionVo> page = new Page<>(currentPage, pageSize);
         return page.setRecords(baseMapper.selectPermissionList(page));
     }

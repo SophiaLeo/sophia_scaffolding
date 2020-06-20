@@ -5,8 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.scaffolding.sophia.common.util.HttpCallOtherInterfaceUtils;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -26,9 +25,8 @@ import java.util.Map;
  * @Version: 1.0
  */
 @Component
+@Slf4j
 public class FeignRequestInterceptorConfig implements RequestInterceptor {
-
-    private static final Logger log = LoggerFactory.getLogger(FeignRequestInterceptorConfig.class);
 
     private final String AUTHORIZATION_HEADER = "Authorization";
 
@@ -56,6 +54,7 @@ public class FeignRequestInterceptorConfig implements RequestInterceptor {
      * Create a template with the header of provided name and extracted extract
      * 1. 如果使用 非web 请求，header 区别
      * 2. 根据authentication 还原请求token
+     * 3.查看是否有内部调用标志
      *
      * @param template
      */
@@ -63,28 +62,28 @@ public class FeignRequestInterceptorConfig implements RequestInterceptor {
     public void apply(RequestTemplate template) {
         Collection<String> fromHeader = template.headers().get(FROM);
         if (CollUtil.isNotEmpty(fromHeader) && fromHeader.contains(FROM_IN)) {
-            log.debug("内部调用feign");
+            log.info("内部调用feign");
             String s = "?client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=client_credentials&scope=all";
             String sr = HttpCallOtherInterfaceUtils.callOtherInterface(url, "/api/auth/oauth/token" + s);
             Map srmap = JSON.parseObject(sr);
             if (null == srmap) {
-                log.debug("内部调用feign传递失败");
+                log.info("内部调用feign传递失败");
                 return;
             }
             String access_token = (String) srmap.get("access_token");
-            System.out.println(access_token);
+            log.info(access_token);
             template.header(AUTHORIZATION_HEADER, "Bearer " + access_token);
             return;
         }
-        log.debug("外部调用feign");
+        log.info("外部调用feign");
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         if (request != null) {
-            log.debug("调用feign传递header携带token");
+            log.info("调用feign传递header携带token");
             //只携带token
-            String authorization = request.getHeader(AUTHORIZATION_HEADER);
+            // String authorization = request.getHeader(AUTHORIZATION_HEADER);
             //requestTemplate.header("Authorization", authorization);
-            log.debug("Authorization :\t\t" + authorization);
+            // log.info("Authorization :\t\t" + authorization);
             //携带全部
             Enumeration<String> headerNames = request.getHeaderNames();
             if (headerNames != null) {
@@ -92,8 +91,8 @@ public class FeignRequestInterceptorConfig implements RequestInterceptor {
                     String name = headerNames.nextElement();
                     String values = request.getHeader(name);
                     template.header(name, values);
-                    log.debug("name ：\t\t" + name);
-                    log.debug("values ： \t\t" + values);
+                    log.info("name ：\t\t" + name);
+                    log.info("values ： \t\t" + values);
                 }
             }
         }

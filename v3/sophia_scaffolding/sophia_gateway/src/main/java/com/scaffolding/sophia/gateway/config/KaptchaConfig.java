@@ -10,7 +10,7 @@ import java.util.Properties;
  * @author LHL
  */
 @Configuration
-public class KaptchaConfiguration {
+public class KaptchaConfig {
 
 	private static final String KAPTCHA_BORDER = "kaptcha.border";
 	private static final String KAPTCHA_TEXTPRODUCER_FONT_COLOR = "kaptcha.textproducer.font.color";

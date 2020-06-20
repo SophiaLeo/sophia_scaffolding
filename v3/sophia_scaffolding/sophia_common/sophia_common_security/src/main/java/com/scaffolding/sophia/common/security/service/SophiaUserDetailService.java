@@ -7,6 +7,7 @@ import com.scaffolding.sophia.admin.api.entity.vo.PermissionVo;
 import com.scaffolding.sophia.admin.api.feign.client.AuthorityClient;
 import com.scaffolding.sophia.admin.api.feign.client.UserClient;
 import com.scaffolding.sophia.common.base.constants.BizConstants;
+import com.scaffolding.sophia.common.base.enums.SophiaHttpStatus;
 import com.scaffolding.sophia.common.base.exception.CommonException;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.security.model.LoginUser;
@@ -44,8 +45,9 @@ public class SophiaUserDetailService implements UserDetailsService {
             throw new CommonException("登录名不能为空");
         }
         ApiResponse apiResponse = userClient.getUserByUserName(username);
-        // String s = JSON.toJSONString(apiResponse.getData());
-        // User user = JSON.parseObject(s,User.class);
+        if (!SophiaHttpStatus.SUCCESS.getCode().equals(apiResponse.getCode())){
+            throw new CommonException(apiResponse.getMessage());
+        }
         User user = JSONObject.parseObject(JSONObject.toJSONString(apiResponse.getData(), true),User.class);
         if (user == null) {
             throw new CommonException("登录名不存在");

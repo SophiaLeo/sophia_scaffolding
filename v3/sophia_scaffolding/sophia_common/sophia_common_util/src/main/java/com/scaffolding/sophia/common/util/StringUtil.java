@@ -1,10 +1,5 @@
 package com.scaffolding.sophia.common.util;
 
-import net.sourceforge.pinyin4j.PinyinHelper;
-import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
-import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-
 import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -67,26 +62,6 @@ public class StringUtil {
     public static boolean isValidUrlAddress(String url) {
         String pattern = "([h]|[H])([t]|[T])([t]|[T])([p]|[P])([s]|[S]){0,1}://([^:/]+)(:([0-9]+))?(/\\S*)*";
         return url.matches(pattern);
-    }
-
-
-    /**
-     * 将汉字转换成拼音
-     *
-     * @param chinese 汉字
-     * @return String
-     */
-    public static String strToPinYin(String chinese) throws Exception {
-        String pinyin = "";
-        HanyuPinyinOutputFormat pinyinOutputFormat = new HanyuPinyinOutputFormat();
-        pinyinOutputFormat.setCaseType(HanyuPinyinCaseType.UPPERCASE);
-        pinyinOutputFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
-        String[] pinyinArray = null;
-        for (char ch : chinese.toCharArray()) {
-            pinyinArray = PinyinHelper.toHanyuPinyinStringArray(ch, pinyinOutputFormat);
-            pinyin += ComUtils.isEmpty(pinyinArray) ? ch : pinyinArray[0];
-        }
-        return pinyin;
     }
 
     /**

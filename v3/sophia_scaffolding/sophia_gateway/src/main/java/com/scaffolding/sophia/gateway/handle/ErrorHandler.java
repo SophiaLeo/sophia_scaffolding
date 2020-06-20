@@ -1,4 +1,4 @@
-package com.scaffolding.sophia.gateway.exception;
+package com.scaffolding.sophia.gateway.handle;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Configuration
 @EnableConfigurationProperties({ServerProperties.class, ResourceProperties.class})
-public class ErrorHandlerConfiguration {
+public class ErrorHandler {
 
     private final ServerProperties serverProperties;
 
@@ -37,11 +37,11 @@ public class ErrorHandlerConfiguration {
 
     private final ServerCodecConfigurer serverCodecConfigurer;
 
-    public ErrorHandlerConfiguration(ServerProperties serverProperties,
-                                     ResourceProperties resourceProperties,
-                                     ObjectProvider<List<ViewResolver>> viewResolversProvider,
-                                     ServerCodecConfigurer serverCodecConfigurer,
-                                     ApplicationContext applicationContext) {
+    public ErrorHandler(ServerProperties serverProperties,
+                        ResourceProperties resourceProperties,
+                        ObjectProvider<List<ViewResolver>> viewResolversProvider,
+                        ServerCodecConfigurer serverCodecConfigurer,
+                        ApplicationContext applicationContext) {
         this.serverProperties = serverProperties;
         this.applicationContext = applicationContext;
         this.resourceProperties = resourceProperties;

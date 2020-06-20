@@ -17,7 +17,7 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 @Slf4j
 @Configuration
 @AllArgsConstructor
-public class RouterFunctionConfiguration {
+public class RouterFunctionConfig {
 
 	private final ImageCodeHandler imageCodeHandler;
 

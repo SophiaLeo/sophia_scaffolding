@@ -23,24 +23,31 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    ID, ROLE_NAME, ROLE_CODE, DESCRIPTION, ROLE_TYPE, STATUS, CREATE_TIME, CREATE_USER,
-    UPDATE_TIME, UPDATE_USER
-  </sql>
+
+            ID, ROLE_NAME, ROLE_CODE, DESCRIPTION, ROLE_TYPE, STATUS, CREATE_TIME, CREATE_USER,
+            UPDATE_TIME, UPDATE_USER
+
+    </sql>
 
     <select id="getRoleByUserId" parameterType="string" resultMap="BaseResultMap">
-        SELECT su.ID, ROLE_NAME, ROLE_CODE, DESCRIPTION, ROLE_TYPE
-        FROM sys_role su
-        LEFT JOIN sys_user_role sr ON sr.role_id = su.id
-        WHERE sr.user_id = #{userId}
+
+                SELECT su.ID, ROLE_NAME, ROLE_CODE, DESCRIPTION, ROLE_TYPE
+                FROM sys_role su
+                LEFT JOIN sys_user_role sr ON sr.role_id = su.id
+                WHERE sr.user_id = #{userId}
+
     </select>
 
 
     <select id="selectRoleList" resultMap="BaseResultMapVo">
-      select
-      ID, ROLE_NAME, ROLE_CODE, DESCRIPTION, ROLE_TYPE
-      from sys_role
-      where status = 1
-      order by  CREATE_TIME DESC
+        select
+        ID, ROLE_NAME, ROLE_CODE, DESCRIPTION, ROLE_TYPE
+        from sys_role
+        where status = 1
+        <if test="param.roleName != null and param.roleName != ''">
+            AND ROLE_NAME like concat('%', #{param.roleName},'%')
+        </if>
+        order by CREATE_TIME DESC
     </select>
 
     <select id="selectRole" resultMap="BaseResultMapVo">

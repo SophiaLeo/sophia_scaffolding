@@ -3,12 +3,12 @@ package com.scaffolding.sophia.admin.biz.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scaffolding.sophia.admin.api.entity.bo.User;
+import com.scaffolding.sophia.admin.api.entity.dto.UserSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: LHL
@@ -50,5 +50,5 @@ public interface UserMapper extends BaseMapper<User> {
      * @param param 条件参数
      * @return List<UserVo>
      */
-    List<UserVo> findUserList(Page page, @Param("param") Map param);
+    List<UserVo> findUserList(Page page, @Param("param") UserSearchDto param);
 }

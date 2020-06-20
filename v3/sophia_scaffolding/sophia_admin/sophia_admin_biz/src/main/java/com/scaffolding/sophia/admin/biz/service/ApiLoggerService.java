@@ -2,10 +2,10 @@ package com.scaffolding.sophia.admin.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.scaffolding.sophia.admin.api.entity.bo.ApiLogger;
+import com.scaffolding.sophia.admin.api.entity.dto.ApiLoggerSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.ApiLoggerVo;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: LHL
@@ -25,7 +25,7 @@ public interface ApiLoggerService  {
      * @param param 分页条件
      * @return IPage<ApiLoggerVo>
      */
-    IPage<ApiLoggerVo> queryApiLoggerList(Map<String,Object> param);
+    IPage<ApiLoggerVo> queryApiLoggerList(ApiLoggerSearchDto param);
 
     /**
      * 删除日志

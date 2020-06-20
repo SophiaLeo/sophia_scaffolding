@@ -7,7 +7,6 @@ import com.scaffolding.sophia.common.feign.config.FeignRequestInterceptorConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author: LHL
@@ -20,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(contextId = "userClient", name = ServiceNameConstants.SOPHIA_ADMIN, configuration = FeignRequestInterceptorConfig.class, fallback = UserClientFallBack.class)
 public interface UserClient {
 
-    @GetMapping("/user/api")
-    ApiResponse getUserByUserName(@RequestParam String username);
+    @GetMapping("/user/api/{username}")
+    ApiResponse getUserByUserName(@PathVariable String username);
 
     @GetMapping("/user/info/{id}")
-    ApiResponse getUserByUserId(@PathVariable String id);
+    ApiResponse loadUserByUserId(@PathVariable String id);
 }

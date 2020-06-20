@@ -3,6 +3,7 @@ package com.scaffolding.sophia.admin.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.scaffolding.sophia.admin.api.entity.bo.User;
 import com.scaffolding.sophia.admin.api.entity.dto.UserDto;
+import com.scaffolding.sophia.admin.api.entity.dto.UserSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 
 import java.util.List;
@@ -72,10 +73,10 @@ public interface UserService {
     /**
      * 分页条件查询
      *
-     * @param param 条件参数
+     * @param userSearchDto 条件参数
      * @return IPage<UserVo>
      */
-    IPage<UserVo> queryUserList(Map param);
+    IPage<UserVo> queryUserList(UserSearchDto userSearchDto);
 
     /**
      * 修改用户状态

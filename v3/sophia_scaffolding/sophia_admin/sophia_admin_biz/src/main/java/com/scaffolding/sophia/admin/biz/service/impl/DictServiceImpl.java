@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scaffolding.sophia.admin.api.entity.bo.Dict;
 import com.scaffolding.sophia.admin.api.entity.dto.DictDto;
+import com.scaffolding.sophia.admin.api.entity.dto.DictSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.DictVo;
 import com.scaffolding.sophia.admin.biz.mapper.DictMapper;
 import com.scaffolding.sophia.admin.biz.service.DictService;
@@ -19,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -37,9 +37,9 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
 
     @Override
-    public IPage<DictVo> queryDictList(Map<String, Object> param) {
-        Integer currentPage = param.get("currentPage") == null ? 1 : Integer.parseInt(String.valueOf(param.get("currentPage")));
-        Integer pageSize = param.get("pageSize") == null ? 10 : Integer.parseInt(String.valueOf(param.get("pageSize")));
+    public IPage<DictVo> queryDictList(DictSearchDto param) {
+        Integer currentPage = param.getCurrentPage() == null ? 1 : param.getCurrentPage();
+        Integer pageSize = param.getPageSize() == null ? 10 : param.getPageSize();
         Page<DictVo> page = new Page<>(currentPage, pageSize);
         return page.setRecords(baseMapper.selectDictList(page, param));
     }

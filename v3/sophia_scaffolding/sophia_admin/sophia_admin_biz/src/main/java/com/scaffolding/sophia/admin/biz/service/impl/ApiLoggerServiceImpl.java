@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scaffolding.sophia.admin.api.entity.bo.ApiLogger;
+import com.scaffolding.sophia.admin.api.entity.dto.ApiLoggerSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.ApiLoggerVo;
 import com.scaffolding.sophia.admin.biz.mapper.ApiLoggerMapper;
 import com.scaffolding.sophia.admin.biz.service.ApiLoggerService;
@@ -14,9 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: LHL
@@ -31,17 +30,17 @@ import java.util.Map;
 public class ApiLoggerServiceImpl extends ServiceImpl<ApiLoggerMapper, ApiLogger> implements ApiLoggerService {
 
     @Override
-    public IPage<ApiLoggerVo> queryApiLoggerList(Map<String, Object> param) {
-        Integer currentPage = param.get("currentPage") == null ? 1 : Integer.parseInt(String.valueOf(param.get("currentPage")));
-        Integer pageSize = param.get("pageSize") == null ? 10 : Integer.parseInt(String.valueOf(param.get("pageSize")));
+    public IPage<ApiLoggerVo> queryApiLoggerList(ApiLoggerSearchDto param) {
+        Integer currentPage = param.getCurrentPage() == null ? 1 : param.getCurrentPage();
+        Integer pageSize = param.getPageSize() == null ? 10 : param.getPageSize();
         Page<ApiLoggerVo> result = new Page<>(currentPage, pageSize);
         Page<ApiLogger> page = new Page<>(currentPage, pageSize);
         QueryWrapper<ApiLogger> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like(StringUtils.isNotBlank((String)param.get("userName")), "USER_NAME", (String)param.get("userName"));
-        queryWrapper.like(StringUtils.isNotBlank((String)param.get("method")), "METHOD", (String)param.get("method"));
-        queryWrapper.like(StringUtils.isNotBlank((String)param.get("methodName")), "METHOD_NAME", (String)param.get("methodName"));
-        queryWrapper.ge(null != (LocalDateTime)param.get("startTime"), "CREATE_TIME", (LocalDateTime)param.get("startTime"));
-        queryWrapper.le(null != (LocalDateTime)param.get("endTime"), "CREATE_TIME", (LocalDateTime)param.get("endTime"));
+        queryWrapper.like(StringUtils.isNotBlank(param.getUserName()), "USER_NAME", param.getUserName());
+        queryWrapper.like(StringUtils.isNotBlank(param.getMethod()), "METHOD", param.getMethod());
+        queryWrapper.like(StringUtils.isNotBlank(param.getMethodName()), "METHOD_NAME", param.getMethodName());
+        queryWrapper.ge(null != param.getStartTime(), "CREATE_TIME", param.getStartTime());
+        queryWrapper.le(null != param.getEndTime(), "CREATE_TIME", param.getEndTime());
         queryWrapper.orderByDesc("CREATE_TIME");
         IPage<ApiLogger> iPage = baseMapper.selectPage(page, queryWrapper);
         BeanUtils.copyProperties(iPage, result);

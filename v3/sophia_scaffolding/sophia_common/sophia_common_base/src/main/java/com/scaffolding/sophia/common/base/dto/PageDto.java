@@ -16,6 +16,11 @@ public class PageDto implements Serializable {
     private Integer pageIndex;
 
     /**
+     * 页码
+     */
+    private Integer currentPage;
+
+    /**
      * 分页
      */
     private Integer pageSize;

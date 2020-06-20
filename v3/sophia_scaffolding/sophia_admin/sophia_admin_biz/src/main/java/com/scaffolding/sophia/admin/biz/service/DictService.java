@@ -2,10 +2,10 @@ package com.scaffolding.sophia.admin.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.scaffolding.sophia.admin.api.entity.dto.DictDto;
+import com.scaffolding.sophia.admin.api.entity.dto.DictSearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.DictVo;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: LHL
@@ -24,7 +24,7 @@ public interface DictService {
      * @param param 分页条件
      * @return IPage<DictVo>
      */
-    IPage<DictVo> queryDictList(Map<String, Object> param);
+    IPage<DictVo> queryDictList(DictSearchDto param);
 
     /**
      * 获取字典

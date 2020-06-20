@@ -1,4 +1,4 @@
-package com.scaffolding.sophia.gateway.exception;
+package com.scaffolding.sophia.gateway.handle;
 
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;

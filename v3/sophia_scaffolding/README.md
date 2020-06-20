@@ -5,3 +5,7 @@
 + 把config/DEFAULT_GROUP中的配置导入你搭建的nacos里
 
 + 把所有的yml配置文件中的nacos集群ip和端口号改为你自己的
+
++ 依次启动 gateway,admin,auth 
+
++ 

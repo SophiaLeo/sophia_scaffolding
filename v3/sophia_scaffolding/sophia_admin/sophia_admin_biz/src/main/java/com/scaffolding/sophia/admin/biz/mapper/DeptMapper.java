@@ -3,12 +3,12 @@ package com.scaffolding.sophia.admin.biz.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scaffolding.sophia.admin.api.entity.bo.Dept;
+import com.scaffolding.sophia.admin.api.entity.dto.CompanySearchDto;
 import com.scaffolding.sophia.admin.api.entity.vo.DeptVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: LHL
@@ -37,6 +37,6 @@ public interface DeptMapper extends BaseMapper<Dept> {
      * @param param 条件
      * @return List<DeptVo>
      */
-    List<DeptVo> findCompanyList(Page<DeptVo> page, @Param("param") Map<String, Object> param);
+    List<DeptVo> findCompanyList(Page<DeptVo> page, @Param("param") CompanySearchDto param);
 
 }
