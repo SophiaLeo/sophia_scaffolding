@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
@@ -33,7 +34,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Configuration
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ComponentScan("com.scaffolding.sophia.common.security")
+@ComponentScan({"com.scaffolding.sophia.common.security"})
 public class SophiaResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Autowired
@@ -70,7 +71,9 @@ public class SophiaResourceServerConfig extends ResourceServerConfigurerAdapter 
     @Bean
     public TokenStore tokenStore() {
 //        return new InMemoryTokenStore();
-        return new RedisTokenStore(redisConnectionFactory);
+        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+        redisTokenStore.setPrefix(GlobalsConstants.PROJECT_PREFIX+GlobalsConstants.OAUTH_PREFIX);
+        return redisTokenStore;
 //        return new JwtTokenStore(jwtAccessTokenConverter());
 //        return new JdbcTokenStore(dataSource);
     }
@@ -83,6 +86,8 @@ public class SophiaResourceServerConfig extends ResourceServerConfigurerAdapter 
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>
                 .ExpressionInterceptUrlRegistry registry = httpSecurity
                 .authorizeRequests();
+
+        registry.antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
         //对配置的url放行 不进行验证
         ignorePropertiesConfig.getUrls()
                 .forEach(url -> registry.antMatchers(url).permitAll());

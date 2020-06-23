@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface AuthorityClient {
 
     @GetMapping("/authority/api/{id}")
-    ApiResponse getAuthorityByUserId(@PathVariable Long id);
+    ApiResponse getAuthorityByUserId(@PathVariable String id);
 
     @GetMapping("/authority/api/info")
     ApiResponse getOauthClientDetailsByClientId(@RequestParam String clientId);

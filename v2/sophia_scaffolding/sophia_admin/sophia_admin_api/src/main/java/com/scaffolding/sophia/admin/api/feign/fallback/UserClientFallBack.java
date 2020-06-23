@@ -3,8 +3,7 @@ package com.scaffolding.sophia.admin.api.feign.fallback;
 import com.scaffolding.sophia.admin.api.feign.client.UserClient;
 import com.scaffolding.sophia.common.base.constants.ServiceNameConstants;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,19 +15,18 @@ import org.springframework.stereotype.Component;
  * @Version: 1.0
  */
 @Component
+@Slf4j
 public class UserClientFallBack implements UserClient {
-
-    private final Logger logger = LoggerFactory.getLogger(UserClientFallBack.class);
 
     @Override
     public ApiResponse getUserByUserName(String username) {
-        logger.error("调用sophia-admin服务getUserByUserName方法失败!");
+        log.error("调用sophia-admin服务getUserByUserName方法失败,参数username:{}",username);
         return ApiResponse.hystrixError(ServiceNameConstants.SOPHIA_ADMIN, "getUserByUserName");
     }
 
     @Override
-    public ApiResponse getUserByUserId(Long id) {
-        logger.error("调用sophia-admin服务getUserByUserId方法失败!");
+    public ApiResponse loadUserByUserId(String id) {
+        log.error("调用sophia-admin服务getUserByUserId方法失败,参数id:{}",id);
         return ApiResponse.hystrixError(ServiceNameConstants.SOPHIA_ADMIN, "getUserByUserId");
     }
 }

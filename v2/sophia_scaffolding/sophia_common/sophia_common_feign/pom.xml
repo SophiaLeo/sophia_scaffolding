@@ -14,6 +14,18 @@
     <description>fegin 调用</description>
 
     <dependencies>
+        <!--公共 工具包 -->
+        <dependency>
+            <groupId>com.scaffolding.sophia</groupId>
+            <artifactId>sophia_common_util</artifactId>
+            <version>${sophia-common.version}</version>
+        </dependency>
+        <!--hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>

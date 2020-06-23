@@ -12,6 +12,7 @@ import lombok.Getter;
  */
 @Getter
 public enum SophiaHttpStatus {
+
     /**
      * Gl 000500 error code enum.
      */

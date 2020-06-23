@@ -1,5 +1,6 @@
 package com.scaffolding.sophia.common.security.config;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -30,16 +31,21 @@ public class JwtTokenEnhancer implements TokenEnhancer {
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         final Map<String, Object> additionalInfo = new HashMap<>();
         // 给/oauth/token接口加属性roles,author
-        JSONObject jsonObject = new JSONObject(authentication.getPrincipal());
-        List<Object> authorities = jsonObject.getJSONArray("authorities").toList();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Object authority : authorities) {
-            Map map = (Map) authority;
-            stringBuilder.append(map.get("authority"));
-            stringBuilder.append(",");
+        String roles = "";
+        if (authentication.getAuthorities().size() > 0) {
+            JSONObject jsonObject = new JSONObject(authentication.getPrincipal());
+            List<Object> authorities = jsonObject.getJSONArray("authorities").toList();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Object authority : authorities) {
+                Map map = (Map) authority;
+                stringBuilder.append(map.get("authority"));
+                stringBuilder.append(",");
+            }
+            roles = stringBuilder.toString();
         }
-        String roles = stringBuilder.toString();
-        additionalInfo.put("roles", roles.substring(0, roles.length() - 1));
+        if (StringUtils.isNotBlank(roles)) {
+            additionalInfo.put("roles", roles.substring(0, roles.length() - 1));
+        }
         additionalInfo.put("author", "sophia");
         additionalInfo.put("createTime", df.format(LocalDateTime.now()));
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);

@@ -1,7 +1,7 @@
 package com.scaffolding.sophia.common.security.service;
 
 import com.alibaba.fastjson.JSON;
-import com.scaffolding.sophia.admin.api.entity.authority.OauthClientDetails;
+import com.scaffolding.sophia.admin.api.entity.bo.OauthClientDetails;
 import com.scaffolding.sophia.admin.api.feign.client.AuthorityClient;
 import com.scaffolding.sophia.common.base.enums.SophiaHttpStatus;
 import com.scaffolding.sophia.common.base.exception.CommonException;

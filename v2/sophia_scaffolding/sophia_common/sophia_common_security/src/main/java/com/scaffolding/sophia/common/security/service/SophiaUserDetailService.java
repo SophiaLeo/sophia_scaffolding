@@ -1,14 +1,17 @@
 package com.scaffolding.sophia.common.security.service;
 
 import com.alibaba.fastjson.JSON;
-import com.scaffolding.sophia.admin.api.entity.authority.Authority;
-import com.scaffolding.sophia.admin.api.entity.user.User;
+import com.alibaba.fastjson.JSONObject;
+import com.scaffolding.sophia.admin.api.entity.bo.User;
+import com.scaffolding.sophia.admin.api.entity.vo.PermissionVo;
 import com.scaffolding.sophia.admin.api.feign.client.AuthorityClient;
 import com.scaffolding.sophia.admin.api.feign.client.UserClient;
 import com.scaffolding.sophia.common.base.constants.BizConstants;
+import com.scaffolding.sophia.common.base.enums.SophiaHttpStatus;
 import com.scaffolding.sophia.common.base.exception.CommonException;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.security.model.LoginUser;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +41,14 @@ public class SophiaUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if(StringUtils.isEmpty(username)){
+        if(StringUtils.isBlank(username)){
             throw new CommonException("登录名不能为空");
         }
         ApiResponse apiResponse = userClient.getUserByUserName(username);
-        User user = JSON.parseObject(JSON.toJSONString( apiResponse.getData(), true),User.class);
+        if (!SophiaHttpStatus.SUCCESS.getCode().equals(apiResponse.getCode())){
+            throw new CommonException(apiResponse.getMessage());
+        }
+        User user = JSONObject.parseObject(JSONObject.toJSONString(apiResponse.getData(), true),User.class);
         if (user == null) {
             throw new CommonException("登录名不存在");
         } else if (BizConstants.USER_STATUS_EXPIRED.equals(user.getStatus())) {
@@ -54,17 +59,19 @@ public class SophiaUserDetailService implements UserDetailsService {
             throw new CommonException("用户已禁用");
         }
         ApiResponse response = authorityClient.getAuthorityByUserId(user.getId());
-        List<Authority> authList = JSON.parseArray(JSON.toJSONString(response.getData(), true),Authority.class);
+        List<PermissionVo> authList = JSON.parseArray(JSON.toJSONString(response.getData(), true), PermissionVo.class);
         List<GrantedAuthority> lists = new ArrayList<>();
         if(authList != null && authList.size()>0){
-            for (Authority auth : authList) {
-                lists.add(new SimpleGrantedAuthority(auth.getAuthCode()));
+            for (PermissionVo auth : authList) {
+                if (StringUtils.isNotBlank(auth.getCode())) {
+                    lists.add(new SimpleGrantedAuthority(auth.getCode()));
+                }
             }
         }
         LoginUser loginUser = new LoginUser(username,user.getPassword(),user.getNickname(),user.getStatus(), lists);
-        // LoginUser loginUser = new LoginUser(username,passwordEncoder.encode(user.getPassword()),user.getNickname(),user.getStatus(), lists);
         loginUser.setId(user.getId());
         loginUser.setDeptId(user.getDeptId());
+        loginUser.setCompId(user.getCompId());
         return loginUser;
     }
 }

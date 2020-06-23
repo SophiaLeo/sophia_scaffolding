@@ -24,7 +24,7 @@ public class BaseBo {
     /**
      * 创建人
      */
-    private Long createUser;
+    private String createUser;
 
     /**
      * 修改时间
@@ -34,5 +34,5 @@ public class BaseBo {
     /**
      * 修改人
      */
-    private Long updateUser;
+    private String updateUser;
 }

@@ -1,9 +1,9 @@
 package com.scaffolding.sophia.auth.controller;
 
-import com.scaffolding.sophia.admin.api.feign.client.ApiClient;
 import com.scaffolding.sophia.admin.api.feign.client.UserClient;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
@@ -38,13 +38,10 @@ public class HomeController extends BaseController {
     private UserClient userClient;
 
     @Autowired
-    private ApiClient apiClient;
-
-    @Autowired
     private TokenStore tokenStore;
 
 
-
+    @SysLog("获取当前用户信息Principal")
     @GetMapping("/principal")
     @ApiOperation(value = "获取当前用户信息Principal")
     public Principal user(Principal member) {
@@ -52,21 +49,15 @@ public class HomeController extends BaseController {
         return member;
     }
 
-
-    @GetMapping("/test")
-    public ApiResponse getUserInfo() {
-        return apiClient.getUserInfo();
-    }
-
-
     @GetMapping("/test/{userId}")
-    public ApiResponse getUserByUserId(@PathVariable Long userId) {
-        return userClient.getUserByUserId(userId);
+    public ApiResponse loadUserByUserId(@PathVariable String userId) {
+        return userClient.loadUserByUserId(userId);
     }
 
     /**
      * 清除token（注销登录）
      */
+    @SysLog("登出")
     @DeleteMapping("/logout")
     @ApiOperation(value = "登出")
     public ApiResponse logout(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {

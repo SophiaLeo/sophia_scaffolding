@@ -21,7 +21,7 @@ public class AuthorityClientFallBack implements AuthorityClient {
     private final Logger logger = LoggerFactory.getLogger(AuthorityClientFallBack.class);
 
     @Override
-    public ApiResponse getAuthorityByUserId(Long id) {
+    public ApiResponse getAuthorityByUserId(String id) {
         logger.error("调用sophia-admin服务getAuthorityByUserId方法失败!");
         return ApiResponse.hystrixError(ServiceNameConstants.SOPHIA_ADMIN, "getAuthorityByUserId");
     }

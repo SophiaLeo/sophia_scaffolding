@@ -15,7 +15,8 @@ spring:
           predicates:
             - Path=/api/auth/**
           filters:
-#            - SwaggerHeaderFilter
+            # 验证码处理
+#            - ValidateCodeGatewayFilter
             - StripPrefix=2
             - name: Hystrix
               args:
@@ -26,7 +27,6 @@ spring:
           predicates:
             - Path=/api/admin/**
           filters:
-#            - SwaggerHeaderFilter
             - StripPrefix=2
             - name: Hystrix
               args:

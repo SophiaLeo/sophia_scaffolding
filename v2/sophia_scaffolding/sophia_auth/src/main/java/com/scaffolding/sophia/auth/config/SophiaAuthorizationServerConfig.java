@@ -9,7 +9,6 @@ import com.scaffolding.sophia.common.security.service.SophiaUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,7 +18,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -54,30 +52,6 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
     private SophiaClientDetailsService sophiaClientDetailsService;
 
 
-    // /**
-    //  * 配置客户端详情信息，客户端详情信息在这里进行初始化，通过数据库来存储调取详情信息
-    //  */
-    // @Override
-    // public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    //     InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
-    //     if (ArrayUtils.isNotEmpty(securityProperties.getOauth2().getClients())) {
-    //         for (OAuth2ClientProperties client : securityProperties.getOauth2().getClients()) {
-    //             builder
-    //                     .withClient(client.getClientId())
-    //                     .secret(new BCryptPasswordEncoder().encode(client.getClientSecret()))
-    //                     // .resourceIds("admin","auth")
-    //                     //设置token的有效期，不设置默认12小时
-    //                     .accessTokenValiditySeconds(client.getAccessTokenValidatySeconds())
-    //                     //设置刷新token的有效期，不设置默认30天
-    //                     .refreshTokenValiditySeconds(client.getRefreshTokenValiditySeconds())
-    //                     .redirectUris("http://www.baidu.com")
-    //                     .authorizedGrantTypes("authorization_code","client_credentials", "refresh_token", "password")
-    //                     .scopes("all", "read", "write")
-    //                     .autoApprove(true);
-    //         }
-    //     }
-    // }
-
     /**
      *  配置客户端详情信息，客户端详情信息在这里进行初始化，通过数据库来存储调取详情信息
      * */
@@ -103,11 +77,10 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
                 .accessTokenConverter(accessTokenConverter())
                 // 自定义jwt生成token方式
                 .tokenEnhancer(tokenEnhancerChain)
-                // 配置TokenServices参数 如果需要jw的token而不是默认生成的uuid 那把他注释
-                //.tokenServices(defaultTokenServices())
-                .tokenServices(defaultTokenServices())
+                // 配置TokenServices参数 如果需要默认的uuid就不用注释了
+                // .tokenServices(defaultTokenServices())
                 .reuseRefreshTokens(false)
-        // ;  //自定义异常处理
+                //自定义异常处理
                 .exceptionTranslator(new SophiaWebResponseExceptionTranslator());
     }
 
@@ -123,23 +96,23 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
     /**
      * 注意，自定义TokenServices的时候，需要设置@Primary，否则报错
      */
-    @Primary
-    @Bean
-    public DefaultTokenServices defaultTokenServices() {
-        DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setTokenStore(tokenStore());
-        tokenServices.setSupportRefreshToken(true);
-        // 这里如果设置为false则不能更新refresh_token，如果需要刷新token的功能需要设置成true
-        tokenServices.setSupportRefreshToken(true);
-        // 设置上次RefreshToken是否还可以使用 默认为true
-        tokenServices.setReuseRefreshToken(false);
-        // token有效期自定义设置，默认12小时
-        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 6);
-        // refresh_token默认30天
-        tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 8);
-        tokenServices.setTokenEnhancer(tokenEnhancer());
-        return tokenServices;
-    }
+    // @Primary
+    // @Bean
+    // public DefaultTokenServices defaultTokenServices() {
+    //     DefaultTokenServices tokenServices = new DefaultTokenServices();
+    //     tokenServices.setTokenStore(tokenStore());
+    //     tokenServices.setAuthenticationManager(authenticationManager);
+    //     // 这里如果设置为false则不能更新refresh_token，如果需要刷新token的功能需要设置成true
+    //     tokenServices.setSupportRefreshToken(true);
+    //     // 设置上次RefreshToken是否还可以使用 默认为true
+    //     tokenServices.setReuseRefreshToken(false);
+    //     // token有效期自定义设置，默认12小时
+    //     tokenServices.setAccessTokenValiditySeconds(securityProperties.getOauth2().getClients()[0].getAccessTokenValidatySeconds());
+    //     // refresh_token默认30天
+    //     tokenServices.setRefreshTokenValiditySeconds(securityProperties.getOauth2().getClients()[0].getRefreshTokenValiditySeconds());
+    //     tokenServices.setTokenEnhancer(tokenEnhancer());
+    //     return tokenServices;
+    // }
 
 
     @Override
@@ -171,7 +144,10 @@ public class SophiaAuthorizationServerConfig extends AuthorizationServerConfigur
      */
     @Bean
     public TokenStore tokenStore() {
-        return new RedisTokenStore(connectionFactory);
+        RedisTokenStore redisTokenStore = new RedisTokenStore(connectionFactory);
+        redisTokenStore.setPrefix(GlobalsConstants.PROJECT_PREFIX+ GlobalsConstants.OAUTH_PREFIX);
+        return redisTokenStore;
+               // return new JwtTokenStore(accessTokenConverter());
     }
 
 }

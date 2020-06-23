@@ -15,11 +15,12 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>sophia_common_base</module>
+        <module>sophia_common_util</module>
+        <module>sophia_common_config</module>
+        <module>sophia_common_log</module>
         <module>sophia_common_feign</module>
         <module>sophia_common_security</module>
-        <module>sophia_common_config</module>
-        <module>sophia_common_util</module>
-        <module>sophia_common_base</module>
     </modules>
 
     <dependencies>
@@ -33,11 +34,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
         </dependency>
     </dependencies>
 

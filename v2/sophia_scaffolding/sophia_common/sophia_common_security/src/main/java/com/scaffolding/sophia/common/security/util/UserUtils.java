@@ -15,6 +15,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class UserUtils {
 
     public static LoginUser getLoginUser() {
-        return (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // return (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //判断是否可以转换
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof LoginUser) {
+            return (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+        return null;
     }
 }

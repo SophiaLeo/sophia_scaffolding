@@ -9,8 +9,8 @@ package com.scaffolding.sophia.common.base.constants;
  * @Description: 服务名称常量
  * @Version: 1.0
  */
-public class ServiceNameConstants {
+public interface ServiceNameConstants {
 
-    public static final String  SOPHIA_ADMIN= "SOPHIA-ADMIN";
+    String  SOPHIA_ADMIN= "SOPHIA-ADMIN";
 
 }

@@ -84,19 +84,26 @@ management:
     enabled: false
 
 swagger:
-  base-package: com.scaffolding.sophia.auth
   enabled: true
-  description: sophia认证服务
+  title: 认证服务
+  base-package: com.scaffolding.sophia.auth
   version: V2.0
+  description: sophia认证服务
   license: Apache License, Version 2.0
   license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  terms-of-service-url: http://localhost:8002/doc.html
+  contact: amorLee412@gmail.com
   authorization:
     key-name: Authorization
 
 sophia:
   security:
+    oauth2:
+      clients[0]:
+        accessTokenValidatySeconds: 21600
+        refreshTokenValiditySeconds: 2592000
     web:
-      unInterceptUris: /v2/api-docs,/swagger-ui.html,/swagger-resources/**,/webjars/**,/oauth/**,/actuator/**,/druid/*
+      unInterceptUris: /v2/api-docs,/swagger-ui.html,/swagger-resources/**,/webjars/**,/oauth/**,/actuator/**,/druid/*,/favicon.ico
 
 # 直接放行URL
 ignore:
@@ -108,6 +115,7 @@ ignore:
     - /swagger-ui.html
     - /swagger-resources/**
     - /webjars/**
+    - /favicon.ico
 
 ribbon:
   ReadTimeout: 10000 #请求处理的超时时间
@@ -133,3 +141,12 @@ feign:
     enabled: true
   httpclient:
     enabled: false
+
+gateway:
+  url: http://localhost:8002
+
+security:
+  oauth2:
+    client:
+      client-id: sophia-admin
+      client-secret: sophia-admin-secret

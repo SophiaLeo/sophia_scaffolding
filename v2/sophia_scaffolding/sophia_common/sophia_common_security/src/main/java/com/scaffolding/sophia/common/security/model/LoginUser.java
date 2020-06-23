@@ -16,13 +16,13 @@ import java.util.List;
  */
 public class LoginUser implements UserDetails {
 
-    private Long id;
+    private String id;
     private Integer status;
     private String nickname;
     private String password;
     private String username;
-    private Long deptId;
-    private Long compId;
+    private String deptId;
+    private String compId;
     private List<GrantedAuthority> authorities;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
@@ -41,7 +41,7 @@ public class LoginUser implements UserDetails {
         this.status = status;
     }
 
-    public LoginUser(Long id, Integer status, String nickname, String password, String username, Long deptId, Long compId, List<GrantedAuthority> authorities, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled) {
+    public LoginUser(String id, Integer status, String nickname, String password, String username, String deptId, String compId, List<GrantedAuthority> authorities, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled) {
         this.id = id;
         this.status = status;
         this.nickname = nickname;
@@ -56,7 +56,7 @@ public class LoginUser implements UserDetails {
         this.enabled = enabled;
     }
 
-    public LoginUser(Long id, Long deptId, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, List<GrantedAuthority> authorities) {
+    public LoginUser(String id, String deptId, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, List<GrantedAuthority> authorities) {
         this.id = id;
         this.deptId = deptId;
         this.password = password;
@@ -68,11 +68,11 @@ public class LoginUser implements UserDetails {
         this.enabled = enabled;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -86,6 +86,7 @@ public class LoginUser implements UserDetails {
     }
 
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -94,6 +95,7 @@ public class LoginUser implements UserDetails {
         this.password = password;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -110,22 +112,23 @@ public class LoginUser implements UserDetails {
         this.status = status;
     }
 
-    public Long getDeptId() {
+    public String getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Long deptId) {
+    public void setDeptId(String deptId) {
         this.deptId = deptId;
     }
 
-    public Long getCompId() {
+    public String getCompId() {
         return compId;
     }
 
-    public void setCompId(Long compId) {
+    public void setCompId(String compId) {
         this.compId = compId;
     }
 
+    @Override
     public List<GrantedAuthority> getAuthorities() {
         return authorities;
     }
@@ -134,6 +137,7 @@ public class LoginUser implements UserDetails {
         this.authorities = authorities;
     }
 
+    @Override
     public boolean isAccountNonExpired() {
         return !BizConstants.USER_STATUS_EXPIRED.equals(this.status);
     }
@@ -142,6 +146,7 @@ public class LoginUser implements UserDetails {
         this.accountNonExpired = accountNonExpired;
     }
 
+    @Override
     public boolean isAccountNonLocked() {
         return !BizConstants.USER_STATUS_LOCKED.equals(this.status);
     }
@@ -150,6 +155,7 @@ public class LoginUser implements UserDetails {
         this.accountNonLocked = accountNonLocked;
     }
 
+    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
@@ -158,6 +164,7 @@ public class LoginUser implements UserDetails {
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
+    @Override
     public boolean isEnabled() {
         return BizConstants.USER_STATUS_NORMAL.equals(this.status);
     }

@@ -68,6 +68,10 @@ eureka:
 eurekaUserName: sophia
 eurekaPassWord: sophia
 
+file:
+  fileActualPath: E:/
+  fileVirtualPath: /upload/**
+
 management:
   metrics:
     web:
@@ -84,12 +88,15 @@ management:
     enabled: false
 
 swagger:
-  base-package: com.scaffolding.sophia.admin.biz
   enabled: true
-  description: sophia用户服务
+  title: 用户服务
+  base-package: com.scaffolding.sophia.admin.biz
   version: V2.0
+  description: sophia用户服务
   license: Apache License, Version 2.0
   license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  terms-of-service-url: http://localhost:8002/doc.html
+  contact: amorLee412@gmail.com
   authorization:
     key-name: Authorization
 
@@ -131,13 +138,14 @@ feign:
 ignore:
   urls:
     - /actuator/**
-    - /user/api/**
-    - /authority/api/**
     - /v2/api-docs
     - /swagger-ui.html
     - /swagger-resources/**
     - /webjars/**
+    - /favicon.ico
     - /api/**
+    - /user/api/**
+    - /authority/api/**
 
 gateway:
   url: http://localhost:8002

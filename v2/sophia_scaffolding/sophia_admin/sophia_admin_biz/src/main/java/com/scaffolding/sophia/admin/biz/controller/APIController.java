@@ -1,29 +1,18 @@
 package com.scaffolding.sophia.admin.biz.controller;
 
-import com.scaffolding.sophia.admin.api.dto.UserDto;
-import com.scaffolding.sophia.admin.api.entity.authority.Authority;
-import com.scaffolding.sophia.admin.api.entity.role.Role;
-import com.scaffolding.sophia.admin.api.entity.user.User;
-import com.scaffolding.sophia.admin.api.vo.UserVo;
-import com.scaffolding.sophia.admin.biz.service.authority.AuthorityService;
-import com.scaffolding.sophia.admin.biz.service.role.RoleService;
-import com.scaffolding.sophia.admin.biz.service.user.UserService;
+import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
+import com.scaffolding.sophia.admin.biz.service.UserService;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
-import com.scaffolding.sophia.common.security.model.LoginUser;
+import com.scaffolding.sophia.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author: LHL
@@ -35,53 +24,32 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
-@Api(tags = "用户登录")
+@Api(tags = "对外暴露的接口")
 public class APIController extends BaseController {
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthorityService authorityService;
-
-    @Autowired
-    private RoleService roleService;
-
-
-    @GetMapping("/principal")
-    @ApiOperation(value = "获取用户信息")
-    public ApiResponse getUserInfo() {
-        UserDto userDto = new UserDto();
-        LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.loadUserByUserId(loginUser.getId());
-        UserVo userVo = new UserVo();
-        Role role = roleService.getRoleByUserId(loginUser.getId());
-        List<Authority> authList = authorityService.findAuthorityByUserId(loginUser.getId());
-        List<String> authCodeList = new ArrayList<>();
-        List<String> roleCodeList = new ArrayList<>();
-        List<String> menuCodeList = new ArrayList<>();
-        for (Authority authority : authList) {
-            authCodeList.add(authority.getAuthCode());
-            menuCodeList.add(authority.getAuthCode());
+    @SysLog("获取token")
+    @PostMapping(value = "/token")
+    @ApiOperation(value = "获取token接口")
+    public ApiResponse getToken(@RequestParam String username, @RequestParam String password, @RequestParam String code, @RequestParam String randomStr){
+        String result = userService.getToken(username, password,code,randomStr);
+        if(StringUtils.isNotBlank(result)){
+            return success("获取token成功",result);
         }
-        roleCodeList.add(role.getRoleCode());
-        BeanUtils.copyProperties(user, userVo);
-        userDto.setSysUser(userVo);
-        userDto.setPermissions(authCodeList);
-        userDto.setRoles(roleCodeList);
-        userDto.setMenus(menuCodeList);
-        return success(userDto);
+        return fail("获取token失败");
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @SysLog("密码登录")
+    @PostMapping(value = "/login")
     @ApiOperation(value = "登录接口")
-    public ApiResponse webLogin(@RequestParam String userName, @RequestParam String password){
-        UserVo result = userService.loginByPassword(userName, password);
+    public ApiResponse webLogin(@RequestParam String username, @RequestParam String password, @RequestParam(required = false) String code, @RequestParam(required = false) String randomStr){
+        UserVo result = userService.loginByPassword(username, password,code,randomStr);
         if(null != result){
             return success(result);
         }
         return fail("登陆失败");
     }
-
 
 }

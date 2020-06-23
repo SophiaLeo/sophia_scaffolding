@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -39,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class FeignHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy {
 
-    private  static  final  Logger log = LoggerFactory.getLogger(FeignHystrixConcurrencyStrategy.class);
+    private  static  final Logger log = LoggerFactory.getLogger(FeignHystrixConcurrencyStrategy.class);
 
     private HystrixConcurrencyStrategy delegate;
 
