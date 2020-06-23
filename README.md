@@ -40,7 +40,7 @@ https://blog.csdn.net/Amor_Leo/article/details/103496056
 ```
 --sophia_admin 用户服务集成资源配置
 
-  --sophia_admin_api feign调用的一些接口
+  --sophia_admin_api feign调用的一些接口及实体类
 
   --sophia_admin_biz  用户微服务
 
