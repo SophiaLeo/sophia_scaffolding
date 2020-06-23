@@ -25,6 +25,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-cloud-alibaba.version>0.9.0.RELEASE</spring-cloud-alibaba.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <spring-cloud-alibaba.version>0.9.0.RELEASE</spring-cloud-alibaba.version>

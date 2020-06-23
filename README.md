@@ -31,7 +31,7 @@ https://blog.csdn.net/Amor_Leo/article/details/103496056
 + MySQL 5.7+
 + Redis
 + SpringBoot 2.2.2(v2,v3)
-+ SpringCloud Hoxton.RELEASE(v2,v3)       
++ SpringCloud Hoxton.SR1(v2,v3)       
 + jwt
 + oauth2
 + nacos(v3)
