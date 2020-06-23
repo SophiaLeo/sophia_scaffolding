@@ -30,8 +30,8 @@ https://blog.csdn.net/Amor_Leo/article/details/103496056
 + JDK 8+
 + MySQL 5.7+
 + Redis
-+ SpringBoot 2.2.2(v3)
-+ SpringCloud Hoxton.RELEASE(v3)       
++ SpringBoot 2.2.2(v2,v3)
++ SpringCloud Hoxton.RELEASE(v2,v3)       
 + jwt
 + oauth2
 + nacos(v3)
@@ -64,7 +64,7 @@ https://blog.csdn.net/Amor_Leo/article/details/103496056
 
 --sophia_zuul 统一网关 
 
---sophia_gateway 统一网关 
+--sophia_gateway 统一网关 (目前用的这个)
 ```
 
 
