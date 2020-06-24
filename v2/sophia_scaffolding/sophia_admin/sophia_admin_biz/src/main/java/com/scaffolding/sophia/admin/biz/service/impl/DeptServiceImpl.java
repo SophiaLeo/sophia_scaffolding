@@ -37,12 +37,17 @@ import java.util.stream.Collectors;
 public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements DeptService {
 
     @Override
-    public List<Map<String, Object>> queryDeptTree() {
-        //部门管理员
-        String deptId = UserUtils.getLoginUser().getDeptId();
-        if (StringUtils.isBlank(deptId)) {
-            //公司管理员
-            deptId = UserUtils.getLoginUser().getCompId();
+    public List<Map<String, Object>> queryDeptTree(String compId) {
+        String deptId = null;
+        if (StringUtils.isBlank(compId)) {
+            //部门管理员
+            deptId = UserUtils.getLoginUser().getDeptId();
+            if (StringUtils.isBlank(deptId)) {
+                //公司管理员
+                deptId = UserUtils.getLoginUser().getCompId();
+            }
+        } else {
+            deptId = compId;
         }
         List<DeptVo> deptList = baseMapper.selectByDeptId(deptId);
         return treeDept(deptList);
@@ -50,7 +55,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
 
     @Override
     public IPage<DeptVo> queryCompanyList(CompanySearchDto param) {
-        Integer currentPage = param.getCurrentPage()== null ? 1 : param.getCurrentPage();
+        Integer currentPage = param.getCurrentPage() == null ? 1 : param.getCurrentPage();
         Integer pageSize = param.getPageSize() == null ? 10 : param.getPageSize();
         Page<DeptVo> page = new Page<>(currentPage, pageSize);
         return page.setRecords(baseMapper.findCompanyList(page, param));
@@ -184,6 +189,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
     private void setTreeMap(Map<String, Object> mapArr, DeptVo treeNode, List<DeptVo> deptList) {
         mapArr.put("id", treeNode.getId());
         mapArr.put("fullName", treeNode.getFullName());
+        mapArr.put("label", treeNode.getFullName());
         mapArr.put("simpleName", treeNode.getSimpleName());
         mapArr.put("address", treeNode.getAddress());
         mapArr.put("tips", treeNode.getTips());
@@ -194,9 +200,9 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         List<?> children = deptChild(treeNode.getId(), deptList);
         if (children.size() > 0) {
             mapArr.put("hasChildren", true);
+            mapArr.put("children", children);
         } else {
             mapArr.put("hasChildren", false);
         }
-        mapArr.put("children", children);
     }
 }

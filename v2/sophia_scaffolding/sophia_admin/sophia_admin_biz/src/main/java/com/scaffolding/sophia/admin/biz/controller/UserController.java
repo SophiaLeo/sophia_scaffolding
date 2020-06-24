@@ -129,7 +129,7 @@ public class UserController extends BaseController {
             return success("成功");
         } else {
             String msg = (String) map.get("msg");
-            return success(msg);
+            return fail(msg);
         }
     }
 

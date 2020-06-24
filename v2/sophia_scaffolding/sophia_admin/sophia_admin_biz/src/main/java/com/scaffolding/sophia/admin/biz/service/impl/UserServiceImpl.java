@@ -32,7 +32,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -214,6 +216,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //TODO 保存头像
         user.setCreateTime(LocalDateTime.now());
         user.setCreateUser(userDto.getUserId());
+        if (null != user.getBirthday()) {
+            user.setAge((int) user.getBirthday().until(LocalDate.now(), ChronoUnit.YEARS));
+        }
         user.setUserType(BizConstants.HT);
         user.setIsDeleted(BizConstants.SYS_YES);
         user.setStatus(BizConstants.USER_STATUS_NORMAL);
@@ -240,6 +245,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             if (!user.getPassword().equals(ckUser.getPassword())) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
             }
+        }
+        if (null != user.getBirthday()) {
+            user.setAge((int) user.getBirthday().until(LocalDate.now(), ChronoUnit.YEARS));
         }
         //TODO 是否修改头像
         user.setUpdateTime(LocalDateTime.now());
@@ -281,14 +289,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Map<String, Object> checkUserName(String username, String id) {
         Map<String, Object> map = new HashMap<>(16);
         if (StringUtils.isBlank(id)) {
-            List<User> users = baseMapper.selectList(new QueryWrapper<User>().eq("USERNAME", username).eq("STATUS", BizConstants.SYS_YES).eq("USER_TYPE", BizConstants.SYS_YES));
+            List<User> users = baseMapper.selectList(new QueryWrapper<User>().eq("USERNAME", username).eq("STATUS", BizConstants.USER_STATUS_NORMAL).eq("USER_TYPE", BizConstants.HT));
             if (users.size() > 0) {
                 map.put("flag", false);
                 map.put("msg", "用户登录名不能重复");
                 return map;
             }
         } else {
-            List<User> users = baseMapper.selectList(new QueryWrapper<User>().ne("ID", id).eq("USERNAME", username).eq("STATUS", BizConstants.SYS_YES).eq("USER_TYPE", BizConstants.SYS_YES));
+            List<User> users = baseMapper.selectList(new QueryWrapper<User>().ne("ID", id).eq("USERNAME", username).eq("STATUS", BizConstants.USER_STATUS_NORMAL).eq("USER_TYPE", BizConstants.HT));
             if (users.size() > 0) {
                 map.put("flag", false);
                 map.put("msg", "用户登录名不能重复");
@@ -303,14 +311,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Map<String, Object> checkNickname(String nickname, String id) {
         Map<String, Object> map = new HashMap<>(16);
         if (StringUtils.isBlank(id)) {
-            List<User> users = baseMapper.selectList(new QueryWrapper<User>().eq("NICKNAME", nickname).eq("STATUS", BizConstants.SYS_YES).eq("USER_TYPE", BizConstants.SYS_YES));
+            List<User> users = baseMapper.selectList(new QueryWrapper<User>().eq("NICKNAME", nickname).eq("STATUS", BizConstants.USER_STATUS_NORMAL).eq("USER_TYPE", BizConstants.HT));
             if (users.size() > 0) {
                 map.put("flag", false);
                 map.put("msg", "用户昵称不能重复");
                 return map;
             }
         } else {
-            List<User> users = baseMapper.selectList(new QueryWrapper<User>().ne("ID", id).eq("NICKNAME", nickname).eq("STATUS", BizConstants.SYS_YES).eq("USER_TYPE", BizConstants.SYS_YES));
+            List<User> users = baseMapper.selectList(new QueryWrapper<User>().ne("ID", id).eq("NICKNAME", nickname).eq("STATUS", BizConstants.USER_STATUS_NORMAL).eq("USER_TYPE", BizConstants.HT));
             if (users.size() > 0) {
                 map.put("flag", false);
                 map.put("msg", "用户昵称不能重复");
@@ -326,14 +334,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Map<String, Object> checkPhone(String phone, String id) {
         Map<String, Object> map = new HashMap<>(16);
         if (StringUtils.isBlank(id)) {
-            List<User> userList = baseMapper.selectList(new QueryWrapper<User>().eq("PHONE", phone).eq("STATUS", BizConstants.SYS_YES).eq("USER_TYPE", BizConstants.SYS_YES));
+            List<User> userList = baseMapper.selectList(new QueryWrapper<User>().eq("PHONE", phone).eq("STATUS", BizConstants.USER_STATUS_NORMAL).eq("USER_TYPE", BizConstants.HT));
             if (userList.size() > 0) {
                 map.put("flag", false);
                 map.put("msg", "手机号不能重复");
                 return map;
             }
         } else {
-            List<User> userList = baseMapper.selectList(new QueryWrapper<User>().ne("ID", id).eq("PHONE", phone).eq("STATUS", BizConstants.SYS_YES).eq("USER_TYPE", BizConstants.SYS_YES));
+            List<User> userList = baseMapper.selectList(new QueryWrapper<User>().ne("ID", id).eq("PHONE", phone).eq("STATUS", BizConstants.USER_STATUS_NORMAL).eq("USER_TYPE", BizConstants.HT));
             if (userList.size() > 0) {
                 map.put("flag", false);
                 map.put("msg", "手机号不能重复");
