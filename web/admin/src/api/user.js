@@ -51,6 +51,21 @@ export function updateStatus(data) {
   })
 }
 
+export function userInfo(id) {
+  return request({
+    url: `/admin/user/web/info/${id}`,
+    method: 'get'
+  })
+}
+
+export function checkUser(data) {
+  return request({
+    url: `/admin/user/web/check`,
+    method: 'get',
+    params: { id: data.id, str: data.str, type: data.type }
+  })
+}
+
 export function deleteUser(id) {
   return request({
     url: `/admin/user/web/del/${id}`,
