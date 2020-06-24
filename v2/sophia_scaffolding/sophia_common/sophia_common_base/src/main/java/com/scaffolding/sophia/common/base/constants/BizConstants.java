@@ -41,7 +41,6 @@ public interface BizConstants {
      * 系统常量：是否
      */
     Integer SYS_YES = 0;
-
     Integer SYS_NO = 1;
 
     String NONE_NODE = "0";

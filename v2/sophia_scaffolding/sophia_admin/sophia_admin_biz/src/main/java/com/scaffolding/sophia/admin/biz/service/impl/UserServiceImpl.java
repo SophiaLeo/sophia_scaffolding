@@ -133,7 +133,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean deleteUser(String id) {
         User user = new User();
         user.setId(id);
-        user.setIsDeleted(BizConstants.SYS_YES);
+        user.setIsDeleted(BizConstants.SYS_NO);
         user.setUpdateTime(LocalDateTime.now());
         user.setUpdateUser(UserUtils.getLoginUser().getId());
         int i = baseMapper.updateById(user);
@@ -215,7 +215,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setCreateTime(LocalDateTime.now());
         user.setCreateUser(userDto.getUserId());
         user.setUserType(BizConstants.HT);
-        user.setIsDeleted(BizConstants.SYS_NO);
+        user.setIsDeleted(BizConstants.SYS_YES);
         user.setStatus(BizConstants.USER_STATUS_NORMAL);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (StringUtils.isNotBlank(userDto.getRoleId())) {

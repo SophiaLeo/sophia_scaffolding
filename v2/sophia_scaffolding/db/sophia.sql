@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 29/05/2020 16:58:34
+ Date: 24/06/2020 13:44:26
 */
 
 SET NAMES utf8mb4;
@@ -38,7 +38,7 @@ CREATE TABLE `sys_api_logger`  (
 -- ----------------------------
 -- Records of sys_api_logger
 -- ----------------------------
-INSERT INTO `sys_api_logger` VALUES ('e4fb4d23946748d5ad718cd7b2818e46', '/log/web/delBatch', 'deleteBatchApiLogger', 'com.scaffolding.sophia.admin.biz.controller.ApiLoggerController', '2020-05-29 16:57:38', 'sophia-admin', 'admin', '[{\"ids\":[\"870dab4dd94b4b3eb8673bf5dcc22d68\",\"7d4988a316df41d588534846ff2d2f94\",\"30af243cd6af43e3b1a509fcdaed4fe3\",\"7ad830270a0a4734bb47b38203ef0fed\",\"d00074ef3f4b48c9b7738ecd42ac1b1a\",\"841e082e068b47b49af4c805751ddc55\",\"79f9d9e10e7c484bb79c42146052791c\"]}]', '0:0:0:0:0:0:0:1', 'DELETE');
+INSERT INTO `sys_api_logger` VALUES ('50245c58f1fe4eec88f6cf4a18c24b0d', '/user/web/status/9ca92a697f4e4bb7b284a51969714275', '修改用户状态:updateStatus', 'com.scaffolding.sophia.admin.biz.controller.UserController', '2020-06-20 18:53:31', 'sophia-admin', 'admin', '[9ca92a697f4e4bb7b284a51969714275, 0]', '0:0:0:0:0:0:0:1', 'PUT');
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -118,7 +118,7 @@ DROP TABLE IF EXISTS `sys_membership`;
 CREATE TABLE `sys_membership`  (
   `ID` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键id',
   `USER_ID` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户id',
-  `APP_ID` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'appid',
+  `APP_ID` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'appid 微信openid',
   `IMG_PATH` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户头像',
   `IS_DELETED` int(1) NULL DEFAULT NULL COMMENT '是否删除 (1 是  0否)',
   `STATUS` int(1) NULL DEFAULT NULL COMMENT '0无效 1有效',
@@ -262,8 +262,8 @@ CREATE TABLE `sys_user`  (
   `COMP_ID` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '公司id',
   `LAST_LOGIN_IP` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '最后登录IP',
   `LAST_LOGIN_TIME` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后登陆时间',
-  `IS_DELETED` int(1) NULL DEFAULT NULL COMMENT '是否删除 (0 是  1否)',
-  `STATUS` int(1) NULL DEFAULT NULL COMMENT '0无效 1有效',
+  `IS_DELETED` int(1) NULL DEFAULT NULL COMMENT '是否删除 (1 是  0否)',
+  `STATUS` int(1) NULL DEFAULT NULL COMMENT '是否有效 0否(无效) 1是(有效)',
   `CREATE_TIME` timestamp(0) NULL DEFAULT NULL COMMENT '创建时间',
   `CREATE_USER` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   `UPDATE_TIME` timestamp(0) NULL DEFAULT NULL COMMENT '修改时间',
@@ -274,9 +274,9 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('63f30a75fab64a81b5454bfe4b194056', 'gs', '公司管理员', '$2a$10$N52.f.hH4i2GpxMheg/XGes.UD7f1y.w2riHH.KqfwJOLDbNUP6vO', 24, 1, '1996-12-23 07:08:54', '13699632394', '', '湖北省', '武汉市', '洪山区', '光谷', 1, 'https://wx.qlogo.cn/mmopen/vi_32/ajNVdqHZLLANP0gcO1TDoMdeqonzCgUTckiaJwA2DHR71HrbTlicIOyDzWX9B04t1jHEORbPicccobeDOjyTCliaIQ/132', NULL, 'ae6e484f4ba3444b90cdf46a10056560', NULL, '2019-12-25 12:19:43', 1, 1, '2019-12-23 10:12:15', 'bf755585d01d46539a5584a38eca7c98', '2019-12-25 12:19:43', 'bf755585d01d46539a5584a38eca7c98');
-INSERT INTO `sys_user` VALUES ('9ca92a697f4e4bb7b284a51969714275', 'bm', '部门管理员', '$2a$10$HRoLELhiOkGiXxpX6iwhfeEVkX4C2wIIi9sNNwAQM9xMv06AkBNQq', 24, 2, '1996-12-23 07:08:54', '13699632394', '', '湖北省', '武汉市', '洪山区', '光谷', 1, 'https://wx.qlogo.cn/mmopen/vi_32/ajNVdqHZLLANP0gcO1TDoMdeqonzCgUTckiaJwA2DHR71HrbTlicIOyDzWX9B04t1jHEORbPicccobeDOjyTCliaIQ/132', '623c541008f24dbc8d220e812c5aea30', 'ae6e484f4ba3444b90cdf46a10056560', NULL, '2019-12-25 12:18:33', 1, 1, '2019-12-23 10:14:02', 'bf755585d01d46539a5584a38eca7c98', '2019-12-25 12:18:10', 'bf755585d01d46539a5584a38eca7c98');
-INSERT INTO `sys_user` VALUES ('bf755585d01d46539a5584a38eca7c98', 'admin', '超级管理员', '$2a$10$2O.A6cHczwBQR5M3s8FQnOfV2/WpZguhWzvALTPyhL39nnWjvyyoe', 18, 1, '1997-04-04 16:00:01', '15623590149', 'aomrlee@gmail.com', '湖北省', '武汉市', '洪山区', '湖北省武汉市洪山区光谷', 1, 'https://wx.qlogo.cn/mmopen/vi_32/ajNVdqHZLLANP0gcO1TDoMdeqonzCgUTckiaJwA2DHR71HrbTlicIOyDzWX9B04t1jHEORbPicccobeDOjyTCliaIQ/132', NULL, NULL, '0:0:0:0:0:0:0:1', '2020-05-29 16:54:35', 1, 1, NULL, NULL, '2020-05-29 16:54:35', 'bf755585d01d46539a5584a38eca7c98');
+INSERT INTO `sys_user` VALUES ('63f30a75fab64a81b5454bfe4b194056', 'gs', '公司管理员', '$2a$10$N52.f.hH4i2GpxMheg/XGes.UD7f1y.w2riHH.KqfwJOLDbNUP6vO', 24, 1, '1996-12-23 07:08:54', '13699632394', '', '湖北省', '武汉市', '洪山区', '光谷', 1, 'https://wx.qlogo.cn/mmopen/vi_32/ajNVdqHZLLANP0gcO1TDoMdeqonzCgUTckiaJwA2DHR71HrbTlicIOyDzWX9B04t1jHEORbPicccobeDOjyTCliaIQ/132', NULL, 'ae6e484f4ba3444b90cdf46a10056560', NULL, '2020-06-24 13:35:07', 0, 1, '2019-12-23 10:12:15', 'bf755585d01d46539a5584a38eca7c98', '2019-12-25 12:19:43', 'bf755585d01d46539a5584a38eca7c98');
+INSERT INTO `sys_user` VALUES ('9ca92a697f4e4bb7b284a51969714275', 'bm', '部门管理员', '$2a$10$HRoLELhiOkGiXxpX6iwhfeEVkX4C2wIIi9sNNwAQM9xMv06AkBNQq', 24, 2, '1996-12-23 07:08:54', '13699632394', '', '湖北省', '武汉市', '洪山区', '光谷', 1, 'https://wx.qlogo.cn/mmopen/vi_32/ajNVdqHZLLANP0gcO1TDoMdeqonzCgUTckiaJwA2DHR71HrbTlicIOyDzWX9B04t1jHEORbPicccobeDOjyTCliaIQ/132', '623c541008f24dbc8d220e812c5aea30', 'ae6e484f4ba3444b90cdf46a10056560', NULL, '2020-06-24 13:35:11', 0, 1, '2019-12-23 10:14:02', 'bf755585d01d46539a5584a38eca7c98', '2020-06-20 18:53:32', 'bf755585d01d46539a5584a38eca7c98');
+INSERT INTO `sys_user` VALUES ('bf755585d01d46539a5584a38eca7c98', 'admin', '超级管理员', '$2a$10$2O.A6cHczwBQR5M3s8FQnOfV2/WpZguhWzvALTPyhL39nnWjvyyoe', 18, 1, '1997-04-04 16:00:01', '15623590149', 'aomrlee@gmail.com', '湖北省', '武汉市', '洪山区', '湖北省武汉市洪山区光谷', 1, 'https://wx.qlogo.cn/mmopen/vi_32/ajNVdqHZLLANP0gcO1TDoMdeqonzCgUTckiaJwA2DHR71HrbTlicIOyDzWX9B04t1jHEORbPicccobeDOjyTCliaIQ/132', NULL, NULL, '0:0:0:0:0:0:0:1', '2020-06-24 13:35:13', 0, 1, NULL, NULL, '2020-06-23 15:15:34', 'bf755585d01d46539a5584a38eca7c98');
 
 -- ----------------------------
 -- Table structure for sys_user_role

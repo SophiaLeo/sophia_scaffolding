@@ -128,7 +128,7 @@ public class User extends BaseBo implements Serializable {
     private LocalDateTime lastLoginTime;
 
     /**
-     * 是否删除 (0 是  1否)
+     * 是否删除 (1是  0否)
      */
     private Integer isDeleted;
 

@@ -71,7 +71,7 @@
         LEFT JOIN sys_dept dt on su.dept_id = dt.id
         LEFT JOIN sys_dept dt1 on su.COMP_ID = dt1.id
         <where>
-            su.is_deleted = 1  AND sr.role_code != #{param.roleCode} AND sr.role_code != 'SUPER_ADMIN'
+            su.is_deleted = 0  AND sr.role_code != #{param.roleCode} AND sr.role_code != 'SUPER_ADMIN'
             <if test="param.username != null and param.username != ''">
                 AND su.username like concat('%', #{param.username},'%')
             </if>
@@ -103,9 +103,9 @@
         LAST_LOGIN_IP, LAST_LOGIN_TIME, STATUS, HEAD_IMAGE, DEPT_ID, COMP_ID
         from sys_user su
         <where>
-            su.is_deleted = 1  and  su.STATUS = 1
+            su.is_deleted = 0
             <if test="username != null and username != '' ">
-                and username = #{username} or PHONE = #{username} or EMAIL = #{username}
+                and ( username = #{username} or PHONE = #{username} or EMAIL = #{username} )
             </if>
         </where>
     </select>
@@ -117,14 +117,13 @@
         WHERE id = #{userId}
     </select>
 
-    <select id="findUserVoList" parameterType="com.scaffolding.sophia.admin.api.entity.vo.UserVo"
-            resultMap="BaseResultMapVO">
+    <select id="findUserVoList" resultMap="BaseResultMapVO">
         select
         ID, USERNAME, NICKNAME, PASSWORD, AGE, SEX, BIRTHDAY, PHONE, PROVINCE, CITY, AREA, ADDRESS, EMAIL,
         LAST_LOGIN_IP, LAST_LOGIN_TIME, IS_DELETED, STATUS, HEAD_IMAGE, DEPT_ID, COMP_ID
         from sys_user
         <where>
-            su.is_deleted = 1  and  su.STATUS = 1
+            su.is_deleted = 0  and  su.STATUS = 1
             <if test="username != null and username != ''">
                 AND username = #{username}
             </if>

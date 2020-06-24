@@ -23,6 +23,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 根据用户名(或手机号或邮箱)查询用户
+     *
      * @param username 用户名(或手机号或邮箱)
      * @return User
      */
@@ -30,6 +31,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 根据用户id查询用户
+     *
      * @param userId 用户id
      * @return User
      */
@@ -41,12 +43,12 @@ public interface UserMapper extends BaseMapper<User> {
      * @param username 用户名
      * @return List<UserVo>
      */
-    List<UserVo> findUserVoList(String username);
+    List<UserVo> findUserVoList(@Param("username") String username);
 
     /**
      * 条件分页查询
      *
-     * @param page 分页
+     * @param page  分页
      * @param param 条件参数
      * @return List<UserVo>
      */
