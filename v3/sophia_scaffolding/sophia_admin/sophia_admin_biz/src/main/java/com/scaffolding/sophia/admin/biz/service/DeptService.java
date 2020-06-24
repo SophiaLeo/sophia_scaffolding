@@ -22,8 +22,9 @@ public interface DeptService {
      * 根据登录用户获取
      *
      * @return
+     * @param compId
      */
-    List<Map<String, Object>> queryDeptTree();
+    List<Map<String, Object>> queryDeptTree(String compId);
 
     /**
      * 公司分页列表

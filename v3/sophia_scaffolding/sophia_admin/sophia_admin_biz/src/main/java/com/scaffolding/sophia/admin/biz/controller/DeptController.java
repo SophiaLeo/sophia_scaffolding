@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -43,8 +44,8 @@ public class DeptController extends BaseController {
 
     @GetMapping("/web")
     @ApiOperation("查询部门树形结构")
-    public ApiResponse getDeptTree() {
-        return success(deptService.queryDeptTree());
+    public ApiResponse getDeptTree(@RequestParam(required = false) String compId) {
+        return success(deptService.queryDeptTree(compId));
     }
 
 
