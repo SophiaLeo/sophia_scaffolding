@@ -80,3 +80,19 @@ export function deleteBatch(ids) {
     data: { ids }
   })
 }
+
+export function saveUser(data) {
+  return request({
+    url: `/admin/user/web/add`,
+    method: 'post',
+    data: data
+  })
+}
+
+export function updateUser(data) {
+  return request({
+    url: `/admin/user/web/update`,
+    method: 'put',
+    data: data
+  })
+}
