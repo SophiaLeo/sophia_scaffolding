@@ -6,7 +6,7 @@
       <el-select v-model="listQuery.roleId" placeholder="请选择角色" clearable style="width: 200px" class="filter-item">
         <el-option v-for="(item, index) in roleList" :key="index" :label="item.roleName" :value="item.id" />
       </el-select>
-      <el-date-picker v-model="listQuery.queryTime" type="daterange" range-separator="至" start-placeholder="访问开始日期" end-placeholder="访问结束日期" class="filter-item" style="width: 400px" />
+      <el-date-picker v-model="listQuery.queryTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd HH:mm:ss" class="filter-item" style="width: 400px" />
       <div class="button-group">
         <el-button type="warning" icon="el-icon-plus" @click="addUser">添加</el-button>
         <el-button type="primary" icon="el-icon-search" @click="getList">查询</el-button>
@@ -197,8 +197,8 @@ export default {
       this.listQuery.pageSize = this.pageSize
       this.listQuery.currentPage = this.currentPage
       if (this.listQuery.queryTime != null && this.listQuery.queryTime.length > 0) {
-        this.listQuery.startTime = Number(this.listQuery.queryTime[0])
-        this.listQuery.endTime = Number(this.listQuery.queryTime[1])
+        this.listQuery.startTime = this.listQuery.queryTime[0]
+        this.listQuery.endTime = this.listQuery.queryTime[1]
       } else {
         this.listQuery.startTime = null
         this.listQuery.endTime = null
