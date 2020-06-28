@@ -32,7 +32,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
@@ -217,7 +216,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setCreateTime(LocalDateTime.now());
         user.setCreateUser(userDto.getUserId());
         if (null != user.getBirthday()) {
-            user.setAge((int) user.getBirthday().until(LocalDate.now(), ChronoUnit.YEARS));
+            user.setAge((int) user.getBirthday().until(LocalDateTime.now(), ChronoUnit.YEARS));
         }
         user.setUserType(BizConstants.HT);
         user.setIsDeleted(BizConstants.SYS_YES);
@@ -247,7 +246,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             }
         }
         if (null != user.getBirthday()) {
-            user.setAge((int) user.getBirthday().until(LocalDate.now(), ChronoUnit.YEARS));
+            user.setAge((int) user.getBirthday().until(LocalDateTime.now(), ChronoUnit.YEARS));
         }
         //TODO 是否修改头像
         user.setUpdateTime(LocalDateTime.now());

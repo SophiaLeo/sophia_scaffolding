@@ -1,5 +1,6 @@
 package com.scaffolding.sophia.admin.api.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -68,6 +69,7 @@ public class UserDto implements Serializable {
      * 生日
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty("生日")
     private LocalDateTime birthday;
 
