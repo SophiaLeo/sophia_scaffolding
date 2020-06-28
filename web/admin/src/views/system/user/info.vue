@@ -4,16 +4,7 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="用户名称" prop="username">
           <el-input
-            v-if="!this.userId"
             v-model.trim="form.username"
-            placeholder="请输入用户名称"
-            clearable
-            autocomplete="off"
-          />
-          <el-input
-            v-if="this.userId"
-            v-model.trim="form.username"
-            readonly
             placeholder="请输入用户名称"
             clearable
             autocomplete="off"
