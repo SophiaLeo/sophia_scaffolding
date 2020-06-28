@@ -83,11 +83,11 @@
         <el-form-item label="地址" prop="address">
           <el-input v-model.trim="form.address" placeholder="请输入地址" clearable autocomplete="off" />
         </el-form-item>
-        <!-- <el-form-item label="角色" prop="roleId">
+        <el-form-item label="角色" prop="roleId">
           <el-select v-model="form.roleId" placeholder="请选择角色" clearable autocomplete="off" style="width: 100%">
             <el-option v-for="(item, index) in roleList" :key="index" :label="item.roleName" :value="item.id" />
           </el-select>
-        </el-form-item>-->
+        </el-form-item>
         <el-form-item label="公司" prop="compId">
           <el-select
             v-model="form.compId"
@@ -130,7 +130,7 @@
 import VDistpicker from 'v-distpicker'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-import { checkUser, userInfo } from '@/api/user'
+import { checkUser, userInfo, saveUser, updateUser } from '@/api/user'
 import { dictByType } from '@/api/dict'
 import { roleSelectList } from '@/api/role'
 import { companySelectList } from '@/api/company'
@@ -252,7 +252,7 @@ export default {
         nickname: [{ required: true, validator: validateNickName, trigger: ['blur'] }],
         password: [{ validator: validatePass, trigger: ['change', 'blur'] }],
         checkPassword: [{ validator: validatePass2, trigger: ['change', 'blur'] }],
-        phone: [{ required: true, validator: validatePhone, trigger: ['blur'] }],
+        phone: [{ required: true, validator: validatePhone, trigger: ['change', 'blur'] }],
         email: [{ validator: validateEmail, trigger: ['change', 'blur'] }],
         area: [{ required: true, validator: check, trigger: ['change'] }]
       },
@@ -265,7 +265,7 @@ export default {
     }
   },
   created() {
-    // this.queryRole()
+    this.queryRole()
     this.queryCompany()
     this.queryDictByType()
     this.init()
@@ -276,7 +276,7 @@ export default {
       if (this.userId) {
         userInfo(this.userId).then(res => {
           this.form = res.data
-          if (!res.data.deptId) {
+          if (res.data.deptId) {
             deptTree(res.data.compId).then(response => {
               this.treeDeptData = response.data
             })
@@ -287,8 +287,27 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log(this.form)
-          alert('submit!')
+          // 编辑
+          if (this.userId) {
+            updateUser(this.form).then(response => {
+              if (response.code == 200) {
+                this.$message.success(response.message)
+                this.$router.push({ name: 'User' })
+              } else {
+                this.$message.error(response.message)
+              }
+            })
+          } else {
+            // 新增
+            saveUser(this.form).then(response => {
+              if (response.code == 200) {
+                this.$message.success(response.message)
+                this.$router.push({ name: 'User' })
+              } else {
+                this.$message.error(response.message)
+              }
+            })
+          }
         } else {
           console.log('error submit!!')
           return false
