@@ -32,6 +32,12 @@ const systemRouter = {
       name: 'UserUpdate',
       hidden: true,
       meta: { title: 'userUpdate', icon: 'user', noCache: true }
+    },
+    {
+      path: '/system/log',
+      component: () => import('@/views/log/index'),
+      name: 'Logger',
+      meta: { title: 'logger', icon: 'log', noCache: true }
     }
   ]
 }
