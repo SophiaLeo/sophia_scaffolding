@@ -123,7 +123,7 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error('用户名要求字母、数字、“_”、“.”、“@”的字串 长度为5-20个字符'))
       } else {
         callback()
       }
