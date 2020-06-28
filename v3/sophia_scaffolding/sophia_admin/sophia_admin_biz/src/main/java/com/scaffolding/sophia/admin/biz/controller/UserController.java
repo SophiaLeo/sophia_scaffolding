@@ -150,7 +150,7 @@ public class UserController extends BaseController {
     }
 
     @SysLog("添加用户")
-    @PutMapping("/web/add")
+    @PostMapping("/web/add")
     @ApiOperation(value = "添加用户")
     public ApiResponse saveUser(@RequestBody UserDto userDto) {
         if (userDto == null) {
