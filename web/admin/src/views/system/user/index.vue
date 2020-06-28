@@ -60,7 +60,7 @@
           <span>{{ row.deptName }}</span>
         </template>
       </el-table-column>
-      <el-table-column :show-overflow-tooltip="true" label="年龄" prop="age" width="150px" align="center">
+      <el-table-column :show-overflow-tooltip="true" label="年龄" prop="age" width="80px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.age }}</span>
         </template>
@@ -70,7 +70,7 @@
           <span>{{ row.birthday }}</span>
         </template>
       </el-table-column>
-      <el-table-column :show-overflow-tooltip="true" label="性别" prop="sex" width="150px" align="center">
+      <el-table-column :show-overflow-tooltip="true" label="性别" prop="sex" width="80px" align="center">
         <template slot-scope="scope">
           <div v-for="(item, index) in sexList" :key="index">
             <el-tag v-if="scope.row.sex === item.value ">{{ item.name }}</el-tag>
@@ -122,8 +122,9 @@
           <el-switch v-model="row.blStatus" style="display: block" class="textbalck" active-text="启用" inactive-text="禁用" active-color="#13ce66" inactive-color="#ff4949" @change="changeStatus(row)" />
         </template>
       </el-table-column>
-      <el-table-column prop="status" label="操作" align="center" fixed="right" width="200">
+      <el-table-column prop="status" label="操作" align="center" fixed="right" width="300px">
         <template slot-scope="{row}">
+          <el-button type="warning" size="mini" icon="el-icon-refresh" @click="resetPassword(row.id)">重置密码</el-button>
           <el-button type="success" size="mini" icon="el-icon-edit" @click="updateUser(row.id)">编辑</el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click="deleteUser(row.id)">删除</el-button>
         </template>
@@ -144,7 +145,7 @@
 </template>
 
 <script>
-import { userList, deleteUser, deleteBatch, updateStatus } from '@/api/user'
+import { userList, deleteUser, deleteBatch, updateStatus, reset } from '@/api/user'
 import { dictByType } from '@/api/dict'
 import { roleSelectList } from '@/api/role'
 import store from '@/store'
@@ -256,6 +257,18 @@ export default {
         if (response.code === 200) {
           this.$message.success(response.message)
           this.getList()
+        } else {
+          this.$message.error(response.message)
+        }
+      })
+    },
+    resetPassword(id) {
+      const params = {
+        id: id
+      }
+      reset(params).then(response => {
+        if (response.code === 200) {
+          this.$message.success(response.message)
         } else {
           this.$message.error(response.message)
         }

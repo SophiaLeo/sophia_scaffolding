@@ -96,3 +96,11 @@ export function updateUser(data) {
     data: data
   })
 }
+
+export function reset(data) {
+  return request({
+    url: `/admin/user/web/resetPassword`,
+    method: 'put',
+    data: data
+  })
+}

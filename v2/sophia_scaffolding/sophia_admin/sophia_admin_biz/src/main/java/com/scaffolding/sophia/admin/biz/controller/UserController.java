@@ -12,6 +12,7 @@ import com.scaffolding.sophia.admin.api.entity.vo.UserVo;
 import com.scaffolding.sophia.admin.biz.service.PermissionService;
 import com.scaffolding.sophia.admin.biz.service.RoleService;
 import com.scaffolding.sophia.admin.biz.service.UserService;
+import com.scaffolding.sophia.common.base.constants.GlobalsConstants;
 import com.scaffolding.sophia.common.base.support.ApiResponse;
 import com.scaffolding.sophia.common.base.support.BaseController;
 import com.scaffolding.sophia.common.log.annotation.SysLog;
@@ -184,6 +185,21 @@ public class UserController extends BaseController {
             return success("修改成功");
         } else {
             return fail("修改失败");
+        }
+    }
+
+    @SysLog("重置密码")
+    @PutMapping("/web/resetPassword")
+    @ApiOperation(value = "重置用户密码-后端管理用户管理", notes = "重置用户密码-后端管理用户管理-123456")
+    public ApiResponse resetWebPassword(@RequestBody UserDto userDto) {
+        if (StringUtils.isBlank(userDto.getId())) {
+            return fail("id不能为空");
+        }
+        userDto.setPassword(GlobalsConstants.PASSWORD);
+        if (userService.updatePassword(userDto)) {
+            return success("重置成功");
+        } else {
+            return fail("重置失败");
         }
     }
 
