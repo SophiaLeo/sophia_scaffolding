@@ -1,12 +1,14 @@
 export default {
   route: {
     dashboard: '首页',
-    log: '日志管理',
-    logger: '变动日志',
     system: '系统管理',
     user: '用户管理',
     userSave: '保存用户',
     userUpdate: '编辑用户',
+    role: '角色管理',
+    roleSave: '保存角色',
+    roleUpdate: '编辑角色',
+    logger: '变动日志',
     documentation: '文档',
     guide: '引导页',
     permission: '权限测试页',
@@ -86,12 +88,11 @@ export default {
     any: '随便填',
     thirdparty: '第三方登录',
     thirdpartyTips: '本地不能模拟，请结合自己业务进行模拟！！！'
-  },  
-  log: {
-    logger: '变动日志'
   },
   system: {
     user: '用户管理',
+    role: '角色管理',
+    logger: '变动日志'
   },
   documentation: {
     documentation: '文档',

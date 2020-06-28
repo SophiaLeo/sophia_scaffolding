@@ -32,8 +32,26 @@ const systemRouter = {
       name: 'UserUpdate',
       hidden: true,
       meta: { title: 'userUpdate', icon: 'user', noCache: true }
+    }, {
+      path: '/system/role',
+      component: () => import('@/views/system/role/index'),
+      name: 'Role',
+      meta: { title: 'role', icon: 'role', noCache: true }
     },
     {
+      path: '/system/role/save',
+      component: () => import('@/views/system/role/info'),
+      name: 'RoleSave',
+      hidden: true,
+      meta: { title: 'roleSave', icon: 'role', noCache: true }
+    },
+    {
+      path: '/system/role/update',
+      component: () => import('@/views/system/role/info'),
+      name: 'RoleUpdate',
+      hidden: true,
+      meta: { title: 'roleUpdate', icon: 'role', noCache: true }
+    }, {
       path: '/system/log',
       component: () => import('@/views/log/index'),
       name: 'Logger',

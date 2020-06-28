@@ -1,42 +1,50 @@
 import request from '@/utils/request'
 
-export function getRoutes() {
+export function roleList(data) {
   return request({
-    url: '/routes',
+    url: '/admin/role/web/list',
+    method: 'get',
+    params: data
+  })
+}
+
+export function roleInfo(id) {
+  return request({
+    url: `/admin/role/web/info/${id}`,
     method: 'get'
   })
 }
 
-export function getRoles() {
+export function saveRole(data) {
   return request({
-    url: '/roles',
-    method: 'get'
-  })
-}
-
-export function addRole(data) {
-  return request({
-    url: '/role',
+    url: '/admin/role/web/save',
     method: 'post',
-    data
+    data: data
   })
 }
 
-export function updateRole(id, data) {
+export function updateRole(data) {
   return request({
-    url: `/role/${id}`,
+    url: `/admin/role/web/update`,
     method: 'put',
-    data
+    data: data
   })
 }
 
 export function deleteRole(id) {
   return request({
-    url: `/role/${id}`,
+    url: `/admin/role/web/del/${id}`,
     method: 'delete'
   })
 }
 
+export function deleteBatch(ids) {
+  return request({
+    url: `/admin/role/web/delBatch`,
+    method: 'delete',
+    data: { ids }
+  })
+}
 
 export function roleSelectList(id) {
   return request({
