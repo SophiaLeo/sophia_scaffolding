@@ -188,8 +188,6 @@ export default {
     var validateNickName = (rule, value, callback) => {
       if (value == '') {
         callback(new Error('请输入用户昵称'))
-      } else if (!validUsername(value)) {
-        callback(new Error('用户昵称要求字母、数字、“_”、“.”、“@”的字串 长度为5-20个字符'))
       } else {
         const params = {
           id: this.userId,
